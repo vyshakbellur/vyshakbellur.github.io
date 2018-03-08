@@ -792,14 +792,14 @@ select {
 	background-color: #9d0000;
 }
 
-.filtr-item {
+/*.filtr-item {
 	transform: scale(1) translate3d(0px, 0px, 0px);
 	-o-transform: scale(1) translate3d(0px, 0px, 0px);
 	transition: all 0.5s ease-out 0ms;
 	-o-transition: all 0.5s ease-out 0ms;
 	transform-style: preserve-3d;
 	-o-transform-style: preserve-3d;
-}
+}*/
 
 ul.simplefilter {
 	text-align: center;
@@ -869,11 +869,11 @@ ul.simplefilter {
 	-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
 	filter: alpha(opacity=100);
 	opacity: 1;
-	-webkit-transform: rotate(0);
+	/*-webkit-transform: rotate(0);
 	-moz-transform: rotate(0);
 	-o-transform: rotate(0);
 	-ms-transform: rotate(0);
-	transform: rotate(0);
+	transform: rotate(0);*/
 	top: 0;
 }
 
