@@ -5,8 +5,6 @@
 	License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
 
-
-
 /*-- Reset-Code --*/
 
 body {
@@ -93,7 +91,7 @@ a:focus, a:hover {
 	left: 0;
 	width: 60%;
 	margin: 0 auto;
-	padding: 75px 0;
+	padding: 25px 0;
 	font-size: 75px;
 	letter-spacing: 3px;
 	font-weight: 700;
@@ -104,12 +102,12 @@ a:focus, a:hover {
 
 .header h2 {
 	position: absolute;
-	top: 45%;
+	top: 5%;
 	left: 0;
 	right: 0;
 	width: 35%;
 	margin: 0 auto;
-	padding: 20px 0;
+	padding: 10px 0;
 	font-size: 25px;
 	letter-spacing: 2px;
 	font-weight: 700;
@@ -121,7 +119,7 @@ a:focus, a:hover {
 
 .navigation {
 	position: absolute;
-	top: 60%;
+	top: 20%;
 	left: 0;
 	right: 0;
 	padding: 0 350px;
@@ -167,8 +165,9 @@ a:focus, a:hover {
 .ch-info-wrap {
 	top: 20px;
 	left: 20px;
-	box-shadow: 0 0 0 10px rgba(255,255,255,0.2), inset 0 0 3px rgba(115,114, 23, 0.8);
+	box-shadow: 0 0 0 10px rgba(159,235,255,0.7), inset 0 0 3px rgba(115,114, 123, 0.8);
 }
+/* #49f */
 
 .ch-info > div {
 	display: block;
@@ -190,7 +189,7 @@ a:focus, a:hover {
 
 .ch-info .ch-info-back {
 	opacity: 0;
-	background: rgba(0, 0, 0, 0.5);
+	background: rgba(0, 0, 0, 0.7);
 	pointer-events: none;
 	-webkit-transform: scale(1.5);
 	-moz-transform: scale(1.5);
@@ -223,10 +222,14 @@ a:focus, a:hover {
 	pointer-events: auto;
 }
 
+.ch-info-front{
+	background: white;
+}
+
 .ch-info-front i.fa {
 	font-size: 60px;
 	padding-top: 20px;
-	color: #FFF;
+	color: #49f;
 }
 
 .ch-info-back h3 {
@@ -582,7 +585,7 @@ a:focus, a:hover {
 	width: 14%;
 }
 
-#myList li{ 
+#myList li{
 	display: none;
 	list-style-type: none;
 	/*--w3layouts--*/
@@ -1198,10 +1201,10 @@ form.contact_form {
 		top: 15%;
 	}
 	.header h2 {
-		top: 45%;
+		top: 15%;
 	}
 	.navigation {
-		top: 60%;
+		top: 35%;
 	}
 	.agileabout-grid-1 h3, .agileabout-grid-3 h3 {
 		width: 27%;
@@ -1216,7 +1219,7 @@ form.contact_form {
 
 @media screen and (max-width: 1440px) {
 	.header h2 {
-		top: 50%;
+		top: 30%;
 	}
 	.agileabout-grid-1 h3 {
 		width: 31%;
@@ -2126,6 +2129,7 @@ form.contact_form {
 	.nav-grid {
 		width: 11%;
 		margin: 30px;
+		background: white;
 	}
 	a.scroll.cont {
 		margin-left: -5px;
@@ -2316,7 +2320,7 @@ form.contact_form {
 		height: 215px;
 	}
 	.header h1 {
-		padding: 8px 0;
+		padding: 4px 0;
 		font-size: 18px;
 		top: 5%;
 		border: 1px solid #FFF;
