@@ -102,7 +102,7 @@ a:focus, a:hover {
 
 .header h2 {
 	position: absolute;
-	top: 5%;
+	top: 15%;
 	left: 0;
 	right: 0;
 	width: 35%;
@@ -1150,7 +1150,7 @@ form.contact_form {
 		top: 70%;
 	}
 	.header h2 {
-		top: 55%;
+		top: 51%;
 	}
 	.agileabout-grid-2-image {
 		width: 55%;
@@ -1202,7 +1202,7 @@ form.contact_form {
 		top: 15%;
 	}
 	.header h2 {
-		top: 25%;
+		top: 15%;
 	}
 	.navigation {
 		top: 35%;
