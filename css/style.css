@@ -740,7 +740,7 @@ li.aitsaitsresumewthreeli-1 {
 }
 
 .filtr-item {
-	padding: 2%;
+	padding: 0;
 	width: 33.3335%;
 	float: left;
 }
@@ -1150,7 +1150,7 @@ form.contact_form {
 		top: 70%;
 	}
 	.header h2 {
-		top: 51%;
+		top: 55%;
 	}
 	.agileabout-grid-2-image {
 		width: 55%;
@@ -1202,7 +1202,7 @@ form.contact_form {
 		top: 15%;
 	}
 	.header h2 {
-		top: 15%;
+		top: 25%;
 	}
 	.navigation {
 		top: 35%;
