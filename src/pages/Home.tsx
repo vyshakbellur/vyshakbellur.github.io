@@ -57,7 +57,7 @@ export default function Home() {
             <div className="mt-7 flex flex-wrap gap-3">
               <a
                 href={profile.links.resume}
-                className="rounded-xl bg-gradient-to-r from-red-600 via-yellow-500 to-red-500 px-5 py-2 text-sm font-semibold text-white"
+                className="rounded-xl border border-white/10 bg-white/5 px-5 py-2 text-sm font-semibold text-white/90 hover:bg-white/10 transition-colors"
                 target="_blank"
                 rel="noreferrer"
               >
