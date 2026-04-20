@@ -38,32 +38,42 @@ export default function Layout() {
             {profile.fullName}
           </Link>
 
-          {/* Desktop links - Piano Keys */}
-          <nav className="hidden md:flex items-end gap-[2px] h-[40px]">
+          {/* Desktop links - Carnatic Piano Keys */}
+          <nav className="hidden md:flex items-start gap-1 h-[60px] relative">
             {nav.map((n, i) => {
+              // 7-note Shankarabharanam ratio (C Major equivalent: Sa, Re, Ga, Ma, Pa, Da, Ni)
+              const ratios = [1, 9/8, 5/4, 4/3, 3/2, 5/3, 15/8];
+              // Map index 0-6 to the ratios
+              const exactRatio = ratios[i % ratios.length];
+              
+              // We'll alternate them as White (indexes 0, 2, 4, 6) and Black (indexes 1, 3, 5) purely visually.
+              const isBlackKey = i % 2 !== 0;
+
               const playNote = () => {
                 try {
                   const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
                   const osc = ctx.createOscillator();
                   const gain = ctx.createGain();
                   
-                  // Simple major scale (C4, E4, G4, etc)
-                  const baseFreq = 261.63; // C4
-                  const intervals = [1, 1.25, 1.5, 1.66, 2];
-                  osc.frequency.value = baseFreq * (intervals[i % intervals.length]);
+                  const baseFreq = 261.63; // Sa (C4)
+                  osc.frequency.value = baseFreq * exactRatio;
                   
                   osc.type = 'sine';
                   osc.connect(gain);
                   gain.connect(ctx.destination);
                   
                   osc.start();
-                  // Envelope
                   gain.gain.setValueAtTime(0, ctx.currentTime);
                   gain.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.05);
                   gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.5);
                   osc.stop(ctx.currentTime + 1.5);
-                } catch(e) { /* ignore if audio context blocked */ }
+                } catch(e) { }
               };
+
+              // White Key classes
+              const whiteKeyStyle = `h-[60px] w-14 bg-gradient-to-b from-white/90 to-white/70 text-slate-900 shadow-[0_4px_10px_rgba(255,255,255,0.2)] rounded-b-md border-b-4 border-slate-300`;
+              // Black Key classes (slightly shorter, elevated)
+              const blackKeyStyle = `h-[40px] w-12 bg-gradient-to-b from-slate-900 to-black text-white/90 shadow-[0_4px_10px_rgba(0,0,0,0.5)] rounded-b-sm border-b-4 border-slate-700 z-10 -mx-3`;
 
               return (
                 <NavLink
@@ -72,14 +82,12 @@ export default function Layout() {
                   end={n.href === '/'}
                   onMouseDown={playNote}
                   className={({ isActive }) =>
-                    `px-4 pt-1 pb-3 text-[11px] font-bold uppercase tracking-widest transition-all duration-150 rounded-b-md border-b-[4px] border-l border-r border-white/5 cursor-pointer flex items-end justify-center h-full active:translate-y-1 active:border-b-0
-                    ${isActive 
-                      ? 'bg-gradient-to-b from-white/10 to-white/20 text-white border-b-gold shadow-[0_4px_15px_rgba(255,255,255,0.1)]' 
-                      : 'bg-gradient-to-b from-transparent to-white/5 text-white/50 hover:text-white/90 hover:from-white/5 hover:to-white/10 border-b-slate-800'
-                    }`
+                    `flex items-end justify-center pb-2 text-[9px] font-bold uppercase tracking-widest transition-transform duration-100 cursor-pointer active:translate-y-1 active:border-b-0
+                    ${isBlackKey ? blackKeyStyle : whiteKeyStyle}
+                    ${isActive ? 'ring-2 ring-gold' : ''}`
                   }
                 >
-                  {n.label}
+                  {n.label.substring(0, 3)}
                 </NavLink>
               );
             })}

@@ -73,36 +73,6 @@ export default function Home() {
                 LinkedIn ↗
               </a>
             </div>
-
-            <div className="mt-14 space-y-12">
-              {/* Education Block */}
-              <div>
-                <div className="mb-4 text-[10px] font-semibold tracking-widest text-white/30 uppercase">Education</div>
-                <div className="flex flex-col gap-3 border-l border-white/10 pl-4">
-                  <div className="flex flex-col group">
-                    <span className="text-sm font-medium text-white/90 group-hover:text-gold transition-colors">University of Cumberlands</span>
-                    <span className="text-xs text-white/50">Ph.D. Candidate</span>
-                  </div>
-                  <div className="flex flex-col group">
-                    <span className="text-sm font-medium text-white/90 group-hover:text-gold transition-colors">San Diego State University</span>
-                    <span className="text-xs text-white/50">Master of Science (M.S.)</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Experience Block */}
-              <div>
-                <div className="mb-4 text-[10px] font-semibold tracking-widest text-white/30 uppercase">Experience</div>
-                <div className="flex flex-col gap-5 border-l border-white/10 pl-4">
-                  {experience.map((x) => (
-                    <div key={x.company} className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline group">
-                      <div className="text-sm font-medium text-white/90 group-hover:text-gold transition-colors">{x.company}</div>
-                      <div className="text-[11px] text-white/40 font-mono tracking-wide">{x.period}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Right: Console Chatbot (Sticky) */}
@@ -111,102 +81,6 @@ export default function Home() {
               <Console />
             </div>
           </div>
-        </div>
-
-        {/* Promo card */}
-        <div className="mt-10 rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-sm text-white/70">
-          Want the &quot;wow&quot; page? Go to{' '}
-          <Link to="/ml" className="text-sky-400 hover:text-sky-300 transition-colors">
-            ML &amp; AWS
-          </Link>{' '}
-          — that&apos;s where I show architecture + deployments.
-        </div>
-      </section>
-
-      {/* ── Hobbies ── */}
-      <section className="mx-auto max-w-6xl px-5 py-14">
-        <h2 className="section-enter mb-6 text-xl font-semibold tracking-tight text-white/95">
-          Life outside the terminal
-        </h2>
-
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {/* Music card */}
-          <div className="section-enter rounded-2xl border border-white/10 bg-white/5 p-5">
-            <div className="mb-2 text-sm font-medium text-white/90">Music</div>
-            <p className="text-sm leading-relaxed text-white/65">
-              Part of <span className="text-white/80">v_naada</span> — a music channel exploring
-              classical Indian traditions and contemporary sounds.
-            </p>
-            <div className="mt-4 flex gap-2">
-              <a
-                href="https://instagram.com/v_naada"
-                target="_blank"
-                rel="noreferrer"
-                className="text-xs text-white/60 hover:text-white/90 transition-colors"
-              >
-                Instagram ↗
-              </a>
-              <a
-                href="https://youtube.com/@v_naada"
-                target="_blank"
-                rel="noreferrer"
-                className="text-xs text-white/60 hover:text-white/90 transition-colors"
-              >
-                YouTube ↗
-              </a>
-            </div>
-          </div>
-
-          {/* ── Running card (Task 1) ── */}
-          <div className="section-enter rounded-2xl border border-white/10 bg-white/5 p-5">
-            <div className="mb-2 text-sm font-medium text-white/90">Running</div>
-            <p className="text-sm leading-relaxed text-white/65">
-              {hobbiesInfo.running.description}
-            </p>
-            <a
-              href={hobbiesInfo.running.nyrrHref}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-4 inline-block text-xs text-white/60 hover:text-white/90 transition-colors"
-            >
-              NYRR Results ↗
-            </a>
-          </div>
-
-          {/* Writing card */}
-          <div className="section-enter rounded-2xl border border-white/10 bg-white/5 p-5">
-            <div className="mb-2 text-sm font-medium text-white/90">Writing</div>
-            <p className="text-sm leading-relaxed text-white/65">
-              Technical deep-dives on LLM limitations, enterprise architectures, and engineering
-              patterns — published on Medium.
-            </p>
-            <Link
-              to="/writing"
-              className="mt-4 inline-block text-xs text-white/60 hover:text-white/90 transition-colors"
-            >
-              Read articles ↗
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Adventures ── */}
-      <section className="mx-auto max-w-6xl px-5 py-10">
-        <h2 className="section-enter mb-6 text-xl font-semibold tracking-tight text-white/95">
-          Adventures
-        </h2>
-        <p className="section-enter mb-6 max-w-2xl text-sm leading-relaxed text-white/60">
-          {hobbiesInfo.travel.description}
-        </p>
-        <AdventureGallery />
-      </section>
-
-      {/* ── Tech pills ── */}
-      <section className="mx-auto max-w-6xl px-5 pb-14">
-        <div className="section-enter flex flex-wrap gap-2">
-          {['React', 'TypeScript', 'Java', 'AWS', 'Python', 'LLMs', 'RAG', 'Spring Boot', 'PostgreSQL'].map((t) => (
-            <Pill key={t}>{t}</Pill>
-          ))}
         </div>
       </section>
     </div>
