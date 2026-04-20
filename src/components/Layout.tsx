@@ -17,28 +17,115 @@ export default function Layout() {
   useEffect(() => {
     if (!menuOpen) return;
     const handler = (e: MouseEvent) => {
-      const nav = document.getElementById('mobile-menu');
-      if (nav && !nav.contains(e.target as Node)) setMenuOpen(false);
+      const navEl = document.getElementById('mobile-menu');
+      if (navEl && !navEl.contains(e.target as Node)) setMenuOpen(false);
     };
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
   }, [menuOpen]);
+
+  // The AI Autopilot Sequencer (Listens for `play-song` events from Console.tsx)
+  useEffect(() => {
+    const autopilot = async (e: any) => {
+      const song = e.detail;
+      if (song === 'titanic') {
+        const sequence = [
+          [5, 400], [7, 600], [12, 1000], [10, 400], [9, 400], [7, 600], [5, 400], [4, 400], [5, 1000]
+        ];
+        // C4 is index 0. F=5, G=7, C5=12, Bb=10, A=9, E=4.
+        for (const [index, duration] of sequence) {
+          const keyEl = document.getElementById(`synth-key-${index}`);
+          if (keyEl) {
+            keyEl.style.transform = 'translateY(15px) rotateX(15deg)';
+            keyEl.style.backgroundColor = '#ff5f56'; // macOS red indicator
+            setTimeout(() => {
+              keyEl.style.transform = '';
+              keyEl.style.backgroundColor = '';
+            }, duration - 100);
+          }
+
+          try {
+            const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.frequency.value = 261.63 * Math.pow(2, index / 12);
+            osc.type = 'square';
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            gain.gain.setValueAtTime(0, ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + (duration / 1000));
+            osc.stop(ctx.currentTime + (duration / 1000));
+          } catch (err) {}
+
+          await new Promise(r => setTimeout(r, duration));
+        }
+      }
+    };
+    window.addEventListener('play-song', autopilot);
+    return () => window.removeEventListener('play-song', autopilot);
+  }, []);
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
 
       {/* ── Sticky nav ── */}
       <header
-        className={`sticky top-0 z-30 transition-all duration-300 ${
+        className={`sticky top-0 z-50 transition-all duration-300 ${
           scrolled ? 'border-b border-white/10 bg-slate-950/60 backdrop-blur-xl' : ''
         }`}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-          <Link to="/" className="font-semibold tracking-tight text-white/90 hover:text-white transition-colors">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 relative">
+          <Link to="/" className="font-semibold tracking-tight text-white/90 hover:text-white transition-colors z-50">
             {profile.fullName}
           </Link>
-          <div className="flex items-center gap-4">
 
+          {/* SVG Musical Staff Router */}
+          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 w-[300px] h-[60px] z-50 group">
+             {/* 5 Staff Lines */}
+             <div className="absolute w-full h-[1px] bg-white/20 top-[15px]" />
+             <div className="absolute w-full h-[1px] bg-white/20 top-[23px]" />
+             <div className="absolute w-full h-[1px] bg-white/20 top-[31px]" />
+             <div className="absolute w-full h-[1px] bg-white/20 top-[39px]" />
+             <div className="absolute w-full h-[1px] bg-white/20 top-[47px]" />
+             
+             {/* G-Clef aesthetics */}
+             <div className="absolute left-[5px] top-[15px] font-serif italic text-2xl text-white/40 font-bold opacity-80 pointer-events-none">
+               𝄞
+             </div>
+
+             {/* Musical Notes mapped to Navigation */}
+             {nav.map((n, i) => {
+               // Plot notes up/down the staff
+               const yOffsets = [43, 35, 27, 19, 11, 23, 31];
+               const topPos = yOffsets[i % yOffsets.length];
+               const leftPos = 40 + (i * 35);
+               return (
+                 <NavLink
+                   key={n.href}
+                   to={n.href}
+                   end={n.href === '/'}
+                   className={({ isActive }) => `
+                      absolute w-[10px] h-[8px] rounded-full rotate-[-15deg] transition-all duration-300 group-hover:drop-shadow-[0_0_10px_white]
+                      ${isActive ? 'bg-gold shadow-[0_0_8px_#ffd700]' : 'bg-slate-300 hover:bg-white hover:scale-125'}
+                   `}
+                   style={{ top: `${topPos}px`, left: `${leftPos}px` }}
+                   title={n.label}
+                 >
+                   {/* Visual stem pointing up/down depending on staff height */}
+                   <div className={`w-[2px] h-[20px] bg-current absolute ${topPos > 27 ? 'bottom-[4px] right-[0px]' : 'top-[4px] left-[0px]'}`} />
+                   
+                   {/* Text Label on hover */}
+                   <span className="absolute left-1/2 -translate-x-1/2 top-4 opacity-0 transition-opacity whitespace-nowrap text-[8px] uppercase tracking-widest font-black text-white bg-black/80 px-1 py-0.5 rounded pointer-events-none group-hover:opacity-100">
+                     {n.label}
+                   </span>
+                 </NavLink>
+               );
+             })}
+          </div>
+
+          <div className="flex items-center gap-4 z-50">
             {/* Hamburger — mobile only */}
             <button
               id="hamburger"
@@ -76,11 +163,6 @@ export default function Layout() {
         )}
       </header>
 
-      {/* ── Page content ── */}
-      <main>
-        <Outlet />
-      </main>
-
       {/* ── Infinite Horizontal Acoustic Chandelier (Desktop) ── */}
       <div className="hidden md:block fixed top-[20px] left-[45%] w-0 h-0 z-40 pointer-events-none" style={{ perspective: '1200px' }}>
         <nav 
@@ -96,7 +178,7 @@ export default function Layout() {
             }}
           >
             <div className="text-[12px] uppercase tracking-[0.4em] font-serif font-bold text-amber-500/80 drop-shadow-[0_2px_2px_rgba(0,0,0,1)]">
-              Play to Navigate
+              V_Naada Auto-Acoustic
             </div>
           </div>
 
@@ -112,29 +194,16 @@ export default function Layout() {
                 return { index: i, isBlack, freq: getFreq(i) };
               });
 
-              // Map only the first few white keys to nav
-              const navMap: Record<number, { href: string, icon: JSX.Element, label: string }> = {
-                0: { href: '/', label: 'Sa (Do)', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> },
-                2: { href: '/experience', label: 'Re (Re)', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> },
-                4: { href: '/credentials', label: 'Ga (Mi)', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg> },
-                5: { href: '/projects', label: 'Ma (Fa)', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg> },
-                7: { href: '/publications', label: 'Pa (Sol)', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> },
-                9: { href: '/life', label: 'Da (La)', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> },
-                11: { href: '/contact', label: 'Ni (Ti)', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> },
-              };
-
               let whiteKeyIndex = 0;
 
               return synthKeys.map((key) => {
-                const navData = navMap[key.index];
-
                 const playNote = () => {
                   try {
                     const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
                     const osc = ctx.createOscillator();
                     const gain = ctx.createGain();
                     osc.frequency.value = key.freq;
-                    osc.type = 'square'; // giving it a harsh massive sound given the scale
+                    osc.type = 'square';
                     osc.connect(gain);
                     gain.connect(ctx.destination);
                     osc.start();
@@ -143,53 +212,45 @@ export default function Layout() {
                     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
                     osc.stop(ctx.currentTime + 1.2);
                   } catch(e) {}
+                  
+                  // Visual trigger
+                  const keyEl = document.getElementById(`synth-key-${key.index}`);
+                  if (keyEl) {
+                    keyEl.style.transform = 'translateY(15px) rotateX(15deg)';
+                    keyEl.style.backgroundColor = '#ffbd2e'; // Yellow for manual click
+                    setTimeout(() => {
+                      keyEl.style.transform = '';
+                      keyEl.style.backgroundColor = '';
+                    }, 100);
+                  }
                 };
 
-                const baseClasses = `transition-transform duration-75 cursor-pointer flex flex-col items-center justify-end pb-2 group active:rotate-x-[10deg] origin-top`;
+                const baseClasses = `transition-transform duration-100 cursor-pointer flex flex-col items-center justify-end pb-2 origin-top`;
 
                 if (key.isBlack) {
                   const leftPos = (whiteKeyIndex * 40) - 12;
                   return (
                     <div 
                       key={`black-${key.index}`} 
+                      id={`synth-key-${key.index}`}
                       onMouseDown={playNote}
                       className={`${baseClasses} absolute top-0 h-[55px] w-[24px] bg-gradient-to-b from-gray-800 to-black rounded-b-sm shadow-[0_20px_20px_rgba(0,0,0,1)] z-20 hover:bg-slate-800`}
-                      style={{ left: `${leftPos}px` }}
+                      style={{ left: `${leftPos}px`, transition: 'all 0.1s ease-out' }}
                     />
                   );
                 } else {
                   const currentWhiteOffset = whiteKeyIndex * 40;
                   whiteKeyIndex++;
 
-                  if (navData) {
-                    return (
-                      <NavLink
-                        key={`white-${key.index}`}
-                        to={navData.href}
-                        end={navData.href === '/'}
-                        onMouseDown={playNote}
-                        className={({ isActive }) => 
-                          `${baseClasses} absolute top-0 h-[100px] w-[38px] bg-gradient-to-b from-white to-gray-200 text-black rounded-b-md shadow-[0_20px_35px_rgba(0,0,0,0.8)] z-10 hover:-translate-y-1 hover:bg-white
-                          ${isActive ? 'border-b-4 border-b-gold !h-[105px]' : ''}`
-                        }
-                        style={{ left: `${currentWhiteOffset}px` }}
-                      >
-                        <div className="flex flex-col items-center gap-1 group-hover:scale-110 transition-transform duration-200">
-                          {navData.icon}
-                          <span className="text-[7px] font-black tracking-tighter opacity-80 group-hover:opacity-100 uppercase">{navData.label}</span>
-                        </div>
-                      </NavLink>
-                    );
-                  } else {
-                    return (
-                      <div 
-                        key={`white-${key.index}`}
-                        onMouseDown={playNote}
-                        className={`${baseClasses} absolute top-0 h-[100px] w-[38px] bg-gradient-to-b from-white to-gray-200 rounded-b-md shadow-[0_20px_35px_rgba(0,0,0,0.8)] z-10`}
-                        style={{ left: `${currentWhiteOffset}px` }}
-                      />
-                    );
-                  }
+                  return (
+                    <div 
+                      key={`white-${key.index}`}
+                      id={`synth-key-${key.index}`}
+                      onMouseDown={playNote}
+                      className={`${baseClasses} absolute top-0 h-[100px] w-[38px] bg-gradient-to-b from-white to-gray-200 rounded-b-md shadow-[0_20px_35px_rgba(0,0,0,0.8)] z-10 hover:-translate-y-1 hover:bg-white`}
+                      style={{ left: `${currentWhiteOffset}px`, transition: 'all 0.1s ease-out' }}
+                    />
+                  );
                 }
               });
             })()}
@@ -197,11 +258,16 @@ export default function Layout() {
         </nav>
       </div>
 
+      {/* ── Page content ── */}
+      <main>
+        <Outlet />
+      </main>
+
       {/* ── Footer ── */}
-      <footer className="border-t border-white/10 py-10">
+      <footer className="border-t border-white/10 py-10 mt-20">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 text-sm text-white/60 md:flex-row md:items-center md:justify-between">
           <div>© {new Date().getFullYear()} {profile.name}</div>
-          <div className="flex gap-4">
+          <div className="flex gap-4 z-50">
             <a className="hover:text-white transition-colors" href={profile.links.github} target="_blank" rel="noreferrer">GitHub</a>
             <a className="hover:text-white transition-colors" href={profile.links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
             <a className="hover:text-white transition-colors" href={profile.links.medium} target="_blank" rel="noreferrer">Medium</a>

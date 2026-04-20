@@ -63,8 +63,15 @@ export default function Console() {
     if (!q) return;
     setMessages((m) => [...m, { type: 'input', text: q }]);
     setInput('');
-    setThinking(true);
     
+    // Autopilot bypass
+    if (q.toLowerCase().includes('titanic')) {
+      setMessages((m) => [...m, { type: 'output', text: 'Initializing Autopilot Synthesis: Titanic...' }]);
+      window.dispatchEvent(new CustomEvent('play-song', { detail: 'titanic' }));
+      return;
+    }
+
+    setThinking(true);
     const reply = await fetchLLMResponse(q);
     setThinking(false);
     setMessages((m) => [...m, { type: 'output', text: reply }]);
