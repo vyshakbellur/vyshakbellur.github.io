@@ -83,6 +83,23 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── Bespoke ML/Runner Graphic Capstone ── */}
+      <section className="relative mx-auto mt-20 max-w-7xl px-5 pb-20 fade-in section-enter">
+        <div className="w-full relative rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-white/5 bg-slate-900/50 backdrop-blur-md group">
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 pointer-events-none" />
+          <img 
+            src="/surreal_ml_runner_nyc.png" 
+            alt="Futuristic Neural Network with NYC Marathon Bib and Running Shoes"
+            className="w-full object-cover transition-transform duration-1000 group-hover:scale-105"
+            style={{ maxHeight: '600px' }}
+          />
+          <div className="absolute bottom-6 left-8 z-20">
+            <h3 className="text-2xl font-bold tracking-tight text-white/90">The Convergence</h3>
+            <p className="text-sm font-mono text-cyan-400 mt-1 uppercase tracking-widest">Endurance • Neural Architecture</p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

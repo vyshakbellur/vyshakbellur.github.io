@@ -77,52 +77,69 @@ export default function Layout() {
         }`}
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 relative">
-          <Link to="/" className="font-semibold tracking-tight text-white/90 hover:text-white transition-colors z-50">
-            {profile.fullName}
-          </Link>
+          
+          {/* LHS: Name + Staff Navigation */}
+          <div className="flex flex-col gap-2 relative z-50">
+            <Link to="/" className="font-semibold tracking-tight text-white/90 hover:text-white transition-colors">
+              {profile.fullName}
+            </Link>
 
-          {/* SVG Musical Staff Router */}
-          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 w-[300px] h-[60px] z-50 group">
-             {/* 5 Staff Lines */}
-             <div className="absolute w-full h-[1px] bg-white/20 top-[15px]" />
-             <div className="absolute w-full h-[1px] bg-white/20 top-[23px]" />
-             <div className="absolute w-full h-[1px] bg-white/20 top-[31px]" />
-             <div className="absolute w-full h-[1px] bg-white/20 top-[39px]" />
-             <div className="absolute w-full h-[1px] bg-white/20 top-[47px]" />
-             
-             {/* G-Clef aesthetics */}
-             <div className="absolute left-[5px] top-[15px] font-serif italic text-2xl text-white/40 font-bold opacity-80 pointer-events-none">
-               𝄞
-             </div>
+            {/* SVG Musical Staff Router */}
+            <div className="relative w-[340px] h-[40px] group mt-1">
+               {/* 4 Staff Lines */}
+               <div className="absolute w-full h-[1px] bg-white/20 top-[10px]" />
+               <div className="absolute w-full h-[1px] bg-white/20 top-[18px]" />
+               <div className="absolute w-full h-[1px] bg-white/20 top-[26px]" />
+               <div className="absolute w-full h-[1px] bg-white/20 top-[34px]" />
+               
+               {/* Clef aesthetics (Bookends) */}
+               <div className="absolute left-[0px] top-[4px] font-serif italic text-2xl text-white/30 font-bold pointer-events-none">
+                 𝄞
+               </div>
+               <div className="absolute right-[0px] top-[4px] font-serif text-2xl text-white/30 font-bold pointer-events-none">
+                 𝄢
+               </div>
 
-             {/* Musical Notes mapped to Navigation */}
-             {nav.map((n, i) => {
-               // Plot notes up/down the staff
-               const yOffsets = [43, 35, 27, 19, 11, 23, 31];
-               const topPos = yOffsets[i % yOffsets.length];
-               const leftPos = 40 + (i * 35);
-               return (
-                 <NavLink
-                   key={n.href}
-                   to={n.href}
-                   end={n.href === '/'}
-                   className={({ isActive }) => `
-                      absolute w-[10px] h-[8px] rounded-full rotate-[-15deg] transition-all duration-300 group-hover:drop-shadow-[0_0_10px_white]
-                      ${isActive ? 'bg-gold shadow-[0_0_8px_#ffd700]' : 'bg-slate-300 hover:bg-white hover:scale-125'}
-                   `}
-                   style={{ top: `${topPos}px`, left: `${leftPos}px` }}
-                   title={n.label}
-                 >
-                   {/* Visual stem pointing up/down depending on staff height */}
-                   <div className={`w-[2px] h-[20px] bg-current absolute ${topPos > 27 ? 'bottom-[4px] right-[0px]' : 'top-[4px] left-[0px]'}`} />
-                   
-                   {/* Text Label on hover */}
-                   <span className="absolute left-1/2 -translate-x-1/2 top-4 opacity-0 transition-opacity whitespace-nowrap text-[8px] uppercase tracking-widest font-black text-white bg-black/80 px-1 py-0.5 rounded pointer-events-none group-hover:opacity-100">
-                     {n.label}
-                   </span>
-                 </NavLink>
-               );
-             })}
+               {/* Musical Notes mapped to Navigation via SVG icons */}
+               {(() => {
+                 const iconMap = [
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>,
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>,
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>,
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>,
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>,
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                 ];
+                 
+                 return nav.map((n, i) => {
+                   const yOffsets = [28, 20, 12, 4, 12, 20, 28];
+                   const topPos = yOffsets[i % yOffsets.length];
+                   const leftPos = 40 + (i * 35);
+                   return (
+                     <NavLink
+                       key={n.href}
+                       to={n.href}
+                       end={n.href === '/'}
+                       className={({ isActive }) => `
+                          absolute w-[20px] h-[20px] flex items-center justify-center rounded bg-slate-900 border transition-all duration-300 group-hover:drop-shadow-[0_0_10px_white] hover:scale-125 z-10
+                          ${isActive ? 'border-gold text-gold shadow-[0_0_8px_#ffd700]' : 'border-white/10 text-white/70 hover:bg-white hover:text-black'}
+                       `}
+                       style={{ top: `${topPos}px`, left: `${leftPos}px` }}
+                       title={n.label}
+                     >
+                       {/* SVG Icon */}
+                       {iconMap[i]}
+                       
+                       {/* Text Label on hover */}
+                       <span className="absolute left-1/2 -translate-x-1/2 top-6 opacity-0 transition-opacity whitespace-nowrap text-[8px] uppercase tracking-widest font-black text-white bg-black/80 px-1 py-0.5 rounded pointer-events-none group-hover:opacity-100">
+                         {n.label}
+                       </span>
+                     </NavLink>
+                   );
+                 });
+               })()}
+            </div>
           </div>
 
           <div className="flex items-center gap-4 z-50">
