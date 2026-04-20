@@ -161,4 +161,17 @@ export const hobbiesInfo = {
     description: 'I collect experiences that push the edge — zip-lines off skyscrapers, skydives over turquoise water, canyon rope bridges. The world is too varied to stay comfortable.',
   },
 };
+
+export type ExperienceItem = {
+  company: string;
+  role?: string;
+  period: string;
+};
+
+export const experience: ExperienceItem[] = [
+  { company: 'JPMorgan Chase & Co.', period: 'Jun 2023 – Present' },
+  { company: 'Walmart Global Tech', period: 'Dec 2022 – Jun 2023' },
+  { company: 'Ford Motor Company (via Altimetrik / Lassim Tech)', period: 'Mar 2021 – Dec 2022' },
+  { company: 'Synchrony Financial (via HCL America)', period: 'Jun 2018 – Dec 2021' },
+];
   

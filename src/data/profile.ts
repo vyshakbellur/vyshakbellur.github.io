@@ -1,6 +1,7 @@
 export const profile = {
     name: "Vyshak Bellur",
-    tagline: "Software Engineer @ JPMorgan Chase • Full-stack • ML/LLMs",
+    fullName: "Vyshak Athreya Bellur Keshavamurthy",
+    tagline: "Software Engineer @ JPMorgan Chase",
     location: "NYC / New Jersey",
     links: {
       github: "https://github.com/vyshakbellur",

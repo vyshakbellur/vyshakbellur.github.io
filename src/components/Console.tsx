@@ -5,12 +5,32 @@ type Message = { type: 'input' | 'output'; text: string };
 
 const suggestions = ['who are you', 'publications', 'music', 'running', 'rcb', 'travel', 'tech stack', 'contact'];
 
-function getResponse(input: string): string {
+const WORKER_URL = 'https://chatbot-llm.vyshak-bellur.workers.dev';
+
+async function fetchLLMResponse(input: string): Promise<string> {
   const q = input.toLowerCase().trim();
+  
+  // First, check local hardcoded knowledge for instant responses
   for (const [key, val] of Object.entries(consoleKnowledge)) {
     if (q.includes(key)) return val;
   }
-  return "Command not recognized. Type 'help' to see available commands.";
+
+  // Fallback to calling the secure worker API
+  try {
+    const res = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: q }),
+    });
+    
+    if (!res.ok) throw new Error('API down');
+    
+    const data = await res.json();
+    return data.reply || "I am currently disconnected from my neural cortex.";
+  } catch (err) {
+    console.error("LLM Error:", err);
+    return "The LLM routing is currently undergoing maintenance. Ask me something from my local logic (experience, running, publications).";
+  }
 }
 
 export default function Console() {
@@ -38,16 +58,16 @@ export default function Console() {
     return () => observer.disconnect();
   }, []);
 
-  const handleSubmit = (query?: string) => {
+  const handleSubmit = async (query?: string) => {
     const q = (query ?? input).trim();
     if (!q) return;
     setMessages((m) => [...m, { type: 'input', text: q }]);
     setInput('');
     setThinking(true);
-    setTimeout(() => {
-      setThinking(false);
-      setMessages((m) => [...m, { type: 'output', text: getResponse(q) }]);
-    }, 600);
+    
+    const reply = await fetchLLMResponse(q);
+    setThinking(false);
+    setMessages((m) => [...m, { type: 'output', text: reply }]);
   };
 
   return (

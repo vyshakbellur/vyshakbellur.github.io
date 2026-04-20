@@ -4,7 +4,7 @@ import HeroBackground from '../components/HeroBackground';
 import Console from '../components/Console';
 import AdventureGallery from '../components/AdventureGallery';
 import { profile } from '../data/profile';
-import { hobbiesInfo } from '../data/content';
+import { hobbiesInfo, experience } from '../data/content';
 
 function Pill({ children }: { children: React.ReactNode }) {
   return (
@@ -97,13 +97,16 @@ export default function Home() {
               </a>
             </div>
 
-            <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {profile.highlights.map((x) => (
-                <div key={x.k} className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <div className="text-xs text-white/60">{x.k}</div>
-                  <div className="mt-1 text-sm font-medium text-white/90">{x.v}</div>
-                </div>
-              ))}
+            <div className="mt-12">
+              <div className="mb-4 text-xs font-semibold tracking-widest text-white/40 uppercase">Experience</div>
+              <div className="flex flex-col gap-4">
+                {experience.map((x) => (
+                  <div key={x.company} className="flex justify-between items-center rounded-2xl border border-white/10 bg-white/5 p-4 hover:border-gold/30 transition-colors">
+                    <div className="text-sm font-medium text-white/90">{x.company}</div>
+                    <div className="text-xs text-white/50">{x.period}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
