@@ -1,8 +1,8 @@
 export const nav = [
-    { label: "About", href: "#about" },
-    { label: "Experience", href: "#experience" },
-    { label: "Projects", href: "#projects" },
-    { label: "Writing", href: "#writing" },
-    { label: "Contact", href: "#contact" },
-  ];
-  
+  { label: 'Home',         href: '/' },
+  { label: 'ML & AWS',     href: '/ml' },
+  { label: 'Projects',     href: '/projects' },
+  { label: 'Writing',      href: '/writing' },
+  { label: 'Certs',        href: '/certs' },
+  { label: 'Contact',      href: '/contact' },
+];
