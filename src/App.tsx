@@ -7,6 +7,7 @@ import Projects from './pages/Projects';
 import Writing from './pages/Writing';
 import Certs from './pages/Certs';
 import Contact from './pages/Contact';
+import Publications from './pages/Publications';
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="writing" element={<Writing />} />
           <Route path="certs" element={<Certs />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="publications" element={<Publications />} />
         </Route>
       </Routes>
     </BrowserRouter>

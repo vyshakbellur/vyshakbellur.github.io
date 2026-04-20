@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import HeroBackground from '../components/HeroBackground';
 import HeroScene from '../components/HeroScene';
+import AdventureGallery from '../components/AdventureGallery';
 import { profile } from '../data/profile';
 import { hobbiesInfo } from '../data/content';
 
@@ -179,6 +180,17 @@ export default function Home() {
             </Link>
           </div>
         </div>
+      </section>
+
+      {/* ── Adventures ── */}
+      <section className="mx-auto max-w-6xl px-5 py-10">
+        <h2 className="section-enter mb-6 text-xl font-semibold tracking-tight text-white/95">
+          Adventures
+        </h2>
+        <p className="section-enter mb-6 max-w-2xl text-sm leading-relaxed text-white/60">
+          {hobbiesInfo.travel.description}
+        </p>
+        <AdventureGallery />
       </section>
 
       {/* ── Tech pills ── */}
