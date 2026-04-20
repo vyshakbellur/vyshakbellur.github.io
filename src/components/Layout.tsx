@@ -101,20 +101,20 @@ export default function Layout() {
                       } catch(e) {}
                     };
 
-                    const baseClasses = `transition-transform duration-100 cursor-pointer active:translate-y-1 active:border-b-0 flex flex-col items-center justify-end pb-2 relative group origin-top`;
+                    const baseClasses = `transition-transform duration-100 cursor-pointer active:translate-y-1 active:border-b-0 flex flex-col items-center justify-end pb-2 group hover:-translate-y-1 origin-top`;
 
                     if (key.isBlack) {
-                      const leftPos = (whiteKeyIndex * 40) - 12;
+                      const leftPos = (whiteKeyIndex * 36) - 10;
                       return (
                         <div 
                           key={`black-${key.index}`} 
                           onMouseDown={playNote}
-                          className={`${baseClasses} absolute top-0 h-[50px] w-[24px] bg-gradient-to-b from-slate-800 to-black rounded-b-sm border-b-4 border-slate-700 shadow-[2px_4px_10px_rgba(0,0,0,0.9)] z-20 hover:bg-slate-800`}
+                          className={`${baseClasses} absolute top-0 h-[45px] w-[20px] bg-gradient-to-b from-slate-900 to-black rounded-b-sm border-b-4 border-slate-700 shadow-[2px_4px_10px_rgba(0,0,0,0.9)] z-20 hover:bg-slate-800`}
                           style={{ left: `${leftPos}px` }}
                         />
                       );
                     } else {
-                      const currentWhiteOffset = whiteKeyIndex * 40;
+                      const currentWhiteOffset = whiteKeyIndex * 36;
                       whiteKeyIndex++;
 
                       if (navData) {
@@ -125,14 +125,14 @@ export default function Layout() {
                             end={navData.href === '/'}
                             onMouseDown={playNote}
                             className={({ isActive }) => 
-                              `${baseClasses} absolute top-0 h-[80px] w-[38px] bg-gradient-to-b from-white to-slate-200 text-slate-800 rounded-b-md border-b-8 border-slate-400 shadow-[1px_8px_15px_rgba(0,0,0,0.5)] z-10 hover:-translate-y-1 hover:border-b-gold
+                              `${baseClasses} absolute top-0 h-[70px] w-[34px] bg-gradient-to-b from-white to-slate-200 text-slate-800 rounded-b-md border-b-8 border-slate-400 shadow-[1px_8px_15px_rgba(0,0,0,0.4)] z-10 hover:border-b-gold
                               ${isActive ? 'ring-2 ring-gold !border-b-gold !text-gold' : 'hover:!text-gold'}`
                             }
                             style={{ left: `${currentWhiteOffset}px` }}
                           >
                             <div className="flex flex-col items-center gap-1 group-hover:scale-110 transition-transform duration-200">
                               {navData.icon}
-                              <span className="text-[7px] font-bold tracking-tighter opacity-70 group-hover:opacity-100 uppercase">{navData.label}</span>
+                              <span className="text-[6px] font-bold tracking-tighter opacity-80 group-hover:opacity-100 uppercase">{navData.label}</span>
                             </div>
                           </NavLink>
                         );
@@ -141,7 +141,7 @@ export default function Layout() {
                           <div 
                             key={`white-${key.index}`}
                             onMouseDown={playNote}
-                            className={`${baseClasses} absolute top-0 h-[80px] w-[38px] bg-gradient-to-b from-white to-slate-200 rounded-b-md border-b-8 border-slate-400 shadow-[1px_8px_15px_rgba(0,0,0,0.5)] z-10`}
+                            className={`${baseClasses} absolute top-0 h-[70px] w-[34px] bg-gradient-to-b from-white to-slate-200 rounded-b-md border-b-8 border-slate-400 shadow-[1px_8px_15px_rgba(0,0,0,0.4)] z-10`}
                             style={{ left: `${currentWhiteOffset}px` }}
                           />
                         );
