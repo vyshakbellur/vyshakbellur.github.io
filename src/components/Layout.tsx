@@ -35,6 +35,9 @@ export default function Layout() {
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
           <Link to="/" className="font-semibold tracking-tight text-white/90 hover:text-white transition-colors">
+            {profile.fullName}
+          </Link>
+
           {/* Piano Navbar Synth */}
           <nav className="relative hidden md:flex items-start h-[60px]">
             {/* We will build a 24-key synth (2 Octaves: C4 -> B5) 
