@@ -105,9 +105,11 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right: Console Chatbot */}
-          <div className="md:col-span-5 flex items-center justify-center">
-            <Console />
+          {/* Right: Console Chatbot (Sticky) */}
+          <div className="md:col-span-5 relative">
+            <div className="sticky top-24 flex items-center justify-center">
+              <Console />
+            </div>
           </div>
         </div>
 

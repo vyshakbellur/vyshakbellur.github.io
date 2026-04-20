@@ -38,23 +38,54 @@ export default function Layout() {
             {profile.fullName}
           </Link>
 
-          {/* Desktop links */}
-          <nav className="hidden items-center gap-6 text-sm text-white/70 md:flex">
-            {nav.map((n) => (
-              <NavLink
-                key={n.href}
-                to={n.href}
-                end={n.href === '/'}
-                className={({ isActive }) =>
-                  `hover:text-white transition-colors ${isActive ? 'text-white' : ''}`
-                }
-              >
-                {n.label}
-              </NavLink>
-            ))}
+          {/* Desktop links - Piano Keys */}
+          <nav className="hidden md:flex items-end gap-[2px] h-[40px]">
+            {nav.map((n, i) => {
+              const playNote = () => {
+                try {
+                  const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+                  const osc = ctx.createOscillator();
+                  const gain = ctx.createGain();
+                  
+                  // Simple major scale (C4, E4, G4, etc)
+                  const baseFreq = 261.63; // C4
+                  const intervals = [1, 1.25, 1.5, 1.66, 2];
+                  osc.frequency.value = baseFreq * (intervals[i % intervals.length]);
+                  
+                  osc.type = 'sine';
+                  osc.connect(gain);
+                  gain.connect(ctx.destination);
+                  
+                  osc.start();
+                  // Envelope
+                  gain.gain.setValueAtTime(0, ctx.currentTime);
+                  gain.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.05);
+                  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.5);
+                  osc.stop(ctx.currentTime + 1.5);
+                } catch(e) { /* ignore if audio context blocked */ }
+              };
+
+              return (
+                <NavLink
+                  key={n.href}
+                  to={n.href}
+                  end={n.href === '/'}
+                  onMouseDown={playNote}
+                  className={({ isActive }) =>
+                    `px-4 pt-1 pb-3 text-[11px] font-bold uppercase tracking-widest transition-all duration-150 rounded-b-md border-b-[4px] border-l border-r border-white/5 cursor-pointer flex items-end justify-center h-full active:translate-y-1 active:border-b-0
+                    ${isActive 
+                      ? 'bg-gradient-to-b from-white/10 to-white/20 text-white border-b-gold shadow-[0_4px_15px_rgba(255,255,255,0.1)]' 
+                      : 'bg-gradient-to-b from-transparent to-white/5 text-white/50 hover:text-white/90 hover:from-white/5 hover:to-white/10 border-b-slate-800'
+                    }`
+                  }
+                >
+                  {n.label}
+                </NavLink>
+              );
+            })}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <a
               href={profile.links.linkedin}
               className="rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white/90 hover:bg-white/15 transition-colors"
