@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import HeroBackground from '../components/HeroBackground';
+import ArtisticBackground from '../components/ArtisticBackground';
 import Console from '../components/Console';
 import AdventureGallery from '../components/AdventureGallery';
 import { profile } from '../data/profile';
@@ -30,82 +30,77 @@ export default function Home() {
   return (
     <div ref={sectionRef}>
       {/* ── Hero ── */}
-      <section className="relative mx-auto max-w-6xl px-5 pb-10 pt-14">
-        <HeroBackground />
+      <section className="relative mx-auto max-w-6xl px-5 pb-10 pt-14 text-white overflow-hidden">
+        <ArtisticBackground />
 
-        <div className="grid gap-10 md:grid-cols-12 md:items-center">
-
+        <div className="relative z-10 grid gap-12 md:grid-cols-12 md:items-start lg:gap-16">
           {/* Left: text */}
           <div className="md:col-span-7">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
-              <span>{profile.location}</span>
-              <span className="text-white/35">•</span>
-              <span>Full-stack + GenAI systems</span>
-            </div>
-
-            <h1 className="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">
-              <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">
-                {profile.tagline}
+            <h1 className="text-4xl font-semibold tracking-tight md:text-5xl text-white/95">
+              {profile.tagline.split('•')[0]} <br/>
+              <span className="text-gold opacity-90 text-2xl md:text-3xl font-normal block mt-2 text-white/60">
+                Musician • Runner • Adrenaline Junkie
               </span>
             </h1>
 
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/75">
-              I build production-grade software and explore practical ML/LLM
-              architectures—clean UX, reliable services, and deployments that scale.
-            </p>
+            <div className="mt-8 space-y-5 text-sm leading-relaxed text-slate-300">
+              <p>
+                I am a Senior Engineer at JPMorgan Chase and an applied ML researcher whose work spans three unlikely domains—financial infrastructure, computational biology, and digital humanities—connected by a single obsession: finding structure in complex, noisy systems.
+              </p>
+              <p>
+                At JPMorgan Chase, I architect production ML systems with a focus on autonomous reliability, utilizing anomaly detection and automated recovery pipelines to reduce MTTR to under 15 minutes. In my research, I collaborate with Prof. Forest Rohwer at San Diego State University on microbiome network architecture and DNA Language Modeling for Metagenomics. Previously, my published work with Prof. Sam Kassegne in Oxford University Press applied computational pattern recognition to measure structural similarity across ancient writing systems.
+              </p>
+              <p>
+                The common thread across all three: ML as a lens for recognizing patterns that cut across domain boundaries. Outside of the terminal, I run long distances, train for half-marathons, and run a music channel called <strong>v_naada</strong>.
+              </p>
+            </div>
 
-            <div className="mt-7 flex flex-wrap gap-3">
-              <a
-                href={profile.links.resume}
-                className="rounded-xl border border-white/10 bg-white/5 px-5 py-2 text-sm font-semibold text-white/90 hover:bg-white/10 transition-colors"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Resume
+            {/* Minimalist Iterative Socials */}
+            <div className="mt-8 flex flex-wrap items-center gap-6">
+              <a href={profile.links.resume} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-white/60 transition-colors hover:text-white">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold/80" /> Resume
               </a>
-              <a
-                href={profile.links.github}
-                className="rounded-xl border border-white/10 bg-white/5 px-5 py-2 text-sm font-semibold text-white/90 hover:bg-white/10 transition-colors"
-                target="_blank"
-                rel="noreferrer"
-              >
-                GitHub
+              <a href={profile.links.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-white/60 transition-colors hover:text-white">
+                GitHub ↗
               </a>
-              <a
-                href={profile.links.scholar}
-                className="rounded-xl border border-white/10 bg-white/5 px-5 py-2 text-sm font-semibold text-white/90 hover:bg-white/10 transition-colors"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Scholar
+              <a href={profile.links.scholar} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-white/60 transition-colors hover:text-white">
+                Scholar ↗
               </a>
-              <a
-                href={profile.links.medium}
-                className="rounded-xl border border-white/10 bg-white/5 px-5 py-2 text-sm font-semibold text-white/90 hover:bg-white/10 transition-colors"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Medium
+              <a href={profile.links.medium} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-white/60 transition-colors hover:text-white">
+                Medium ↗
               </a>
-              <a
-                href={profile.links.linkedin}
-                className="rounded-xl border border-white/10 bg-white/5 px-5 py-2 text-sm font-semibold text-white/90 hover:bg-white/10 transition-colors"
-                target="_blank"
-                rel="noreferrer"
-              >
-                LinkedIn
+              <a href={profile.links.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-white/60 transition-colors hover:text-white">
+                LinkedIn ↗
               </a>
             </div>
 
-            <div className="mt-12">
-              <div className="mb-4 text-xs font-semibold tracking-widest text-white/40 uppercase">Experience</div>
-              <div className="flex flex-col gap-4">
-                {experience.map((x) => (
-                  <div key={x.company} className="flex justify-between items-center rounded-2xl border border-white/10 bg-white/5 p-4 hover:border-gold/30 transition-colors">
-                    <div className="text-sm font-medium text-white/90">{x.company}</div>
-                    <div className="text-xs text-white/50">{x.period}</div>
+            <div className="mt-14 space-y-12">
+              {/* Education Block */}
+              <div>
+                <div className="mb-4 text-[10px] font-semibold tracking-widest text-white/30 uppercase">Education</div>
+                <div className="flex flex-col gap-3 border-l border-white/10 pl-4">
+                  <div className="flex flex-col group">
+                    <span className="text-sm font-medium text-white/90 group-hover:text-gold transition-colors">University of Cumberlands</span>
+                    <span className="text-xs text-white/50">Ph.D. Candidate</span>
                   </div>
-                ))}
+                  <div className="flex flex-col group">
+                    <span className="text-sm font-medium text-white/90 group-hover:text-gold transition-colors">San Diego State University</span>
+                    <span className="text-xs text-white/50">Master of Science (M.S.)</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Experience Block */}
+              <div>
+                <div className="mb-4 text-[10px] font-semibold tracking-widest text-white/30 uppercase">Experience</div>
+                <div className="flex flex-col gap-5 border-l border-white/10 pl-4">
+                  {experience.map((x) => (
+                    <div key={x.company} className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline group">
+                      <div className="text-sm font-medium text-white/90 group-hover:text-gold transition-colors">{x.company}</div>
+                      <div className="text-[11px] text-white/40 font-mono tracking-wide">{x.period}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

@@ -3,7 +3,7 @@ import { consoleKnowledge } from '../data/content';
 
 type Message = { type: 'input' | 'output'; text: string };
 
-const suggestions = ['who are you', 'publications', 'music', 'running', 'rcb', 'travel', 'tech stack', 'contact'];
+const suggestions = ['Ask about AI in FinTech', 'Tell me about Metagenomics'];
 
 const WORKER_URL = 'https://chatbot-llm.vyshak-bellur.workers.dev';
 
