@@ -44,7 +44,7 @@ export default function MLPage() {
         <div className="mb-2 text-xs font-medium tracking-widest text-white/40 uppercase">Engineering</div>
         <h1 className="text-3xl font-semibold tracking-tight text-white/95 md:text-4xl">
           ML &amp;{' '}
-          <span className="bg-gradient-to-r from-fuchsia-400 via-sky-400 to-emerald-300 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">
             AWS
           </span>
         </h1>

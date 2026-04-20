@@ -43,7 +43,7 @@ export default function Home() {
             </div>
 
             <h1 className="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">
-              <span className="bg-gradient-to-r from-fuchsia-400 via-sky-400 to-emerald-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">
                 {profile.tagline}
               </span>
             </h1>
@@ -56,7 +56,7 @@ export default function Home() {
             <div className="mt-7 flex flex-wrap gap-3">
               <a
                 href={profile.links.resume}
-                className="rounded-xl bg-gradient-to-r from-fuchsia-500 via-sky-500 to-emerald-400 px-5 py-2 text-sm font-semibold text-slate-950"
+                className="rounded-xl bg-gradient-to-r from-red-600 via-yellow-500 to-red-500 px-5 py-2 text-sm font-semibold text-white"
                 target="_blank"
                 rel="noreferrer"
               >

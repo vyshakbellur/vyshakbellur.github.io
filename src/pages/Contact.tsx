@@ -19,7 +19,7 @@ export default function Contact() {
       <div className="section-enter mb-10">
         <div className="mb-2 text-xs font-medium tracking-widest text-white/40 uppercase">Get in touch</div>
         <h1 className="text-3xl font-semibold tracking-tight text-white/95 md:text-4xl">
-          <span className="bg-gradient-to-r from-fuchsia-400 via-sky-400 to-emerald-300 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">
             Contact
           </span>
         </h1>
@@ -38,7 +38,7 @@ export default function Contact() {
                 href={profile.links.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-xl bg-gradient-to-r from-fuchsia-500 via-sky-500 to-emerald-400 px-5 py-2 text-sm font-semibold text-slate-950"
+                className="rounded-xl bg-gradient-to-r from-red-600 via-yellow-500 to-red-500 px-5 py-2 text-sm font-semibold text-slate-950"
               >
                 Message on LinkedIn
               </a>
