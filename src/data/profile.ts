@@ -6,6 +6,7 @@ export const profile = {
       github: "https://github.com/vyshakbellur",
       linkedin: "https://www.linkedin.com/in/vyshak-bellur-40a072310/",
       medium: "https://medium.com/@vyshak.x.bellur",
+      scholar: "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C31&q=vyshak+athreya+bellur+keshavamurthy&btnG=",
       // Put your resume PDF in /public and keep the filename stable:
       resume: "/Vyshak_Bellur_Resume.pdf",
     },

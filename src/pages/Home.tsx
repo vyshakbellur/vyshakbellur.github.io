@@ -72,6 +72,14 @@ export default function Home() {
                 GitHub
               </a>
               <a
+                href={profile.links.scholar}
+                className="rounded-xl border border-white/10 bg-white/5 px-5 py-2 text-sm font-semibold text-white/90 hover:bg-white/10 transition-colors"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Scholar
+              </a>
+              <a
                 href={profile.links.medium}
                 className="rounded-xl border border-white/10 bg-white/5 px-5 py-2 text-sm font-semibold text-white/90 hover:bg-white/10 transition-colors"
                 target="_blank"

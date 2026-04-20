@@ -46,7 +46,7 @@ export const projects: Project[] = [
     desc: 'Published in Oxford University Press journal — computational analysis of structural similarity across ancient writing systems using graph-theoretic approaches.',
     tags: ['Python', 'NLP', 'Graph Theory', 'Published'],
     status: 'published',
-    href: 'https://academic.oup.com/dsh/article/39/1/dhae004/7624314',
+    href: 'https://academic.oup.com/dsh/advance-article/doi/10.1093/llc/fqag029/8539597?login=false',
   },
   {
     title: 'vyshakbellur.github.io',
@@ -65,7 +65,7 @@ export const publications: Publication[] = [
     year: 2024,
     tier: 'Q1 Journal',
     coAuthor: 'Prof. Sam Kassegne',
-    href: 'https://academic.oup.com/dsh/article/39/1/dhae004/7624314',
+    href: 'https://academic.oup.com/dsh/advance-article/doi/10.1093/llc/fqag029/8539597?login=false',
     desc: 'A graph-theoretic framework for measuring structural similarity across ancient scripts. Quantifies evolutionary relationships using topological feature vectors and network centrality metrics.',
   },
   {
@@ -154,8 +154,7 @@ export const hobbiesInfo = {
       { label: 'Next Goal', value: 'NYC', unit: 'Marathon' },
     ],
     description: 'Half marathons, one full marathon, training for NYC Marathon. NYRR member — race results and training log below.',
-    // TODO: replace with actual NYRR profile URL
-    nyrrHref: 'https://results.nyrr.org/runner/[VYSHAK_NYRR_ID]/races',
+    nyrrHref: 'https://results.nyrr.org/runner/50011145/races',
   },
   travel: {
     places: ['Dubai', 'Florida Keys', 'Amalfi Coast', 'Rome', 'Pisa', 'West Virginia', 'California'],
