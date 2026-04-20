@@ -128,7 +128,7 @@ export const adventurePhotos: AdventurePhoto[] = [
 ];
 
 export const consoleKnowledge: Record<string, string> = {
-  'who are you': 'I am Vyshak Bellur — ML engineer at JPMorgan Chase, researcher, musician, and marathon runner based in New Jersey.',
+  'who are you': 'I am Vyshak Athreya Bellur Keshavamurthy — ML engineer at JPMorgan Chase, researcher, musician, and marathon runner based in New Jersey.',
   'publications': 'Published in Oxford University Press (Digital Scholarship in the Humanities, 2024). Co-authored with Prof. Sam Kassegne — computational analysis of ancient script similarity using graph theory.',
   'research': 'My research spans computational linguistics, microbiome network modeling (with Prof. Forest Rohwer at SDSU), and enterprise LLM architectures.',
   'music': 'I run v_naada — a music channel with Chinmayi. We explore classical and contemporary Indian music. Find us on YouTube and Instagram @v_naada.',

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import HeroBackground from '../components/HeroBackground';
-import HeroScene from '../components/HeroScene';
+import Console from '../components/Console';
 import AdventureGallery from '../components/AdventureGallery';
 import { profile } from '../data/profile';
 import { hobbiesInfo } from '../data/content';
@@ -107,9 +107,9 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right: SVG scene */}
-          <div className="md:col-span-5">
-            <HeroScene />
+          {/* Right: Console Chatbot */}
+          <div className="md:col-span-5 flex items-center justify-center">
+            <Console />
           </div>
         </div>
 

@@ -51,18 +51,8 @@ export default function Console() {
   };
 
   return (
-    <section id="console" ref={sectionRef} className="py-24 bg-ink-soft">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="section-enter mb-12">
-          <div className="tag mb-4">AMA</div>
-          <h2 className="font-display font-bold text-cream text-4xl md:text-5xl">
-            Ask Me{' '}
-            <span className="text-gold-gradient">Anything</span>
-          </h2>
-          <div className="gold-line" />
-        </div>
-
-        <div className="section-enter console-window" style={{ maxWidth: '720px' }}>
+    <div id="console" ref={sectionRef} className="w-full">
+      <div className="section-enter console-window w-full">
           <div className="flex items-center gap-2 px-4 py-3 border-b border-gold/10">
             <span className="w-3 h-3 rounded-full bg-ember" />
             <span className="w-3 h-3 rounded-full bg-gold" />
@@ -120,7 +110,6 @@ export default function Console() {
             </button>
           ))}
         </div>
-      </div>
-    </section>
+    </div>
   );
 }
