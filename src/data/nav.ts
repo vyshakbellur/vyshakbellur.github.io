@@ -1,9 +1,10 @@
 export const nav = [
   { label: 'Home',         href: '/' },
+  { label: 'About',        href: '/about' },
+  { label: 'Education',    href: '/education' },
   { label: 'Experience',   href: '/experience' },
-  { label: 'Credentials',  href: '/credentials' },
   { label: 'Projects',     href: '/projects' },
-  { label: 'Publications', href: '/publications' },
+  { label: 'Papers',       href: '/publications' },
   { label: 'Life',         href: '/life' },
   { label: 'Contact',      href: '/contact' },
 ];
