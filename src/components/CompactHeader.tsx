@@ -6,6 +6,7 @@ const PAGE_ACCENT: Record<string, string> = {
   '/about':        '#F2E8D0',  /* warm ivory — general bio */
   '/education':    '#86efac',  /* sage green — academic */
   '/experience':   '#F5A623',  /* amber — career timeline */
+  '/sandbox':      '#00D4FF',  /* cyan — interactive algorithms */
   '/projects':     '#00ffa0',  /* ATC green — radar */
   '/publications': '#7dd3fc',  /* sky blue — papers */
   '/life':         '#fb7185',  /* rose — running / travel */

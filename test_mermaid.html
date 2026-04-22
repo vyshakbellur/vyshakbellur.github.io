@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html><body>
+<div class="mermaid">
+gitgraph
+  commit id: "a3f9e2b" tag: "ubs" type: HIGHLIGHT
+  commit id: "c81df90" tag: "hcl"
+  branch sdsu
+  checkout sdsu
+  commit id: "e94c3d2" tag: "sdsu"
+  checkout main
+  merge sdsu id: "7b29a1f" tag: "synchrony"
+  branch ford
+  checkout ford
+  commit id: "d60f1b8" tag: "ford"
+  branch walmart
+  checkout walmart
+  commit id: "2f8ca94" tag: "walmart"
+  checkout main
+  merge ford 
+  merge walmart id: "9a0bf5c" tag: "jpmc" type: HIGHLIGHT
+</div>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+</script>
+</body></html>

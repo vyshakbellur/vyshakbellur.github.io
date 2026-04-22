@@ -35,12 +35,7 @@ export const projects: Project[] = [
     tags: ['Java', 'Spring Boot', 'AWS', 'Observability'],
     status: 'production',
   },
-  {
-    title: 'Microbiome Network Architecture',
-    desc: 'Computational framework for modeling microbial interaction networks. Collaborative research with Prof. Forest Rohwer at SDSU exploring cross-domain biological patterns.',
-    tags: ['Python', 'Network Science', 'Research'],
-    status: 'research',
-  },
+
   {
     title: 'Computational Script Similarity',
     desc: 'Published in Oxford University Press journal — computational analysis of structural similarity across ancient writing systems using graph-theoretic approaches.',
@@ -74,6 +69,7 @@ export const publications: Publication[] = [
     publisher: 'San Diego State University',
     year: 2019,
     tier: 'Thesis',
+    href: 'https://www.proquest.com/openview/194737039beaa878147991fc6e8aa954/1?pq-origsite=gscholar&cbl=18750&diss=y',
     desc: 'Foundational research establishing computational methods for cross-script structural analysis. Applied machine learning to classify glyph morphology across 12 ancient writing systems.',
   },
 ];

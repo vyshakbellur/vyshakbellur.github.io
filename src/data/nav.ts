@@ -3,6 +3,7 @@ export const nav = [
   { label: 'About',        href: '/about' },
   { label: 'Education',    href: '/education' },
   { label: 'Experience',   href: '/experience' },
+  { label: 'Sandbox',      href: '/sandbox' },
   { label: 'Projects',     href: '/projects' },
   { label: 'Papers',       href: '/publications' },
   { label: 'Life',         href: '/life' },

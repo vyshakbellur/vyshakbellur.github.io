@@ -1,308 +1,442 @@
-import { useState, useEffect } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 
 type EduNode = {
   id: string;
-  type: 'root' | 'branch' | 'leaf';
+  strand: 0 | 1; // 0 = Education, 1 = Certification
+  u: number;     // Position along the diagonal axis (0 to 1200)
   title: string;
   institution: string;
   period?: string;
-  url?: string;
   description: string;
+  impact?: string;
+  courses?: string[];
+  url?: string;
   color: string;
-  cx: number;
-  cy: number;
-  path: string; /* SVG path from stem connection to the node */
 };
 
-/* Base plant stem (Core identity / Software Engineering foundations) */
-const STEM_PATH = 'M400,480 C395,380 410,250 400,80';
+// Helix mathematical constants for Diagonal rendering
+const D = 1200; // Total timeline length
+const A = 130;  // Amplitude (width of helix)
+const FREQ = (Math.PI * 2) / 800; // One full twist every 800 units
 
+// getPos translates the 1D parameter `u` into 2D diagonal coordinates
+const getPos = (u: number, strand: 0 | 1) => {
+  const pct = u / D;
+  
+  // Center line moving from bottom-left (150, 950) to top-right (1050, 50)
+  const cx = 150 + pct * 900;  
+  const cy = 950 - pct * 900;  
+  
+  // Normal vector pointing bottom-right (perpendicular to center line)
+  const nx = 0.707;
+  const ny = 0.707;
+  
+  const phase = strand === 0 ? 0 : Math.PI;
+  const offset = A * Math.sin(u * FREQ + phase);
+  
+  return {
+    x: cx + offset * nx,
+    y: cy + offset * ny,
+    isRightSide: offset > 0,
+  };
+};
+
+// Nodes mapped chronologically from bottom-left (low u) to top-right (high u)
 const NODES: EduNode[] = [
-  /* ─── Roots (Degrees) ─── */
-  {
-    id: 'phd',
-    type: 'root',
-    title: 'PhD in Machine Learning',
-    institution: 'University of the Cumberlands',
-    period: '2022 – Present',
-    description: 'Current research focusing on ML architectures, DNA Language Modeling, and reliability engineering.',
-    color: '#8b5cf6', // purple
-    cx: 460, cy: 560,
-    path: 'M400,480 C410,500 430,530 460,560'
-  },
-  {
-    id: 'ms',
-    type: 'root',
-    title: 'MS in Computer Science',
-    institution: 'San Diego State University',
-    period: '2016 – 2019',
-    description: 'Specialized in computer science fundamentals, applied research, and bioinformatics pipelines.',
-    color: '#3b82f6', // blue
-    cx: 400, cy: 590,
-    path: 'M400,480 C395,520 405,560 400,590'
-  },
+  /* ─── Strand 0: Education ─── */
   {
     id: 'be',
-    type: 'root',
+    strand: 0,
+    u: 150,
     title: 'BE, Electronics & Communication',
     institution: 'Visvesvaraya Technological University',
     period: '2010 – 2014',
     description: 'Foundational engineering degree combining hardware systems with low-level software.',
-    color: '#10b981', // emerald
-    cx: 320, cy: 550,
-    path: 'M400,480 C380,500 350,520 320,550'
+    courses: ['Digital Signal Processing', 'Microcontrollers & Architecture', 'Data Structures'],
+    color: '#06b6d4', // Cyan
+  },
+  {
+    id: 'ms',
+    strand: 0,
+    u: 300,
+    title: 'MS in Computer Science',
+    institution: 'San Diego State University',
+    period: '2016 – 2019',
+    description: 'Specialized in computer science fundamentals, applied research, and bioinformatics pipelines.',
+    impact: 'Established the research foundation for large-scale computational analysis on biological networks.',
+    courses: ['Bioinformatics & Network Science', 'Database Systems', 'Machine Learning'],
+    color: '#3b82f6', // Blue
   },
 
-  /* ─── Branches (Specializations) ─── */
+  /* ─── Strand 1: Certifications & Specializations ─── */
   {
     id: 'stan-algo',
-    type: 'branch',
+    strand: 1,
+    u: 450,
     title: 'Algorithms Specialization',
     institution: 'Stanford University (Coursera)',
+    period: 'Dec 2017',
     url: 'https://www.coursera.org/account/accomplishments/specialization/GTU2NM3LEHMW',
-    description: 'In-depth specialization covering algorithmic design, graphs, NP-completeness, and dynamic programming.',
-    color: '#f59e0b', // amber
-    cx: 240, cy: 220,
-    path: 'M401,360 C320,330 270,270 240,220'
-  },
-
-  /* ─── Leaves (Certifications) ─── */
-  {
-    id: 'aws-arch',
-    type: 'leaf',
-    title: 'AWS Certified Solutions Architect – Associate',
-    institution: 'Amazon Web Services',
-    description: 'Cloud architecture, distributed systems, and cost-optimized fault-tolerant deployment strategies.',
-    color: '#f97316', // orange
-    cx: 560, cy: 280,
-    path: 'M405,390 C450,380 510,340 560,280'
-  },
-  {
-    id: 'aws-dev',
-    type: 'leaf',
-    title: 'AWS Certified Developer – Associate',
-    institution: 'Amazon Web Services',
-    description: 'Cloud-native application development, serverless computing, and CI/CD on AWS.',
-    color: '#eab308', // yellow
-    cx: 520, cy: 160,
-    path: 'M406,260 C440,240 480,200 520,160'
+    description: 'Rigorous specialization covering greedy algorithms, dynamic programming, and computationally intractable (NP) problems.',
+    impact: 'Honed my ability to optimize bottlenecks in computationally heavy systems like DNA Language Models. Algorithmic efficiency is the difference between a research prototype and a viable real-world platform.',
+    courses: ['Greedy Algorithms', 'Graph Theory', 'Dynamic Programming', 'NP-Completeness'],
+    color: '#f97316', // Orange
   },
   {
     id: 'grad-web',
-    type: 'leaf',
-    title: 'Graduate Certificate in Web & Mobile Apps',
+    strand: 1,
+    u: 600,
+    title: 'Grad Cert Web & Mobile Apps',
     institution: 'San Diego State University',
     period: '2019',
-    description: 'Advanced coursework in modern full-stack web and mobile application engineering.',
-    color: '#2dd4bf', // teal
-    cx: 280, cy: 120,
-    path: 'M400,180 C360,160 310,140 280,120'
-  }
+    description: 'Advanced coursework spanning full-stack web architectures, mobile deployments, and API integrations.',
+    impact: 'Provides the structural engineering background needed to build tangible UI/UX interfaces over complex back-end architectures, allowing me to build complete products rather than just isolated algorithms.',
+    courses: ['Advanced Web Applications', 'Mobile Development Frameworks'],
+    color: '#10b981', // Emerald
+  },
+  {
+    id: 'aws-dev',
+    strand: 1,
+    u: 750,
+    title: 'AWS Certified Developer – Associate',
+    institution: 'Amazon Web Services',
+    url: 'https://cp.certmetrics.com/amazon/en/public/verify/credential/9c863874de0e4e3b8279faae6cae39b3',
+    description: 'Cloud-native application development, serverless computing, and robust CI/CD pipelines on AWS infrastructure.',
+    impact: 'Validates my ability to turn research and models into reliable, highly-available production APIs. This is crucial for bridging the gap between theoretical ML models and scalable enterprise deployments.',
+    courses: [],
+    color: '#f59e0b', // Amber
+  },
+  {
+    id: 'aws-arch',
+    strand: 1,
+    u: 900,
+    title: 'AWS Solutions Architect – Associate',
+    institution: 'Amazon Web Services',
+    url: 'https://cp.certmetrics.com/amazon/en/public/verify/credential/J8X553629M4E1XG0',
+    description: 'Designing highly available, scalable, fault-tolerant, and cost-optimized enterprise cloud architectures.',
+    impact: 'Empowers me to architect resilient ML production pipelines and orchestration layers—like autonomous self-healing engines—ensuring they scale flawlessly within modern FinTech and enterprise ecosystems.',
+    courses: [],
+    color: '#ef4444', // Red
+  },
+
+  /* ─── Stand 0: PhD at the very top ─── */
+  {
+    id: 'phd',
+    strand: 0,
+    u: 1050,
+    title: 'PhD in Machine Learning',
+    institution: 'University of the Cumberlands',
+    period: '2022 – Present',
+    description: 'Current research focusing on ML architectures, DNA Language Modeling, and reliability engineering.',
+    impact: 'Driving cutting-edge applied research to build fault-tolerant learning architectures for complex, noisy systems (e.g. metagenomics, financial telemetry).',
+    courses: ['Advanced Neural Architectures', 'Computational Metagenomics', 'Stochastic Processes Data Modeling'],
+    color: '#8b5cf6', // Purple
+  },
 ];
 
 export default function Education() {
-  const [hovered, setHovered] = useState<string | null>(null);
-  const [mounted, setMounted] = useState(false);
+  // Select PhD by default on mount
+  const [hovered, setHovered] = useState<string>('phd');
 
-  useEffect(() => {
-    // Small delay to ensure CSS animation triggers after DOM mount
-    const t = setTimeout(() => setMounted(true), 100);
-    return () => clearTimeout(t);
+  const activeNode = NODES.find((n) => n.id === hovered) || NODES[NODES.length - 1];
+
+  // Generate Helix paths
+  const boundsU = [0, 1200];
+  const resolution = 15;
+  
+  const strand0Points = useMemo(() => {
+    let d = '';
+    for (let u = boundsU[0]; u <= boundsU[1]; u += resolution) {
+      const pos = getPos(u, 0);
+      d += `${u === boundsU[0] ? 'M' : 'L'} ${pos.x},${pos.y} `;
+    }
+    return d;
   }, []);
 
-  const activeNode = NODES.find(n => n.id === hovered) || null;
+  const strand1Points = useMemo(() => {
+    let d = '';
+    for (let u = boundsU[0]; u <= boundsU[1]; u += resolution) {
+      const pos = getPos(u, 1);
+      d += `${u === boundsU[0] ? 'M' : 'L'} ${pos.x},${pos.y} `;
+    }
+    return d;
+  }, []);
+
+  // Generate Base Pairs
+  const basePairs = useMemo(() => {
+    const pairs = [];
+    for (let u = boundsU[0] + 15; u < boundsU[1]; u += 25) {
+      pairs.push({
+        u,
+        p1: getPos(u, 0),
+        p2: getPos(u, 1),
+      });
+    }
+    return pairs;
+  }, []);
 
   return (
-    <div className="flex h-full bg-[#05080e] overflow-hidden">
+    <div className="flex flex-col md:flex-row h-full bg-[#030610] overflow-hidden">
       
-      {/* ─── SVG Plant Map ─── */}
-      <div className="flex-1 relative overflow-hidden flex items-center justify-center">
-        <svg
-          viewBox="0 0 800 700"
-          className="w-full h-full max-h-[90vh] object-contain drop-shadow-2xl"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <defs>
-            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur1" />
-              <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur2" />
-              <feMerge>
-                <feMergeNode in="blur1" />
-                <feMergeNode in="blur2" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
+      {/* ─── Left Side: Title + SVG Map ─── */}
+      <div className="flex-1 flex flex-col min-w-0 relative">
+        {/* Unified Title (Static Document Flow, No Overlap) */}
+        <div className="pt-8 px-6 md:px-10 flex-shrink-0 z-20 relative">
+          <h1 className="text-3xl md:text-5xl font-black tracking-widest uppercase text-white/90">Education</h1>
+          <p className="text-xs md:text-lg font-mono tracking-widest mt-1 md:mt-2 text-white/50 uppercase">Academia and Certifications</p>
+        </div>
 
-            {/* Dash animation for plant growth */}
-            <style>{`
-              .grow-path {
-                stroke-dasharray: 1000;
-                stroke-dashoffset: 1000;
-                animation: grow 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-              }
-              .grow-delayed {
-                animation-delay: 1s;
-              }
-              @keyframes grow {
-                to { stroke-dashoffset: 0; }
-              }
-            `}</style>
-          </defs>
+        {/* ─── SVG DNA Helix Map ─── */}
+        <div className="flex-1 relative overflow-hidden flex items-center justify-center p-4 min-h-0">
+          <svg
+            viewBox="0 0 1200 1000"
+            className="w-full h-full max-h-[100%] object-contain drop-shadow-2xl"
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <defs>
+              <filter id="helix-glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur1" />
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur2" />
+                <feMerge>
+                  <feMergeNode in="blur1" />
+                  <feMergeNode in="blur2" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
 
-          {/* Grid background (faint organic texture) */}
-          <g stroke="rgba(255,255,255,0.02)" strokeWidth="1">
-            {Array.from({ length: 15 }).map((_, i) => (
-              <circle key={i} cx="400" cy="480" r={(i + 1) * 40} fill="none" />
-            ))}
-          </g>
+              <filter id="node-active-glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur1" />
+                <feMerge>
+                  <feMergeNode in="blur1" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
 
-          {/* ─── The Stem ─── */}
-          <path
-            d={STEM_PATH}
-            fill="none"
-            stroke="#202A36"
-            strokeWidth="12"
-            strokeLinecap="round"
-            className={mounted ? 'grow-path' : ''}
-          />
-          <path
-            d={STEM_PATH}
-            fill="none"
-            stroke="#4A6572"
-            strokeWidth="4"
-            strokeLinecap="round"
-            className={mounted ? 'grow-path' : ''}
-          />
+              <linearGradient id="grad-edu" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.8" />
+              </linearGradient>
 
-          {/* ─── Ground line ─── */}
-          <line
-            x1="200" y1="480" x2="600" y2="480"
-            stroke="rgba(255,255,255,0.05)"
-            strokeWidth="2"
-            strokeDasharray="4 6"
-          />
-          <text x="700" y="484" fill="rgba(255,255,255,0.15)" fontSize="10" fontFamily="monospace" textAnchor="middle" letterSpacing="0.1em">
-            FOUNDATION (2010–2022)
-          </text>
+              <linearGradient id="grad-cert" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stopColor="#10b981" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#ef4444" stopOpacity="0.8" />
+              </linearGradient>
+            </defs>
 
-          {/* ─── Branches and Roots ─── */}
-          {NODES.map((node) => {
-            const isHovered = hovered === node.id;
-            const isFaded = hovered !== null && !isHovered;
-            
-            return (
-              <g key={node.id}
-                onMouseEnter={() => setHovered(node.id)}
-                onMouseLeave={() => setHovered(null)}
-                style={{ cursor: 'pointer', transition: 'opacity 0.3s' }}
-                opacity={isFaded ? 0.3 : 1}
-              >
-                {/* Branch/Root line */}
-                <path
-                  d={node.path}
-                  fill="none"
-                  stroke={node.color}
-                  strokeWidth={node.type === 'root' ? "6" : "4"}
+            {/* Grid/Context representing time flow from bottom-left to top-right */}
+            <g opacity={0.03} stroke="#fff" strokeWidth={1}>
+              {Array.from({ length: 20 }).map((_, i) => (
+                <line key={`lx-${i}`} x1="0" y1={i * 70} x2="1200" y2={i * 70} />
+              ))}
+              {Array.from({ length: 20 }).map((_, i) => (
+                <line key={`ly-${i}`} x1={i * 70} y1="0" x2={i * 70} y2="1000" />
+              ))}
+            </g>
+
+            {/* ─── Base Pairs ─── */}
+            <g>
+              {basePairs.map((bp, i) => (
+                <line
+                  key={`bp-${i}`}
+                  x1={bp.p1.x} y1={bp.p1.y}
+                  x2={bp.p2.x} y2={bp.p2.y}
+                  stroke="rgba(255,255,255,0.12)"
+                  strokeWidth={3}
+                  strokeDasharray="2 4"
                   strokeLinecap="round"
-                  opacity="0.6"
-                  className={mounted ? `grow-path ${node.type !== 'root' ? 'grow-delayed' : ''}` : ''}
                 />
-                
-                {/* Connection point pulse (active) */}
-                {isHovered && (
-                  <circle cx={node.cx} cy={node.cy} r="16" fill={node.color} opacity="0.2" filter="url(#glow)" />
-                )}
+              ))}
+            </g>
 
-                {/* Node representation based on type */}
-                {node.type === 'root' ? (
-                  /* Roots are solid anchor circles */
-                  <circle cx={node.cx} cy={node.cy} r="10" fill={node.color} stroke="#05080e" strokeWidth="3" />
-                ) : node.type === 'branch' ? (
-                  /* Branches are diamond shapes for specialization */
-                  <rect x={node.cx - 8} y={node.cy - 8} width="16" height="16" fill={node.color} transform={`rotate(45, ${node.cx}, ${node.cy})`} stroke="#05080e" strokeWidth="2" />
-                ) : (
-                  /* Leaves are smaller, bright nodes */
-                  <circle cx={node.cx} cy={node.cy} r="6" fill={node.color} filter="url(#glow)" />
-                )}
+            {/* ─── Backbones (Education & Certification Strands) ─── */}
+            <path
+              d={strand0Points}
+              fill="none"
+              stroke="url(#grad-edu)"
+              strokeWidth={10}
+              strokeLinecap="round"
+              filter="url(#helix-glow)"
+              opacity={hovered ? (activeNode?.strand === 0 ? 1 : 0.15) : 0.8}
+              style={{ transition: 'opacity 0.4s ease' }}
+            />
+            <path
+              d={strand1Points}
+              fill="none"
+              stroke="url(#grad-cert)"
+              strokeWidth={10}
+              strokeLinecap="round"
+              filter="url(#helix-glow)"
+              opacity={hovered ? (activeNode?.strand === 1 ? 1 : 0.15) : 0.8}
+              style={{ transition: 'opacity 0.4s ease' }}
+            />
 
-                {/* Inline label (small) */}
-                <text
-                  x={node.cx + (node.cx > 400 ? 16 : -16)}
-                  y={node.cy + 4}
-                  textAnchor={node.cx > 400 ? 'start' : 'end'}
-                  fill={isHovered ? '#fff' : 'rgba(255,255,255,0.6)'}
-                  fontSize="12"
-                  fontFamily="sans-serif"
-                  fontWeight={isHovered ? 'bold' : 'normal'}
+            {/* ─── Data Nodes (Degrees & Certs) ─── */}
+            {NODES.map((node) => {
+              const isHovered = hovered === node.id;
+              const isFaded = hovered !== null && !isHovered;
+              const { x, y, isRightSide } = getPos(node.u, node.strand);
+
+              const labelOffsetX = isRightSide ? 50 : -50;
+              const labelOffsetY = isRightSide ? 50 : -50;
+
+              return (
+                <g
+                  key={node.id}
+                  onMouseEnter={() => setHovered(node.id)}
+                  style={{ cursor: 'pointer', transition: 'opacity 0.3s' }}
+                  opacity={isFaded ? 0.3 : 1}
                 >
-                  {node.title.length > 25 ? node.title.slice(0, 25) + '...' : node.title}
-                </text>
-              </g>
-            );
-          })}
-        </svg>
+                  <line
+                    x1={x} y1={y}
+                    x2={x + labelOffsetX * 0.8} y2={y + labelOffsetY * 0.8}
+                    stroke={node.color}
+                    strokeWidth={2}
+                    strokeOpacity={isHovered ? 0.8 : 0.3}
+                    strokeDasharray="4 4"
+                  />
 
-        {/* Floating title */}
-        <div className="absolute top-10 left-10 opacity-20 pointer-events-none">
-          <h1 className="text-6xl font-black tracking-widest uppercase">Education</h1>
-          <p className="text-xl font-mono tracking-widest mt-2 ml-1">ACADEMIC & CONTINUOUS LEARNING</p>
+                  <circle
+                    cx={x} cy={y} r={isHovered ? 28 : 16}
+                    fill={node.color} opacity={isHovered ? 0.4 : 0}
+                    filter="url(#node-active-glow)"
+                    style={{ transition: 'r 0.3s, opacity 0.3s' }}
+                  />
+
+                  <polygon
+                    points={node.strand === 0 
+                       ? `${x},${y-10} ${x-10},${y} ${x},${y+10} ${x+10},${y}`
+                       : `${x-9},${y-9} ${x+9},${y-9} ${x+9},${y+9} ${x-9},${y+9}`
+                    }
+                    fill={isHovered ? '#fff' : '#030610'}
+                    stroke={node.color}
+                    strokeWidth={4}
+                    filter={isHovered ? "url(#node-active-glow)" : "none"}
+                  />
+
+                  <text
+                    x={x + labelOffsetX}
+                    y={y + labelOffsetY - 8}
+                    textAnchor={isRightSide ? 'start' : 'end'}
+                    fill={isHovered ? '#fff' : 'rgba(255,255,255,0.7)'}
+                    fontSize="22"
+                    fontFamily="sans-serif"
+                    fontWeight={isHovered ? '900' : 'bold'}
+                    style={{ textShadow: '0 4px 12px rgba(0,0,0,0.9)' }}
+                  >
+                    {node.title}
+                  </text>
+                  
+                  {node.period && (
+                    <text
+                      x={x + labelOffsetX}
+                      y={y + labelOffsetY + 16}
+                      textAnchor={isRightSide ? 'start' : 'end'}
+                      fill={node.color}
+                      fontSize="14"
+                      fontFamily="monospace"
+                    >
+                      {node.period}
+                    </text>
+                  )}
+                </g>
+              );
+            })}
+
+            {/* DNA Strand Identifiers */}
+            <text x="250" y="920" fill="url(#grad-edu)" fontSize="16" fontFamily="monospace" fontWeight="bold" opacity="0.6">
+              STRAND 0: ACADEMIA & RESEARCH
+            </text>
+            <text x="1100" y="120" fill="url(#grad-cert)" textAnchor="end" fontSize="16" fontFamily="monospace" fontWeight="bold" opacity="0.6">
+              STRAND 1: INDUSTRY & ARCHITECTURE
+            </text>
+          </svg>
         </div>
       </div>
 
       {/* ─── Detail Panel ─── */}
-      <div className="w-[340px] bg-[#020306] border-l border-white/5 flex flex-col shrink-0">
-        {activeNode ? (
-          <div className="flex-1 p-8 flex flex-col animate-in fade-in slide-in-from-right-4 duration-300">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-3 h-3 rounded-full" style={{ background: activeNode.color, boxShadow: `0 0 10px ${activeNode.color}` }} />
+      <div className="w-full md:w-[400px] bg-[#020409] border-l border-white/5 flex flex-col shrink-0 z-10 shadow-2xl">
+        <div className="flex-1 p-8 flex flex-col overflow-y-auto animate-in fade-in slide-in-from-right-4 duration-300">
+            <div className="flex items-center gap-3 mb-6 bg-white/5 p-2 px-3 rounded-lg border border-white/10 w-max">
+              <div
+                className="w-3 h-3"
+                style={{
+                  background: activeNode.color,
+                  boxShadow: `0 0 10px ${activeNode.color}`,
+                  borderRadius: activeNode.strand === 0 ? '50%' : '2px'
+                }}
+              />
               <span className="text-xs font-mono uppercase tracking-widest" style={{ color: activeNode.color }}>
-                {activeNode.type === 'root' ? 'Academic Degree (Root)' : activeNode.type === 'branch' ? 'Specialization (Branch)' : 'Certification (Leaf)'}
+                {activeNode.strand === 0 ? 'Strand 0: Academia' : 'Strand 1: Industry'}
               </span>
             </div>
 
-            <h2 className="text-2xl font-bold text-white mb-2 leading-tight">
+            <h2 className="text-3xl font-bold text-white mb-3 leading-tight">
               {activeNode.title}
             </h2>
             
-            <div className="text-white/60 font-serif italic mb-6">
+            <div className="text-white/60 font-serif italic mb-6 text-lg">
               {activeNode.institution}
             </div>
 
             {activeNode.period && (
-              <div className="inline-block px-3 py-1 rounded bg-white/5 border border-white/10 text-xs font-mono tracking-widest text-white/80 mb-6 w-max">
+              <div className="inline-block px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm font-mono tracking-widest text-white/80 mb-6 w-max">
                 {activeNode.period}
               </div>
             )}
 
-            <div className="w-full h-px bg-white/10 mb-6" />
-
-            <p className="text-white/70 leading-relaxed text-sm">
+            <p className="text-white/80 leading-relaxed text-base mb-6">
               {activeNode.description}
             </p>
 
+            {/* Value & Impact Write-up */}
+            {activeNode.impact && (
+              <div className="mb-8 border-l-2 pl-4 py-1" style={{ borderColor: `${activeNode.color}88` }}>
+                <span className="text-xs font-mono uppercase tracking-widest block mb-2" style={{ color: activeNode.color }}>
+                  Strategic Value & Impact
+                </span>
+                <p className="text-white/60 text-sm leading-relaxed">
+                  {activeNode.impact}
+                </p>
+              </div>
+            )}
+
+            {/* Courses / Projects placeholder list */}
+            {activeNode.courses && activeNode.courses.length > 0 && (
+              <div className="mb-8 p-5 rounded-xl bg-white/[0.02] border border-white/5">
+                <span className="text-xs font-mono uppercase tracking-widest block mb-4 text-white/40">
+                  Key Coursework & Projects
+                </span>
+                <ul className="space-y-3">
+                  {activeNode.courses.map((course, i) => (
+                    <li key={i} className="flex gap-3 text-sm text-white/70 items-start">
+                      <span className="mt-1" style={{ color: activeNode.color }}>▹</span>
+                      <span>{course}</span>
+                    </li>
+                  ))}
+                  {/* Invisible placeholder for User to add more easily in code */}
+                  <li className="hidden">{/* Add another project here */}</li>
+                </ul>
+              </div>
+            )}
+
+            <div className="flex-1 min-h-[40px]" />
+
+            {/* AWS & Coursera Credential Links */}
             {activeNode.url && (
               <a
                 href={activeNode.url}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-8 px-4 py-3 rounded text-sm font-mono tracking-widest text-center border border-white/20 hover:bg-white/10 transition-colors"
-                style={{ color: activeNode.color }}
+                className="mt-6 px-5 py-4 rounded bg-white/[0.03] text-sm font-mono tracking-widest text-center border hover:bg-white/10 transition-colors shadow-lg flex items-center justify-center gap-2"
+                style={{ color: activeNode.color, borderColor: `${activeNode.color}44` }}
               >
-                VERIFY CREDENTIAL ↗
+                VERIFY CREDENTIAL
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
               </a>
             )}
-          </div>
-        ) : (
-          <div className="flex-1 flex items-center justify-center p-8 text-center opacity-30">
-            <div>
-              <div className="text-4xl mb-4">🌱</div>
-              <p className="font-mono text-xs tracking-widest leading-loose text-white/50">
-                HOVER OVER A ROOT, BRANCH, OR LEAF<br/>
-                TO VIEW CREDENTIAL DETAILS
-              </p>
-            </div>
-          </div>
-        )}
+        </div>
       </div>
 
     </div>

@@ -87,7 +87,7 @@ export default function Console() {
         {/* ── Message log ── */}
         <div
           className="px-4 pt-4 space-y-2 overflow-y-auto"
-          style={{ minHeight: 200, maxHeight: 320 }}
+          style={{ height: '40vh', minHeight: 200, maxHeight: 500 }}
           onClick={() => inputRef.current?.focus()}
         >
           {messages.map((msg, i) => (
