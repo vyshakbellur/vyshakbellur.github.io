@@ -284,7 +284,7 @@ export default function Education() {
                 <g
                   key={node.id}
                   onMouseEnter={() => setHovered(node.id)}
-                  style={{ cursor: 'pointer', transition: 'opacity 0.3s' }}
+                  style={{ cursor: 'pointer', transition: 'opacity 0.4s ease' }}
                   opacity={isFaded ? 0.15 : 1}
                 >
                   <line
@@ -294,13 +294,14 @@ export default function Education() {
                     strokeWidth={2}
                     strokeOpacity={isSameStrand ? 0.8 : 0.2}
                     strokeDasharray="4 4"
+                    style={{ transition: 'all 0.4s ease' }}
                   />
 
                   <circle
                     cx={x} cy={y} r={isHovered ? 32 : (isSameStrand ? 22 : 16)}
                     fill={node.color} opacity={isHovered ? 0.5 : (isSameStrand ? 0.25 : 0)}
                     filter="url(#node-active-glow)"
-                    style={{ transition: 'r 0.3s, opacity 0.3s' }}
+                    style={{ transition: 'all 0.4s ease' }}
                   />
 
                   <polygon
@@ -312,7 +313,7 @@ export default function Education() {
                     stroke={node.color}
                     strokeWidth={3}
                     filter={isSameStrand ? "url(#node-active-glow)" : "none"}
-                    style={{ transition: 'fill 0.3s, transform 0.3s' }}
+                    style={{ transition: 'all 0.4s ease' }}
                   />
 
                   <text
@@ -325,6 +326,7 @@ export default function Education() {
                     fontFamily="monospace"
                     letterSpacing="0.05em"
                     className="drop-shadow-lg pointer-events-none"
+                    style={{ transition: 'all 0.4s ease' }}
                   >
                     {node.title}
                   </text>

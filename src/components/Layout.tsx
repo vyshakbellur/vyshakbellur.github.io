@@ -317,7 +317,7 @@ export default function Layout() {
         <img 
           src="/src/assets/running_medals.png" 
           alt="Marathon Medals" 
-          className="absolute -bottom-[50px] left-[180px] w-[380px] object-contain mix-blend-screen opacity-30 group-hover:opacity-40 hover:!opacity-80 transition-all duration-700 pointer-events-none scale-125 z-0 mask-image:linear-gradient(to_bottom,black_40%,transparent_100%)"
+          className="absolute -bottom-[50px] left-[180px] w-[380px] object-contain mix-blend-screen opacity-30 group-hover:opacity-40 hover:!opacity-80 transition-all duration-700 pointer-events-none scale-125 z-0"
           style={{ WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%)' }}
         />
 
