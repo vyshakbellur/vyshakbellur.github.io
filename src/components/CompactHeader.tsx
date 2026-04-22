@@ -41,7 +41,7 @@ export default function CompactHeader() {
         style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', gap: 1, marginRight: 'auto' }}
       >
         <span style={{
-          fontSize: 13.5, fontWeight: 900, fontFamily: 'Georgia,serif',
+          fontSize: 15, fontWeight: 900, fontFamily: 'Georgia,serif',
           letterSpacing: '0.07em', color: ac, lineHeight: 1,
           textShadow: `0 0 18px ${ac}44`,
           transition: 'color 0.3s, text-shadow 0.3s',
@@ -49,7 +49,7 @@ export default function CompactHeader() {
           VYSHAK ATHREYA
         </span>
         <span style={{
-          fontSize: 7.5, fontWeight: 600, letterSpacing: '0.22em',
+          fontSize: 8.5, fontWeight: 600, letterSpacing: '0.22em',
           color: `${ac}55`, fontFamily: 'Georgia,serif', lineHeight: 1,
         }}>
           BELLUR KESHAVAMURTHY
@@ -57,7 +57,7 @@ export default function CompactHeader() {
       </Link>
 
       {/* ── Separator ── */}
-      <div style={{ width: 1, height: 28, background: `${ac}18`, marginRight: 20 }} />
+      <div style={{ width: 1, height: 28, background: `${ac}18`, marginRight: 24 }} />
 
       {/* ── Nav links ── */}
       <nav style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
@@ -68,12 +68,12 @@ export default function CompactHeader() {
             end={item.href === '/'}
             style={({ isActive }) => ({
               textDecoration: 'none',
-              padding: '5px 11px',
+              padding: '6px 14px',
               borderRadius: 6,
-              fontSize: 9.5,
+              fontSize: 10.5,
               fontFamily: 'monospace',
               fontWeight: isActive ? 900 : 400,
-              letterSpacing: '0.10em',
+              letterSpacing: '0.12em',
               textTransform: 'uppercase',
               color: isActive ? ac : 'rgba(255,255,255,0.58)',
               background: isActive ? `${ac}14` : 'transparent',

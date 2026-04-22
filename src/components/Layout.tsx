@@ -130,39 +130,6 @@ export default function Layout() {
     flashEl(id);
   };
 
-  /* Per-key content: stacked characters + icon + gold/red edge selector */
-  const KeyContent = ({ label, active, wi }: { label: string; active: boolean; wi: number }) => (
-    <>
-      {/* Stacked letter labels */}
-      <div style={{ position: 'absolute', top: 10, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1.5, pointerEvents: 'none' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
-          {label.split('').map((ch, i) => (
-            <span key={i} style={{
-              fontSize: 9, fontWeight: 900, textTransform: 'uppercase',
-              /* Near-black for inactive = excellent contrast on white ivory */
-              color: active ? '#0a0a0a' : 'rgba(0,0,0,0.60)',
-              lineHeight: 1.2, display: 'block', textAlign: 'center',
-            }}>
-              {ch}
-            </span>
-          ))}
-        </div>
-        <span style={{ color: active ? '#b45309' : 'rgba(0,0,0,0.25)', marginTop: 5 }}>
-          {ICONS[wi]}
-        </span>
-      </div>
-
-      {/* Active key: pale-gold LEFT edge + crimson RED right edge + bottom bar */}
-      {active && (
-        <>
-          <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: 3, background: 'rgba(245,166,35,0.80)', borderRadius: '0 0 0 6px', boxShadow: '0 0 8px rgba(245,166,35,0.5)' }} />
-          <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: 3, background: 'rgba(204,0,0,0.75)', borderRadius: '0 0 6px 0', boxShadow: '0 0 8px rgba(204,0,0,0.4)' }} />
-          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 6, borderRadius: '0 0 6px 6px', background: 'linear-gradient(90deg,rgba(245,166,35,0.9),rgba(204,0,0,0.85))' }} />
-        </>
-      )}
-    </>
-  );
-
   /* Key base styles */
   const whiteBase: React.CSSProperties = {
     position: 'absolute', top: 0, width: WW, height: WH,
@@ -194,12 +161,12 @@ export default function Layout() {
       {/* Desktop header: full piano on home, compact nav everywhere else */}
       {isHome && (
       <header
-        className="hidden md:block flex-shrink-0 z-50 shadow-[0_4px_24px_rgba(0,0,0,0.9)] border-b border-white/5"
-        style={{ height: 268, background: '#070300' }}
+        className="relative hidden md:block flex-shrink-0 z-50 shadow-[0_4px_24px_rgba(0,0,0,0.9)] border-b border-white/5"
+        style={{ height: 270, background: '#070300' }}
       >
         {/* piano strip — centered horizontally, no scrollbar */}
         <div style={{
-          width: '100%', overflowX: 'hidden', overflowY: 'visible',
+          width: '100%', overflow: 'hidden',
           background: '#070300', paddingTop: 10,
           display: 'flex', justifyContent: 'center',   /* CENTER the piano */
         }}>
@@ -225,14 +192,14 @@ export default function Layout() {
               /* Piano-lacquer black with very subtle warm walnut grain at edges */
               background: 'linear-gradient(90deg, #1a0800 0%, #080300 18%, #030100 50%, #080300 82%, #1a0800 100%)',
               borderBottom: '6px solid rgba(0,0,0,0.98)',
-              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-              gap: 5, paddingTop: 2, paddingBottom: 2,
+              display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
+              padding: '0 32px',
               boxShadow: 'inset 0 1px 0 rgba(255,200,100,0.08)',
             }}>
-              {/* Name — title + subtitle, centered — white/cream on black lacquer */}
-              <Link to="/" className="group text-center block" style={{ lineHeight: 1 }}>
+              {/* Name — title + subtitle, left-aligned — white/cream on black lacquer */}
+              <Link to="/" className="group block" style={{ lineHeight: 1, textAlign: 'left' }}>
                 <div style={{
-                  fontSize: 23, fontWeight: 900, letterSpacing: '0.04em',
+                  fontSize: 25, fontWeight: 900, letterSpacing: '0.04em',
                   color: '#F2E8D0',          /* warm ivory white */
                   textShadow: '0 0 30px rgba(255,230,160,0.35)',
                   lineHeight: 1,
@@ -242,7 +209,7 @@ export default function Layout() {
                   VYSHAK ATHREYA
                 </div>
                 <div style={{
-                  fontSize: 11, fontWeight: 600, letterSpacing: '0.22em',
+                  fontSize: 12, fontWeight: 600, letterSpacing: '0.22em',
                   color: 'rgba(242,232,208,0.52)',  /* same ivory, dimmed */
                   lineHeight: 1.4, marginTop: 4,
                   fontFamily: 'Georgia, serif',
@@ -253,16 +220,18 @@ export default function Layout() {
                 </div>
               </Link>
 
-              {/* Persona tags — horizontal row, each a different vibrant color */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 18, marginTop: 1 }}>
-                {PERSONAS.map((p, i) => (
-                  <div key={p.label} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                    {/* Separator dot between items */}
-                    {i > 0 && <span style={{ width: 2, height: 2, borderRadius: '50%', background: 'rgba(255,255,255,0.15)', flexShrink: 0, marginRight: 13 }} />}
-                    <span style={{ width: 4, height: 4, borderRadius: '50%', background: p.color, flexShrink: 0, boxShadow: `0 0 6px ${p.color}88` }} />
-                    <span style={{ fontSize: 8.5, fontWeight: 700, color: p.color, letterSpacing: '0.06em', whiteSpace: 'nowrap', opacity: 0.92 }}>
-                      {p.label}
-                    </span>
+              {/* Main Navigation (Right aligned) */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
+                {nav.map((n, i) => (
+                  <div key={n.href} style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
+                    {i > 0 && <span style={{ width: 4, height: 4, borderRadius: '50%', background: 'rgba(255,255,255,0.15)', flexShrink: 0 }} />}
+                    <NavLink 
+                      to={n.href} 
+                      end={n.href === '/'} 
+                      className={({ isActive }) => `text-[11px] font-black tracking-[0.16em] uppercase transition-all duration-300 ${isActive ? 'text-[#F5A623] drop-shadow-[0_0_8px_rgba(245,166,35,0.6)] scale-105' : 'text-white/40 hover:text-white'}`}
+                    >
+                      {n.label}
+                    </NavLink>
                   </div>
                 ))}
               </div>
@@ -270,27 +239,20 @@ export default function Layout() {
 
             {/* Key canvas */}
             <div style={{ position: 'relative', width: PIANO_W, height: WH }}>
-              {/* White keys */}
-              {ALL_KEYS.filter(k => !k.isBlack).map(key => {
-                /* Central octave: white keys 7–14 (C4→C5) */
-                const isNav = key.wi >= 7 && key.wi <= 14;
-                const navItem = isNav ? nav[key.wi - 7] : null;
-                const id = `sk-${key.s}`;
-                if (isNav && navItem) {
-                  return (
-                    <NavLink key={id} id={id} to={navItem.href} end={navItem.href === '/'}
-                      onMouseDown={() => playNote(key.freq, id)}
-                      style={{ ...whiteBase, left: key.x }}>
-                      {({ isActive }) => <KeyContent label={navItem.label} active={isActive} wi={key.wi - 7} />}
-                    </NavLink>
-                  );
-                }
-                return <div key={id} id={id} onMouseDown={() => playNote(key.freq, id)} style={{ ...whiteBase, left: key.x }} />;
-              })}
+              {/* White keys (Purely for music playing now) */}
+              {ALL_KEYS.filter(k => !k.isBlack).map(key => (
+                <div 
+                  key={`sk-${key.s}`} 
+                  id={`sk-${key.s}`} 
+                  onPointerDown={(e) => { e.preventDefault(); playNote(key.freq, `sk-${key.s}`); }} 
+                  style={{ ...whiteBase, left: key.x }} 
+                />
+              ))}
+              
               {/* Black keys */}
               {ALL_KEYS.filter(k => k.isBlack).map(key => (
                 <div key={`sk-${key.s}`} id={`sk-${key.s}`}
-                  onMouseDown={() => playNote(key.freq, `sk-${key.s}`)}
+                  onPointerDown={(e) => { e.preventDefault(); playNote(key.freq, `sk-${key.s}`); }}
                   style={{ ...blackBase, left: key.x }} />
               ))}
             </div>
@@ -342,7 +304,7 @@ export default function Layout() {
       {/* ════════════════════════════════════════════════════════════
           FOOTER — fixed height, never scrolls away
       ════════════════════════════════════════════════════════════ */}
-      <footer className="flex-shrink-0 z-50 bg-[#05070a] border-t border-white/10 shadow-[0_-10px_30px_rgba(0,0,0,0.8)] relative overflow-hidden group" style={{ height: 110 }}>
+      <footer className="flex-shrink-0 z-50 bg-transparent relative overflow-hidden group border-t-0" style={{ height: 110 }}>
         
         {/* Left Bottom: Air Jordans bleeding off the screen */}
         <img 
