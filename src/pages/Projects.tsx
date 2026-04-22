@@ -245,7 +245,7 @@ export default function Projects() {
       const d = Math.hypot(b.x - cx, b.y - cy);
       if (d < b.size + 14 && d < best) { best = d; hit = b; }
     });
-    if (hit) { setSelected(hit.repo); setSelColor(hit.color); }
+    if (hit) { setSelected((hit as Blip).repo); setSelColor((hit as Blip).color); }
     else setSelected(null);
   };
 
