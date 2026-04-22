@@ -273,7 +273,8 @@ export default function Education() {
             {/* ─── Data Nodes (Degrees & Certs) ─── */}
             {NODES.map((node) => {
               const isHovered = hovered === node.id;
-              const isFaded = hovered !== null && !isHovered;
+              const isSameStrand = activeNode?.strand === node.strand;
+              const isFaded = !isSameStrand;
               const { x, y, isRightSide } = getPos(node.u, node.strand);
 
               const labelOffsetX = isRightSide ? 50 : -50;
@@ -284,44 +285,46 @@ export default function Education() {
                   key={node.id}
                   onMouseEnter={() => setHovered(node.id)}
                   style={{ cursor: 'pointer', transition: 'opacity 0.3s' }}
-                  opacity={isFaded ? 0.3 : 1}
+                  opacity={isFaded ? 0.15 : 1}
                 >
                   <line
                     x1={x} y1={y}
                     x2={x + labelOffsetX * 0.8} y2={y + labelOffsetY * 0.8}
                     stroke={node.color}
                     strokeWidth={2}
-                    strokeOpacity={isHovered ? 0.8 : 0.3}
+                    strokeOpacity={isSameStrand ? 0.8 : 0.2}
                     strokeDasharray="4 4"
                   />
 
                   <circle
-                    cx={x} cy={y} r={isHovered ? 28 : 16}
-                    fill={node.color} opacity={isHovered ? 0.4 : 0}
+                    cx={x} cy={y} r={isHovered ? 32 : (isSameStrand ? 22 : 16)}
+                    fill={node.color} opacity={isHovered ? 0.5 : (isSameStrand ? 0.25 : 0)}
                     filter="url(#node-active-glow)"
                     style={{ transition: 'r 0.3s, opacity 0.3s' }}
                   />
 
                   <polygon
                     points={node.strand === 0 
-                       ? `${x},${y-10} ${x-10},${y} ${x},${y+10} ${x+10},${y}`
-                       : `${x-9},${y-9} ${x+9},${y-9} ${x+9},${y+9} ${x-9},${y+9}`
+                       ? `${x},${y-12} ${x-12},${y} ${x},${y+12} ${x+12},${y}`
+                       : `${x-10},${y-10} ${x+10},${y-10} ${x+10},${y+10} ${x-10},${y+10}`
                     }
-                    fill={isHovered ? '#fff' : '#030610'}
+                    fill={isHovered ? '#fff' : (isSameStrand ? node.color : '#030610')}
                     stroke={node.color}
-                    strokeWidth={4}
-                    filter={isHovered ? "url(#node-active-glow)" : "none"}
+                    strokeWidth={3}
+                    filter={isSameStrand ? "url(#node-active-glow)" : "none"}
+                    style={{ transition: 'fill 0.3s, transform 0.3s' }}
                   />
 
                   <text
                     x={x + labelOffsetX}
                     y={y + labelOffsetY - 8}
                     textAnchor={isRightSide ? 'start' : 'end'}
-                    fill={isHovered ? '#fff' : 'rgba(255,255,255,0.7)'}
-                    fontSize="22"
-                    fontFamily="sans-serif"
-                    fontWeight={isHovered ? '900' : 'bold'}
-                    style={{ textShadow: '0 4px 12px rgba(0,0,0,0.9)' }}
+                    fill={isHovered ? '#fff' : (isSameStrand ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0.4)')}
+                    fontSize={13}
+                    fontWeight={900}
+                    fontFamily="monospace"
+                    letterSpacing="0.05em"
+                    className="drop-shadow-lg pointer-events-none"
                   >
                     {node.title}
                   </text>
