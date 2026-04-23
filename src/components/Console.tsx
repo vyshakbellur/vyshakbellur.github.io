@@ -25,6 +25,12 @@ async function fetchLLMResponse(input: string): Promise<string> {
     });
     if (!res.ok) throw new Error('API down');
     const data = await res.json();
+    
+    // Intercept Google Cloud HTTP throttling/auth errors cleanly
+    if (data.reply && data.reply.includes('GCP')) {
+      return "My cognitive uplink to Google's primary servers is currently saturated by traffic. Ask me something from my hardcoded logic (experience, running, publications).";
+    }
+    
     return data.reply || 'I am currently disconnected from my neural cortex.';
   } catch (err) {
     console.error('LLM Error:', err);
