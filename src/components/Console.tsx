@@ -10,7 +10,7 @@ const SUGGESTIONS = [
   'Tell me about your running',
 ];
 
-const WORKER_URL = 'https://chatbot-llm.vyshak-bellur.workers.dev';
+const WORKER_URL = 'https://chatbot-llm.vyshakathreya.workers.dev';
 
 async function fetchLLMResponse(input: string): Promise<string> {
   const q = input.toLowerCase().trim();
