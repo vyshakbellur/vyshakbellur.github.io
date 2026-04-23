@@ -1,5 +1,8 @@
 import Console from '../components/Console';
 
+import mtRainierUrl from '../assets/mt_rainier_aurora.png';
+import transformerBgUrl from '../assets/transformer_bg.png';
+
 const SIGNPOST_ITEMS = [
   { label: 'ML Researcher',     color: '#F5A623', dir: 'right', angle: 'rotate-2' },
   { label: 'PhD Candidate',     color: '#FB923C', dir: 'left',  angle: '-rotate-1' },
@@ -68,7 +71,7 @@ export default function Home() {
       {/* ── Mount Rainier & Aurora Backdrop ── */}
       <div className="fixed inset-0 z-0 pointer-events-none flex items-center justify-center bg-[#010610]">
         <img 
-          src="/src/assets/mt_rainier_aurora.png" 
+          src={mtRainierUrl} 
           alt="Mount Rainier Aurora Sky" 
           className="w-full h-full object-cover opacity-[0.35]"
         />
@@ -91,7 +94,7 @@ export default function Home() {
         <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.35] mix-blend-screen"
              style={{ WebkitMaskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%)' }}>
           <img 
-            src="/src/assets/transformer_bg.png" 
+            src={transformerBgUrl} 
             alt="Local Neural Network" 
             className="w-full h-full object-cover"
           />

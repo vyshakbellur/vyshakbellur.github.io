@@ -2,6 +2,10 @@ import { Outlet } from 'react-router-dom';
 import { profile } from '../data/profile';
 import CompactHeader from './CompactHeader';
 
+import airJordansUrl from '../assets/air_jordans.png';
+import runningMedalsUrl from '../assets/running_medals.png';
+import rcbLogoUrl from '../assets/rcb_logo.png';
+
 export default function Layout() {
   return (
     <div className="h-screen overflow-hidden flex flex-col text-slate-100 bg-slate-950">
@@ -23,14 +27,14 @@ export default function Layout() {
       <footer className="flex-shrink-0 z-50 bg-transparent relative overflow-hidden group border-t-0" style={{ height: 110 }}>
         {/* Left Side: Air Jordans */}
         <img 
-          src="/src/assets/air_jordans.png" 
+          src={airJordansUrl} 
           alt="Air Jordans Kicks" 
           className="absolute -bottom-16 -left-12 w-56 object-contain mix-blend-screen opacity-70 group-hover:opacity-100 group-hover:-translate-y-2 group-hover:scale-105 transition-all duration-500 z-0"
         />
 
         {/* Left Side: Running Medals */}
         <img 
-          src="/src/assets/running_medals.png" 
+          src={runningMedalsUrl} 
           alt="Marathon Medals" 
           className="absolute -bottom-[50px] left-[180px] w-[380px] object-contain mix-blend-screen opacity-30 group-hover:opacity-40 hover:!opacity-80 transition-all duration-700 pointer-events-none scale-125 z-0"
           style={{ WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%)' }}
@@ -55,7 +59,7 @@ export default function Layout() {
               <div className="w-px h-6 bg-white/10" />
               <div className="flex items-center opacity-50 hover:opacity-100 transition-opacity cursor-default hover:animate-ping" style={{ animationDuration: '2s' }}>
                 <img 
-                  src="/src/assets/rcb_logo.png" 
+                  src={rcbLogoUrl} 
                   alt="RCB Lion Crest" 
                   className="w-[34px] h-[34px] mix-blend-screen drop-shadow-[0_0_12px_rgba(251,191,36,0.9)]"
                 />
