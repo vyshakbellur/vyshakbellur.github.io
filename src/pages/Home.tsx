@@ -88,7 +88,7 @@ export default function Home() {
       </div>
 
       {/* ── CENTER: The Chatbot Console ── */}
-      <div className="relative w-full max-w-[800px] xl:w-[650px] h-[95%] flex-shrink-0 flex items-center justify-center z-20 p-2 sm:p-4">
+      <div className="relative w-full max-w-[800px] xl:w-[650px] flex-shrink-0 flex items-center justify-center z-20 p-2 sm:p-4">
         
         {/* Subtle Neural Network Backdrop bounded strictly to the terminal wrapper */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.35] mix-blend-screen"
@@ -101,7 +101,7 @@ export default function Home() {
         </div>
 
         {/* The active terminal window */}
-        <div className="relative w-full h-full z-10 shadow-[0_0_100px_rgba(15,200,255,0.12)] rounded-xl backdrop-blur-sm bg-black/50 border border-white/10 overflow-hidden flex flex-col transition-all duration-300 hover:shadow-[0_0_120px_rgba(15,200,255,0.2)]">
+        <div className="relative w-full z-10 transition-all duration-300">
           <Console />
         </div>
       </div>
