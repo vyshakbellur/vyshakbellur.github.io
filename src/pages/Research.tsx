@@ -60,7 +60,7 @@ export default function Research() {
       </div>
 
       <div className="section-enter mb-14">
-        <h2 className="mb-4 text-xl font-bold text-white/90">Primary Research Focus</h2>
+        <h2 className="mb-4 text-xl font-bold text-white/90">Active Research Initiatives</h2>
         <div className="rounded-2xl border border-white/10 bg-[#0a0f18] p-6 shadow-2xl">
           <h3 className="text-lg font-bold text-amber-400 mb-3">Cross-Domain Pattern Recognition via Machine Learning</h3>
           <p className="text-sm leading-relaxed text-white/70 mb-4">
