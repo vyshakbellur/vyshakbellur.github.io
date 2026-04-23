@@ -5,6 +5,7 @@ const SIGNPOST_ITEMS = [
   { label: 'PhD Candidate',     color: '#FB923C', dir: 'left',  angle: '-rotate-1' },
   { label: 'Musician',          color: '#A78BFA', dir: 'right', angle: 'rotate-1' },
   { label: 'Adventure Traveler',color: '#34D399', dir: 'left',  angle: '-rotate-2' },
+  { label: 'Runner',            color: '#FB7185', dir: 'right', angle: 'rotate-2' },
 ];
 
 function Signpost() {

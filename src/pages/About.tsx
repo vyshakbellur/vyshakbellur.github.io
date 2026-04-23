@@ -28,6 +28,8 @@ export default function About() {
           </p>
           <p>
             Outside of the terminal, I run long distances, do adventure travel, and produce music under the channel <strong className="text-amber-400 font-serif italic">v_naada</strong>. I am a Royal Challengers Bengaluru fan, a mountain person, and a believer that pattern recognition is a universal language.
+          </p>
+        </div>
       </div>
     </div>
   );
