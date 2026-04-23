@@ -31,7 +31,14 @@ export default function About() {
           </p>
         </div>
 
+        <div className="mt-14 h-px w-full bg-white/10" />
 
+        <div className="section-enter mt-10">
+          <h2 className="mb-4 text-xs font-black tracking-[0.3em] uppercase text-white/50">Professional Service & Availability</h2>
+          <p className="text-sm leading-relaxed text-slate-300">
+            Vyshak is heavily engaged in the intersection of biological sequence modeling, linguistic structure, and enterprise anomaly detection. He is open to select opportunities for academic peer review, hackathon/competition judging, and technical speaking engagements regarding cross-domain AI architectures.
+          </p>
+        </div>
       </div>
     </div>
   );

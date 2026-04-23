@@ -5,7 +5,7 @@ export const nav = [
   { label: 'Experience',   href: '/experience' },
   { label: 'Sandbox',      href: '/sandbox' },
   { label: 'Projects',     href: '/projects' },
-  { label: 'Papers',       href: '/publications' },
+  { label: 'Research',     href: '/research' },
   { label: 'Life',         href: '/life' },
   { label: 'Contact',      href: '/contact' },
 ];

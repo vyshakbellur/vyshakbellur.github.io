@@ -6,7 +6,7 @@ import Education from './pages/Education';
 import Experience from './pages/Experience';
 import Sandbox from './pages/Sandbox';
 import Projects from './pages/Projects';
-import Publications from './pages/Publications';
+import Research from './pages/Research';
 import Life from './pages/Life';
 import Contact from './pages/Contact';
 
@@ -21,7 +21,7 @@ export default function App() {
           <Route path="experience"   element={<Experience />} />
           <Route path="sandbox"      element={<Sandbox />} />
           <Route path="projects"     element={<Projects />} />
-          <Route path="publications" element={<Publications />} />
+          <Route path="research"     element={<Research />} />
           <Route path="life"         element={<Life />} />
           <Route path="contact"      element={<Contact />} />
         </Route>

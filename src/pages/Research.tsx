@@ -9,7 +9,7 @@ const pubs = [
     quarter: 'Q1',
     coAuthors: ['Prof. Sam Kassegne'],
     abstract:
-      'A graph-theoretic approach to quantifying structural similarity between ancient scripts. The work introduces a novel adjacency-matrix representation for glyphs and applies spectral clustering to uncover cross-linguistic patterns invisible to traditional paleographic methods.',
+      'Proved that structural and visual pattern analysis algorithms can transcend traditional linguistic constraints. By utilizing spectral clustering and graph theory, this research successfully decoded structural similarities within ancient scripts—providing an underlying algorithmic blueprint that is directly analogous to UI behavior mapping and log anomaly detection in modern enterprise systems.',
     tags: ['Graph Theory', 'Computational Linguistics', 'NLP', 'Python'],
     href: 'https://academic.oup.com/dsh',
     badge: 'Oxford · OUP 2024',
@@ -31,7 +31,7 @@ const pubs = [
   },
 ];
 
-export default function Publications() {
+export default function Research() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export default function Publications() {
         <div className="mb-2 text-xs font-medium tracking-widest text-white/40 uppercase">Research</div>
         <h1 className="text-3xl font-semibold tracking-tight text-white/95 md:text-4xl">
           <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">
-            Publications
+            Research & Literature
           </span>
         </h1>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/65">
@@ -59,7 +59,23 @@ export default function Publications() {
         <div className="mt-4 h-px w-full bg-white/10" />
       </div>
 
+      <div className="section-enter mb-14">
+        <h2 className="mb-4 text-xl font-bold text-white/90">Primary Research Focus</h2>
+        <div className="rounded-2xl border border-white/10 bg-[#0a0f18] p-6 shadow-2xl">
+          <h3 className="text-lg font-bold text-amber-400 mb-3">Cross-Domain Pattern Recognition via Machine Learning</h3>
+          <p className="text-sm leading-relaxed text-white/70 mb-4">
+            My core thesis explores how mathematically rigorous pattern-detection architectures—such as State Space Models, Spectral Clustering, and Hierarchical MoE—can be universally applied to extract latent structural signals from extreme noise.
+          </p>
+          <ul className="list-disc list-inside text-sm text-white/60 space-y-2">
+            <li><strong className="text-white/80">Biological Sequence Discovery:</strong> Harvesting highly-noisy metagenomic environments for evolutionary sequence patterns.</li>
+            <li><strong className="text-white/80">Linguistic Topologies:</strong> Decoding the visual and graphical grammar of unrecognized ancient texts using adjacency-matrix formations.</li>
+            <li><strong className="text-white/80">Enterprise Telemetry:</strong> Hardening mathematical anomaly detection into scalable architectures for FinTech fraud and UI state corruption.</li>
+          </ul>
+        </div>
+      </div>
+
       <div className="flex flex-col gap-6">
+        <h2 className="section-enter mb-1 text-xl font-bold text-white/90">Published Literature</h2>
         {pubs.map((p) => (
           <div
             key={p.title}
