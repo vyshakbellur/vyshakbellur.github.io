@@ -116,12 +116,7 @@ export default function Life() {
 
       </div>
 
-      <div className="section-enter flex items-center justify-between mb-8">
-         <div>
-            <h2 className="text-xl font-semibold tracking-tight text-white/95">Latent Coordinates</h2>
-            <p className="text-xs text-white/40 tracking-widest uppercase mt-1">Geo-tagged memories. Drag to pan.</p>
-         </div>
-      </div>
+
       
       {/* ─── NATIVE CSS CAROUSEL (Infinite horizontal snap) ─── */}
       <div className="section-enter w-full relative -mx-5 px-5 md:mx-0 md:px-0">
