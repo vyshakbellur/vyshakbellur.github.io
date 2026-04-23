@@ -25,7 +25,7 @@ const pubs = [
     abstract:
       'Graph-based analysis of microbial co-occurrence patterns in the human gut using metagenomic sequencing data. Explored how network topology shifts under dietary interventions, establishing a computational framework for microbiome surveillance.',
     tags: ['Bioinformatics', 'Network Science', 'Python', 'R'],
-    href: '',
+    href: 'https://www.proquest.com/openview/194737039beaa878147991fc6e8aa954/1?pq-origsite=gscholar&cbl=18750&diss=y',
     badge: 'SDSU · 2019',
     badgeColor: 'bg-yellow-400/20 text-yellow-300 border-yellow-400/30',
   },
