@@ -80,6 +80,7 @@ export default function Projects() {
   const [selColor, setSelColor] = useState(DS.text);
   const [filter,   setFilter]   = useState<Cluster | 'all'>('all');
   const [cvSize,   setCvSize]   = useState(400);
+  const [mobileFilter, setMobileFilter] = useState<Cluster | null>(null);
 
   useEffect(() => { filterRef.current = filter; }, [filter]);
 
@@ -437,47 +438,74 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* ── MOBILE MODE: TRADITIONAL CARD LIST FALLBACK ── */}
-      <div className="lg:hidden flex flex-col h-full overflow-y-auto px-6 py-10 no-scrollbar">
+      {/* ── MOBILE MODE: CLUSTER HIERARCHY FALLBACK ── */}
+      <div className="lg:hidden flex flex-col h-full overflow-y-auto px-6 py-10 no-scrollbar relative z-30">
         <h1 className="text-3xl font-black mb-3 tracking-widest uppercase">Projects</h1>
         <p className="text-xs text-white/50 mb-10 pb-4 border-b border-white/10 uppercase tracking-widest font-mono">
-          Latent Canvas Engine is optimized for desktop environments. Executing linear list fallback protocol. Active Repositories: {repos.length}
+          Latent Canvas Engine is optimized for desktop environments. Executing hierarchy clustering protocol. Active Repositories: {repos.length}
         </p>
         
         {loading && <p className="text-white/50 text-xs">Querying Github Architectures...</p>}
 
-        <div className="flex flex-col gap-5 pb-20">
-           {repos.map(r => {
-               const clsId = classifyCluster(r.language);
-               const cls = CLUSTERS.find(c => c.id === clsId)!;
-               return (
-                 <a key={r.id} href={r.html_url} target="_blank" rel="noreferrer" className="block border border-white/10 bg-white/[0.03] rounded-2xl p-6 hover:bg-white-[0.06] hover:border-white/20 transition duration-300">
-                   <div className="flex items-center justify-between mb-4">
-                     <div className="flex items-center gap-2">
-                       <div className="w-1.5 h-1.5 rounded-full shadow-[0_0_8px_currentColor]" style={{ background: cls.color, color: cls.color }} />
-                       <span className="text-[10px] uppercase font-bold tracking-[0.2em]" style={{ color: cls.color }}>{cls.label}</span>
+        {!mobileFilter ? (
+          <div className="flex flex-col gap-4">
+             {CLUSTERS.map(cls => (
+               <button 
+                 key={cls.id}
+                 onClick={() => setMobileFilter(cls.id)}
+                 className="flex items-center justify-between p-6 rounded-2xl border border-white/10 bg-white/[0.03] active:bg-white/[0.08] transition-colors"
+               >
+                 <div className="flex flex-col items-start gap-1">
+                   <div className="flex items-center gap-3 mb-1">
+                     <div className="w-2 h-2 rounded-full shadow-[0_0_8px_currentColor]" style={{ background: cls.color, color: cls.color }} />
+                     <span className="text-sm font-bold tracking-widest uppercase" style={{ color: cls.color }}>{cls.label}</span>
+                   </div>
+                   <span className="text-xs text-white/40 font-mono pl-5">{cls.sub}</span>
+                 </div>
+                 <div className="text-white/20">❯</div>
+               </button>
+             ))}
+          </div>
+        ) : (
+          <div className="flex flex-col pb-20">
+             <button 
+               onClick={() => setMobileFilter(null)}
+               className="mb-8 flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-white/60 hover:text-white"
+             >
+               <span className="text-lg">❮</span> Back to Clusters
+             </button>
+
+             <div className="flex flex-col gap-5">
+               {repos.filter(r => classifyCluster(r.language) === mobileFilter).map(r => {
+                 const cls = CLUSTERS.find(c => c.id === mobileFilter)!;
+                 return (
+                   <a key={r.id} href={r.html_url} target="_blank" rel="noreferrer" className="block border border-white/10 bg-white/[0.03] rounded-2xl p-6 hover:bg-white/[0.06] hover:border-white/20 transition duration-300">
+                     <div className="flex items-center justify-between mb-4">
+                       <div className="flex items-center gap-2">
+                         <div className="w-1.5 h-1.5 rounded-full shadow-[0_0_8px_currentColor]" style={{ background: cls.color, color: cls.color }} />
+                         <span className="text-[10px] uppercase font-bold tracking-[0.2em]" style={{ color: cls.color }}>{cls.label}</span>
+                       </div>
+                       <div className="text-[10px] bg-slate-900 rounded border border-white/10 px-2 py-0.5 text-white/50">{timeAgo(r.updated_at)}</div>
                      </div>
-                     <div className="text-[10px] bg-slate-900 rounded border border-white/10 px-2 py-0.5 text-white/50">{timeAgo(r.updated_at)}</div>
-                   </div>
-                   
-                   <h2 className="text-white font-black text-xl mb-3 tracking-tight">{r.name}</h2>
-                   <p className="text-white/60 text-sm leading-relaxed mb-6">{r.description || 'No abstract provided for this infrastructure.'}</p>
-                   
-                   <div className="flex flex-wrap gap-4 items-center">
-                      {r.language && (
-                        <div className="flex items-center gap-1.5 text-xs font-mono text-white/50">
-                          <code className="bg-white/5 px-2 py-0.5 border border-white/5 rounded">{r.language}</code>
+                     <h2 className="text-white font-black text-xl mb-3 tracking-tight">{r.name}</h2>
+                     <p className="text-white/60 text-sm leading-relaxed mb-6">{r.description || 'No abstract provided for this infrastructure.'}</p>
+                     <div className="flex flex-wrap gap-4 items-center">
+                        {r.language && (
+                          <div className="flex items-center gap-1.5 text-xs font-mono text-white/50">
+                            <code className="bg-white/5 px-2 py-0.5 border border-white/5 rounded">{r.language}</code>
+                          </div>
+                        )}
+                        <div className="flex items-center gap-3 text-xs font-mono">
+                           <span className="text-amber-400">★ {r.stargazers_count}</span>
+                           <span className="text-white/40">⑂ {r.forks_count}</span>
                         </div>
-                      )}
-                      <div className="flex items-center gap-3 text-xs font-mono">
-                         <span className="text-amber-400">★ {r.stargazers_count}</span>
-                         <span className="text-white/40">⑂ {r.forks_count}</span>
-                      </div>
-                   </div>
-                 </a>
-               )
-           })}
-        </div>
+                     </div>
+                   </a>
+                 )
+               })}
+             </div>
+          </div>
+        )}
       </div>
 
     </div>
