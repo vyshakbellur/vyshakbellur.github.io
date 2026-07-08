@@ -9,6 +9,8 @@ import Projects from './pages/Projects';
 import Research from './pages/Research';
 import Life from './pages/Life';
 import Contact from './pages/Contact';
+import Speak from './pages/Speak';
+import Writing from './pages/Writing';
 
 export default function App() {
   return (
@@ -24,6 +26,8 @@ export default function App() {
           <Route path="research"     element={<Research />} />
           <Route path="life"         element={<Life />} />
           <Route path="contact"      element={<Contact />} />
+          <Route path="speak"        element={<Speak />} />
+          <Route path="writing"      element={<Writing />} />
         </Route>
       </Routes>
     </BrowserRouter>

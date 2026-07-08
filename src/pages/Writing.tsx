@@ -1,17 +1,56 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-const articles = [
+const MEDIUM_USERNAME = 'vyshak.x.bellur';
+const RSS_URL = `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@${MEDIUM_USERNAME}`;
+
+const SEED_ARTICLES = [
   {
     title: 'Bridging the Context Gap: A Technical Analysis of LLM Limitations and Enterprise Architectures',
-    href: 'https://medium.com/@vyshak.x.bellur/bridging-the-context-gap-a-technical-analysis-of-llm-limitations-and-enterprise-architectures-d961dc35dcfc',
-    where: 'Medium',
-    tag: 'LLMs / Enterprise',
-    blurb: 'A technical deep dive into why context breaks at scale and how enterprise architectures can mitigate limitations with retrieval, orchestration, and governance.',
+    link: 'https://medium.com/@vyshak.x.bellur/bridging-the-context-gap-a-technical-analysis-of-llm-limitations-and-enterprise-architectures-d961dc35dcfc',
+    pubDate: '2024-01-01',
+    description: 'A technical deep dive into why context breaks at scale and how enterprise architectures can mitigate limitations with retrieval, orchestration, and governance.',
+    categories: ['LLMs', 'Enterprise'],
   },
 ];
 
+type Article = {
+  title: string;
+  link: string;
+  pubDate: string;
+  description: string;
+  categories: string[];
+};
+
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, '').replace(/&[a-z]+;/gi, ' ').slice(0, 180).trim() + '...';
+}
+
 export default function Writing() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(RSS_URL)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.status === 'ok' && data.items?.length) {
+          setArticles(
+            data.items.slice(0, 8).map((item: Record<string, unknown>) => ({
+              title: item.title as string,
+              link: item.link as string,
+              pubDate: ((item.pubDate as string) ?? '').slice(0, 10),
+              description: stripHtml((item.description as string) ?? ''),
+              categories: (item.categories as string[]) ?? [],
+            }))
+          );
+        } else {
+          setArticles(SEED_ARTICLES);
+        }
+      })
+      .catch(() => setArticles(SEED_ARTICLES))
+      .finally(() => setLoading(false));
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -21,7 +60,7 @@ export default function Writing() {
     const el = sectionRef.current;
     if (el) el.querySelectorAll('.section-enter').forEach((item) => observer.observe(item));
     return () => observer.disconnect();
-  }, []);
+  }, [articles]);
 
   return (
     <div ref={sectionRef} className="mx-auto max-w-6xl px-5 py-14">
@@ -33,32 +72,56 @@ export default function Writing() {
           </span>
         </h1>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/65">
-          Technical writing on LLMs, system design, and engineering at scale.
+          Technical writing on LLMs, system design, and engineering at scale. Auto-synced from{' '}
+          <a
+            href={`https://medium.com/@${MEDIUM_USERNAME}`}
+            target="_blank"
+            rel="noreferrer"
+            className="text-yellow-400 hover:text-yellow-300 transition-colors"
+          >
+            Medium
+          </a>
         </p>
         <div className="mt-4 h-px w-full bg-white/10" />
       </div>
 
-      <div className="grid gap-5 md:grid-cols-2">
-        {articles.map((w) => (
-          <a
-            key={w.href}
-            href={w.href}
-            target="_blank"
-            rel="noreferrer"
-            className="section-enter group rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10"
-          >
-            <div className="mb-3 flex items-center justify-between gap-3">
-              <span className="text-xs text-white/50">{w.where}</span>
-              <span className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-white/60">
-                {w.tag}
-              </span>
+      {loading ? (
+        <div className="grid gap-5 md:grid-cols-2">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="rounded-2xl border border-white/10 bg-white/5 p-6 animate-pulse">
+              <div className="h-3 w-16 bg-white/10 rounded mb-4" />
+              <div className="h-4 w-full bg-white/10 rounded mb-2" />
+              <div className="h-4 w-3/4 bg-white/10 rounded mb-4" />
+              <div className="h-3 w-full bg-white/5 rounded mb-1" />
+              <div className="h-3 w-2/3 bg-white/5 rounded" />
             </div>
-            <div className="mb-2 font-semibold leading-snug text-white/95">{w.title}</div>
-            <p className="text-sm leading-relaxed text-white/65">{w.blurb}</p>
-            <div className="mt-4 text-xs text-white/50 group-hover:text-white/80 transition-colors">Read ↗</div>
-          </a>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="grid gap-5 md:grid-cols-2">
+          {articles.map((w) => (
+            <a
+              key={w.link}
+              href={w.link}
+              target="_blank"
+              rel="noreferrer"
+              className="section-enter group rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10"
+            >
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <span className="text-xs text-white/40">{w.pubDate}</span>
+                {w.categories[0] && (
+                  <span className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-white/60">
+                    {w.categories[0]}
+                  </span>
+                )}
+              </div>
+              <div className="mb-2 font-semibold leading-snug text-white/95">{w.title}</div>
+              <p className="text-sm leading-relaxed text-white/65">{w.description}</p>
+              <div className="mt-4 text-xs text-white/50 group-hover:text-white/80 transition-colors">Read on Medium</div>
+            </a>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

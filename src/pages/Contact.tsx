@@ -28,6 +28,18 @@ export default function Contact() {
 
       <div className="grid gap-6 md:grid-cols-12">
         <div className="section-enter md:col-span-7">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 mb-4">
+            <div className="text-sm text-white/50 mb-2 uppercase tracking-wider text-xs">Available For</div>
+            <div className="flex flex-wrap gap-2 mb-4">
+              {['Technical Speaking', 'Panel Discussions', 'Hackathon Judging', 'ML Mentorship', 'GenAI Consulting'].map(t => (
+                <span key={t} className="rounded-full border border-yellow-400/30 bg-yellow-400/10 px-3 py-1 text-xs text-yellow-300">{t}</span>
+              ))}
+            </div>
+            <p className="text-white/60 text-sm leading-relaxed">
+              Open to speaking on Large Language Models, AI in Financial Services, Metagenomics ML, and enterprise platform architecture.
+              View the <a href="/speak" className="text-yellow-400 hover:text-yellow-300 transition-colors">Speaking page</a> for full topic list and press kit.
+            </p>
+          </div>
           <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
             <p className="text-white/75 leading-relaxed">
               The fastest way to reach me is on LinkedIn. I&apos;m happy to discuss full-stack
