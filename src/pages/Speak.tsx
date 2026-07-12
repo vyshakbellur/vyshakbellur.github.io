@@ -1,42 +1,67 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-const EXPERTISE_TOPICS = [
+const SPEAKING_TOPICS = [
   {
-    icon: '🧠',
-    title: 'Large Language Models in Production',
-    desc: 'Designing, deploying, and governing LLM systems in regulated enterprise environments. Prompt engineering, RAG pipelines, compliance controls.',
+    title: 'Building Self-Healing APIs with AI',
+    badges: ['Cloud Engineering', 'AIOps', 'Enterprise AI'],
+    abstract: 'Modern cloud platforms generate millions of logs, metrics, traces, and deployment events every day, yet most organizations remain reactive to production failures. This talk explores how machine learning and large language models can transform operational telemetry into actionable intelligence. Drawing from enterprise engineering experience and research into self-healing cloud architectures, the session demonstrates how knowledge graphs, dependency analysis, anomaly detection, and risk-aware automation can reduce incident resolution time while preserving operational safety. Attendees will learn practical architectural patterns for integrating AI into production systems without sacrificing observability, auditability, or human oversight.',
   },
   {
-    icon: '🔬',
-    title: 'Cross-Domain ML & Metagenomics',
-    desc: 'Applying NLP pattern recognition to genomic sequences — a rare transfer of ML intuition across computational biology and software engineering.',
+    title: 'The Guardian Paradigm: Secure Agentic AI for Regulated Enterprises',
+    badges: ['Agentic AI', 'AI Security', 'Enterprise Architecture'],
+    abstract: 'As AI systems evolve from assistants into autonomous agents, traditional software security models must also evolve. This session introduces the Guardian Paradigm, a deterministic governance architecture designed to supervise AI agents operating in regulated environments. The talk covers prompt injection defenses, tool governance, intent verification, progressive validation, and policy-driven execution. Rather than trusting an AI model to make security decisions, the architecture separates probabilistic reasoning from deterministic enforcement, enabling secure adoption of agentic AI in enterprise systems.',
   },
   {
-    icon: '⚙️',
-    title: 'AI-Driven AIOps & Self-Healing Systems',
-    desc: 'Building autonomous anomaly detection, root-cause analysis, and automated remediation for enterprise APIs. From PhD research to production.',
+    title: 'What Ancient Scripts Taught Me About Cloud Telemetry',
+    badges: ['Machine Learning', 'Digital Humanities', 'Applied AI'],
+    abstract: 'What do ancient Ethiopian manuscripts, microbial DNA sequences, and cloud microservice telemetry have in common? They are all structured sequences that can be analyzed using similar machine learning principles. Drawing from published research in historical manuscript analysis, genomic sequence modeling, and enterprise AI systems, this talk explores how representation learning, embeddings, similarity metrics, and anomaly detection transfer across seemingly unrelated domains.',
   },
   {
-    icon: '🏗️',
-    title: 'Enterprise Platform Architecture',
-    desc: 'Event-driven microservices, cloud-native migration, and modernizing legacy SOAP/monolith systems to resilient REST ecosystems at scale.',
+    title: 'Designing AI Systems for Production, Not Prototypes',
+    badges: ['LLMs', 'Software Engineering', 'MLOps'],
+    abstract: 'Many AI demonstrations work well in isolation but fail under the demands of production systems. This talk discusses the engineering principles required to move beyond proof-of-concept applications toward reliable enterprise AI. Topics include architecture design, observability, evaluation, governance, deployment strategies, and operational guardrails.',
   },
   {
-    icon: '📊',
-    title: 'AI in Financial Services',
-    desc: 'Responsible AI deployment inside a top-5 global bank. Balancing performance, governance, regulatory controls, and real-time decision intelligence.',
+    title: 'Beyond Chatbots: Enterprise Applications of Large Language Models',
+    badges: ['LLMs', 'Enterprise AI', 'Applied Machine Learning'],
+    abstract: 'Large language models are rapidly becoming foundational components of enterprise software, but successful adoption requires much more than conversational interfaces. This session explores practical architectural patterns for integrating LLMs into enterprise workflows, including intelligent search, operational assistance, incident management, decision support, and workflow automation.',
   },
   {
-    icon: '🛤️',
-    title: 'Career & Research in ML Engineering',
-    desc: 'Navigating the intersection of industry engineering and academic research — from HCL to JPMC to PhD and Oxford publications.',
+    title: 'From Observability to Autonomous Operations',
+    badges: ['Cloud Platforms', 'DevOps', 'AI Infrastructure'],
+    abstract: 'Modern observability platforms provide unprecedented visibility into production systems, yet engineers often remain responsible for manually correlating alerts and diagnosing failures. This talk explores how AI can augment traditional observability by connecting logs, metrics, traces, deployment history, and service dependencies into actionable operational intelligence.',
+  },
+  {
+    title: 'Machine Learning Beyond Language: Lessons from Scripts, Genomes, and Software Systems',
+    badges: ['Machine Learning', 'AI Research'],
+    abstract: 'Machine learning techniques developed for natural language processing are increasingly being applied to biological sequences, historical manuscripts, source code, and distributed systems. This presentation examines the common statistical principles underlying these seemingly unrelated domains, including representation learning, sequence modeling, metric learning, and anomaly detection.',
+  },
+  {
+    title: 'Responsible AI in Enterprise Engineering',
+    badges: ['AI Governance', 'Security', 'Compliance'],
+    abstract: 'Responsible AI requires more than model accuracy. Enterprise AI systems must satisfy requirements for transparency, security, auditability, governance, and regulatory compliance. This talk discusses architectural approaches for building trustworthy AI systems, including human-in-the-loop decision making, policy enforcement, monitoring, explainability, and risk-based validation.',
   },
 ];
 
-const PRESS_BIO = `Vyshak Athreya Bellur Keshavamurthy is a Senior Full-Stack and Platform Engineer at JPMorgan Chase & Co., where he builds production AI systems including an LLM-powered client intelligence platform serving wealth advisors. He is a PhD candidate in Computer Science at the University of the Cumberlands, with research focused on AI-driven self-healing API frameworks. A published co-author in Oxford University Press's Digital Scholarship in the Humanities, Vyshak is recognized for his rare ability to transfer ML intuition across radically different domains — from financial infrastructure to genomic sequence analysis. Outside the terminal, he is an avid marathon runner and adventure traveler who has visited 43 U.S. states and 14 countries.`;
+const INVITED_TALKS = [
+  {
+    event: 'JPMorgan Chase Innovation Week 2026',
+    title: 'Financial Guardrail Agent: A Security-First Approach to Agentic AI',
+    audience: 'Internal engineering cohorts, application owners, and technology leadership stakeholders.',
+    overview: 'Presented a deterministic Guard\u2013Classifier\u2013Verifier architecture for securing agentic AI workflows in regulated financial environments. The session demonstrated how policy enforcement, intent verification, and human approval mechanisms can reduce the risks associated with autonomous tool-calling agents while maintaining auditability and compliance.',
+    badges: ['Agentic AI', 'AI Governance', 'Runtime Security'],
+    year: '2026',
+  },
+];
+
+const PRESS_BIO = `Vyshak Athreya Bellur Keshavamurthy is a Senior Full-Stack and Platform Engineer at JPMorgan Chase & Co., where he builds production AI systems including an LLM-powered client intelligence platform serving wealth advisors. He is a PhD candidate in Computer Science at the University of the Cumberlands, with research focused on AI-driven self-healing API frameworks. A published co-author in Oxford University Press's Digital Scholarship in the Humanities, Vyshak is recognized for his rare ability to transfer ML intuition across radically different domains from financial infrastructure to genomic sequence analysis. Outside the terminal, he is an avid marathon runner and adventure traveler who has visited 43 U.S. states and 14 countries.`;
 
 export default function Speak() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
+  const [copiedBio, setCopiedBio] = useState(false);
+  const [expandedInvited, setExpandedInvited] = useState<number | null>(0);
+  const [expandedTopic, setExpandedTopic] = useState<number | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -48,149 +73,165 @@ export default function Speak() {
     return () => observer.disconnect();
   }, []);
 
+  const copyTopic = (idx: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    const t = SPEAKING_TOPICS[idx];
+    const text = `${t.title}\n\n${t.badges.join(' \u2022 ')}\n\nAbstract\n\n${t.abstract}`;
+    navigator.clipboard.writeText(text);
+    setCopiedIdx(idx);
+    setTimeout(() => setCopiedIdx(null), 2000);
+  };
+
   const copyBio = () => {
     navigator.clipboard.writeText(PRESS_BIO);
+    setCopiedBio(true);
+    setTimeout(() => setCopiedBio(false), 2000);
   };
 
   return (
-    <div ref={sectionRef} className="mx-auto max-w-6xl px-5 py-14">
+    <div ref={sectionRef} className="mx-auto max-w-6xl px-5 py-8">
       {/* Header */}
-      <div className="section-enter mb-10">
-        <div className="mb-2 text-xs font-medium tracking-widest text-white/40 uppercase">Speaking & Judging</div>
-        <h1 className="text-3xl font-semibold tracking-tight text-white/95 md:text-4xl">
-          <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">
-            On Stage
-          </span>
+      <div className="section-enter mb-6">
+        <h1 className="text-2xl font-semibold tracking-tight text-white/95 md:text-3xl">
+          <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">Speaking</span>
         </h1>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/65">
-          Available for technical speaking, panel discussions, and judging roles in AI, ML, and enterprise engineering.
-          Reach out via <a href="/contact" className="text-yellow-400 hover:text-yellow-300 transition-colors">Contact</a> to discuss.
+        <p className="mt-2 max-w-2xl text-xs leading-relaxed text-white/50">
+          Available for keynotes, technical sessions, panel discussions, and judging roles.{' '}
+          <a href="/contact" className="text-yellow-400 hover:text-yellow-300 transition-colors">Get in touch →</a>
         </p>
-        <div className="mt-4 h-px w-full bg-white/10" />
+        <div className="mt-3 h-px w-full bg-white/10" />
       </div>
 
-      {/* Featured Talk */}
-      <div className="section-enter mb-12">
-        <div className="mb-5 text-xs font-medium tracking-widest text-white/40 uppercase">Featured Engagement</div>
-        <div className="rounded-2xl border border-yellow-400/20 bg-yellow-400/5 p-7">
-          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
-            <div>
-              <div className="text-xs text-yellow-400/80 mb-1 uppercase tracking-wider">Internal Technical Talk · JPMorgan Chase</div>
-              <h2 className="text-lg font-semibold text-white/95 leading-snug">
-                "Magic Button: Building a Production LLM System Inside a Regulated Bank"
-              </h2>
+      <div className="grid gap-6 lg:grid-cols-3">
+        {/* ── LEFT: Invited + Topics (2/3 width) ── */}
+        <div className="lg:col-span-2 space-y-5">
+
+          {/* Invited Talks — Collapsible */}
+          <div className="section-enter">
+            <h2 className="text-sm font-semibold text-white/80 mb-3 uppercase tracking-widest">Invited Talks</h2>
+            <div className="space-y-2">
+              {INVITED_TALKS.map((talk, idx) => (
+                <div key={talk.title} className="rounded-xl border border-yellow-400/15 bg-yellow-400/[0.02] overflow-hidden">
+                  <button
+                    onClick={() => setExpandedInvited(expandedInvited === idx ? null : idx)}
+                    className="w-full px-5 py-3.5 flex items-center justify-between gap-3 text-left hover:bg-yellow-400/[0.03] transition-colors"
+                  >
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[10px] text-yellow-400/60 mb-0.5 uppercase tracking-wider font-medium">{talk.event} · {talk.year}</div>
+                      <h3 className="text-sm font-semibold text-white/90 leading-snug truncate">{talk.title}</h3>
+                    </div>
+                    <svg className={`w-4 h-4 shrink-0 text-white/30 transition-transform duration-200 ${expandedInvited === idx ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  {expandedInvited === idx && (
+                    <div className="px-5 pb-4 border-t border-yellow-400/10 pt-3 space-y-2">
+                      <div>
+                        <span className="text-[10px] font-medium tracking-wider text-white/30 uppercase">Audience</span>
+                        <p className="text-xs text-white/55 mt-0.5">{talk.audience}</p>
+                      </div>
+                      <div>
+                        <span className="text-[10px] font-medium tracking-wider text-white/30 uppercase">Overview</span>
+                        <p className="text-xs leading-relaxed text-white/60 mt-0.5">{talk.overview}</p>
+                      </div>
+                      <div className="flex flex-wrap gap-1.5 pt-1">
+                        {talk.badges.map((b) => (
+                          <span key={b} className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] text-white/45">{b}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
-            <span className="shrink-0 rounded-full border border-yellow-400/30 bg-yellow-400/10 px-3 py-1 text-xs text-yellow-300">
-              2024
-            </span>
           </div>
-          <p className="text-sm leading-relaxed text-white/70">
-            Presented to an internal audience of engineers and stakeholders at JPMorgan Chase, this talk detailed the architecture
-            and delivery of "Magic Button" — an LLM-powered system generating real-time client intelligence summaries for wealth advisors.
-            The session covered prompt engineering strategies, integration with internal data pipelines, compliance and governance controls
-            required inside a heavily regulated Tier-1 financial institution, and lessons learned scaling a generative AI product from
-            prototype to production. The talk explored how enterprise constraints — security, auditability, latency SLAs — shape
-            real-world LLM deployment in ways academic benchmarks never surface.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {['LLMs', 'RAG', 'Enterprise AI', 'Financial Services', 'Production Systems'].map(t => (
-              <span key={t} className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs text-white/50">{t}</span>
-            ))}
+
+          {/* Speaking Topics — Collapsible */}
+          <div className="section-enter">
+            <h2 className="text-sm font-semibold text-white/80 mb-2 uppercase tracking-widest">Speaking Topics</h2>
+            <p className="text-[10px] text-white/35 mb-3">Click to expand. Use Copy to export any topic into your event schedule.</p>
+            <div className="space-y-1.5">
+              {SPEAKING_TOPICS.map((topic, idx) => (
+                <div key={topic.title} className="rounded-xl border border-white/8 bg-white/[0.02] overflow-hidden">
+                  <button
+                    onClick={() => setExpandedTopic(expandedTopic === idx ? null : idx)}
+                    className="w-full px-4 py-3 flex items-center justify-between gap-3 text-left hover:bg-white/[0.03] transition-colors"
+                  >
+                    <div className="flex items-center gap-2.5 flex-1 min-w-0">
+                      <span className="text-[10px] font-mono text-white/20 shrink-0">{String(idx + 1).padStart(2, '0')}</span>
+                      <h3 className="text-xs font-semibold text-white/85 leading-snug truncate">{topic.title}</h3>
+                    </div>
+                    <div className="flex items-center gap-2 shrink-0">
+                      <button
+                        onClick={(e) => copyTopic(idx, e)}
+                        className="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-[10px] font-medium text-white/50 hover:bg-white/10 hover:text-white/80 transition-colors"
+                      >
+                        {copiedIdx === idx ? '✓' : 'Copy'}
+                      </button>
+                      <svg className={`w-3.5 h-3.5 text-white/25 transition-transform duration-200 ${expandedTopic === idx ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </button>
+                  {expandedTopic === idx && (
+                    <div className="px-4 pb-4 border-t border-white/5 pt-3">
+                      <div className="flex flex-wrap gap-1.5 mb-2">
+                        {topic.badges.map((b) => (
+                          <span key={b} className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] text-white/45">{b}</span>
+                        ))}
+                      </div>
+                      <p className="text-xs leading-relaxed text-white/55">{topic.abstract}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Expertise Topics */}
-      <div className="section-enter mb-12">
-        <div className="mb-5 text-xs font-medium tracking-widest text-white/40 uppercase">Topics I Cover</div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {EXPERTISE_TOPICS.map((t) => (
-            <div
-              key={t.title}
-              className="section-enter rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/[0.07] transition"
-            >
-              <div className="text-2xl mb-3">{t.icon}</div>
-              <div className="mb-2 text-sm font-semibold text-white/90 leading-snug">{t.title}</div>
-              <p className="text-xs leading-relaxed text-white/55">{t.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+        {/* ── RIGHT: Speaker Bio (1/3 width) ── */}
+        <div className="section-enter space-y-4">
+          <h2 className="text-sm font-semibold text-white/80 uppercase tracking-widest">Speaker Bio</h2>
 
-      {/* Proposed Talks */}
-      <div className="section-enter mb-12">
-        <div className="mb-5 text-xs font-medium tracking-widest text-white/40 uppercase">Proposed Talk Formats</div>
-        <div className="grid gap-4 md:grid-cols-2">
-          {[
-            {
-              format: 'Keynote / Conference Talk (30–45 min)',
-              title: 'From DNA to Dollars: How ML Pattern Recognition Crosses Domain Boundaries',
-              desc: 'A narrative talk connecting metagenomics NLP research with enterprise LLM deployments — arguing that the future of ML belongs to engineers who can operate across radically different problem spaces.',
-            },
-            {
-              format: 'Technical Deep-Dive (45–60 min)',
-              title: 'Self-Healing APIs: AI-Driven AIOps from Research to Production',
-              desc: 'A hands-on session walking through the ARIA framework — anomaly detection, root-cause analysis, and automated remediation — with live architecture diagrams and real production benchmarks.',
-            },
-            {
-              format: 'Panel / Fireside Chat',
-              title: 'Responsible LLMs in Finance: What Nobody Tells You',
-              desc: 'A candid conversation on the gap between LLM demos and production reality inside a regulated bank — governance, auditability, latency, and the politics of shipping AI at scale.',
-            },
-            {
-              format: 'Workshop / Judging',
-              title: 'AI Hackathon Mentor & Judge',
-              desc: 'Available to mentor teams building LLM-powered, AIOps, or cross-domain ML applications. Experienced evaluating both technical depth and practical production-readiness.',
-            },
-          ].map((p) => (
-            <div key={p.title} className="section-enter rounded-2xl border border-white/10 bg-white/5 p-5">
-              <div className="mb-2 text-xs text-white/40 uppercase tracking-wider">{p.format}</div>
-              <div className="mb-2 text-sm font-semibold text-white/90 leading-snug">{p.title}</div>
-              <p className="text-xs leading-relaxed text-white/55">{p.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Press Kit */}
-      <div className="section-enter">
-        <div className="mb-5 text-xs font-medium tracking-widest text-white/40 uppercase">Press Kit</div>
-        <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <div className="mb-3 text-sm font-semibold text-white/90">Official Bio (150 words)</div>
-            <p className="text-xs leading-relaxed text-white/60 mb-4">{PRESS_BIO}</p>
+          <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
+            <p className="text-xs leading-relaxed text-white/55 mb-4">{PRESS_BIO}</p>
             <button
               onClick={copyBio}
               id="copy-bio-btn"
-              className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-white/80 hover:bg-white/10 transition-colors"
+              className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-[10px] font-semibold text-white/70 hover:bg-white/10 transition-colors"
             >
-              Copy Bio to Clipboard
+              {copiedBio ? '✓ Copied to Clipboard' : 'Copy Bio'}
             </button>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col justify-between">
-            <div>
-              <div className="mb-3 text-sm font-semibold text-white/90">Assets</div>
-              <p className="text-xs leading-relaxed text-white/55 mb-4">
-                For headshots, speaker photos, or additional materials, reach out directly. Assets can be provided in print-ready resolution upon request.
-              </p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <a
-                href="/Vyshak_Bellur_Resume.pdf"
-                target="_blank"
-                rel="noreferrer"
-                id="download-resume-speak"
-                className="rounded-xl bg-gradient-to-r from-red-600 via-yellow-500 to-red-500 px-5 py-2.5 text-sm font-semibold text-slate-950 text-center"
-              >
-                Download CV / Resume
-              </a>
-              <a
-                href="/contact"
-                id="contact-speaking"
-                className="rounded-xl border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white/80 hover:bg-white/10 transition-colors text-center"
-              >
-                Contact for Speaking
-              </a>
+
+          <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5 space-y-3">
+            <a
+              href="/Vyshak_Bellur_Resume.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center justify-center gap-2 w-full rounded-lg bg-gradient-to-r from-red-600 via-yellow-500 to-red-500 px-4 py-2.5 text-xs font-bold text-slate-950"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Download Speaker Bio PDF
+            </a>
+            <a
+              href="/contact"
+              className="flex items-center justify-center w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-semibold text-white/70 hover:bg-white/10 transition-colors"
+            >
+              Invite to Speak
+            </a>
+          </div>
+
+          <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
+            <div className="text-[10px] font-medium tracking-widest uppercase text-white/30 mb-2">Available For</div>
+            <div className="flex flex-wrap gap-1.5">
+              {['Keynotes', 'Technical Sessions', 'Panel Discussions', 'Hackathon Judging', 'ML Mentorship'].map(t => (
+                <span key={t} className="rounded-full border border-yellow-400/25 bg-yellow-400/10 px-2.5 py-0.5 text-[10px] text-yellow-300">{t}</span>
+              ))}
             </div>
           </div>
         </div>

@@ -4,13 +4,11 @@ import { nav } from '../data/nav';
 
 /* Per-page accent colours — complement each page's content palette */
 const PAGE_ACCENT: Record<string, string> = {
-  '/about':        '#F2E8D0',  /* warm ivory — general bio */
-  '/education':    '#86efac',  /* sage green — academic */
-  '/experience':   '#F5A623',  /* amber — career timeline */
-  '/sandbox':      '#00D4FF',  /* cyan — interactive algorithms */
+  '/about':        '#F2E8D0',  /* warm ivory — about */
   '/projects':     '#00ffa0',  /* ATC green — radar */
-  '/publications': '#7dd3fc',  /* sky blue — papers */
-  '/life':         '#fb7185',  /* rose — running / travel */
+  '/research':     '#F2E8D0',  /* warm ivory — papers */
+  '/speak':        '#facc15',  /* gold — speaking engagements */
+  '/writing':      '#38bdf8',  /* sky blue — blog / writing */
   '/contact':      '#c084fc',  /* lavender — message */
 };
 
@@ -46,17 +44,18 @@ export default function CompactHeader() {
         >
           <span className="text-[18px] md:text-[24px]" style={{
             fontWeight: 900, fontFamily: 'Georgia,serif',
-            letterSpacing: '0.04em', color: ac, lineHeight: 1,
-            textShadow: `0 0 18px ${ac}44`,
+            letterSpacing: '0.04em', lineHeight: 1,
             transition: 'color 0.3s, text-shadow 0.3s',
           }}>
-            VYSHAK ATHREYA
+            <span style={{ color: ac, textShadow: `0 0 18px ${ac}44` }}>VYSHAK</span>
+            <span style={{ color: `${ac}35` }}>{' '}ATHREYA</span>
           </span>
           <span className="text-[8px] md:text-[11.5px]" style={{
             fontWeight: 600, letterSpacing: '0.22em',
-            color: `${ac}55`, fontFamily: 'Georgia,serif', lineHeight: 1,
+            fontFamily: 'Georgia,serif', lineHeight: 1,
           }}>
-            BELLUR KESHAVAMURTHY
+            <span style={{ color: `${ac}99` }}>BELLUR</span>
+            <span style={{ color: `${ac}30` }}>{' '}KESHAVAMURTHY</span>
           </span>
         </Link>
 
