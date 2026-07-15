@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { hobbiesInfo } from '../data/content';
 
 /* ─── Sub-section definitions ─── */
