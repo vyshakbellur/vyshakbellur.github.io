@@ -69,21 +69,21 @@ export default function Research() {
             Research &amp; Literature
           </span>
         </h1>
-        <div className="mt-3 h-px w-full bg-white/10" />
+        <div className="mt-3 h-px w-full bg-white/14" />
       </div>
 
       {/* Two-column layout */}
       <div className="grid gap-6 lg:grid-cols-2 items-start">
         {/* ── LEFT: Published Literature ── */}
         <div className="section-enter">
-          <div className="mb-3 text-xs font-medium tracking-widest text-white/40 uppercase">Published Literature</div>
+          <div className="mb-3 text-xs font-medium tracking-widest text-white/50 uppercase">Published Literature</div>
           <div className="flex flex-col gap-3">
             {pubs.map((p, idx) => {
               const isOpen = expanded === idx;
               return (
                 <div
                   key={p.title}
-                  className="section-enter rounded-xl border border-white/10 bg-white/[0.03] transition hover:bg-white/[0.05]"
+                  className="section-enter rounded-xl border border-white/14 bg-white/[0.06] transition hover:bg-white/[0.09]"
                 >
                   {/* Collapsed header — always visible */}
                   <button
@@ -95,27 +95,27 @@ export default function Research() {
                         <span className={`rounded-full border px-2 py-px text-[10px] font-medium ${p.badgeColor}`}>
                           {p.badge}
                         </span>
-                        <span className="text-[10px] text-white/35">{p.journal}</span>
+                        <span className="text-[10px] text-white/45">{p.journal}</span>
                       </div>
                       <h3 className="text-xs font-semibold leading-snug text-white/90 line-clamp-2">{p.title}</h3>
-                      <p className="mt-1 text-[10px] text-white/45">
+                      <p className="mt-1 text-[10px] text-white/55">
                         {p.coAuthors.length > 0
                           ? `With ${p.coAuthors.join(', ')} — ${p.publisher}, ${p.year}`
                           : `${p.publisher}, ${p.year}`}
                       </p>
                     </div>
-                    <span className="shrink-0 mt-1 text-white/30 text-xs transition-transform duration-200" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+                    <span className="shrink-0 mt-1 text-white/40 text-xs transition-transform duration-200" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
                       ▾
                     </span>
                   </button>
 
                   {/* Expanded details */}
                   {isOpen && (
-                    <div className="px-5 pb-4 border-t border-white/5 pt-3">
-                      <p className="text-xs leading-relaxed text-white/55 mb-3">{p.abstract}</p>
+                    <div className="px-5 pb-4 border-t border-white/8 pt-3">
+                      <p className="text-xs leading-relaxed text-white/70 mb-3">{p.abstract}</p>
                       <div className="flex flex-wrap gap-1.5 mb-2">
                         {p.tags.map((t) => (
-                          <span key={t} className="rounded-full border border-white/10 bg-white/5 px-2 py-px text-[10px] text-white/45">
+                          <span key={t} className="rounded-full border border-white/14 bg-white/[0.06] px-2 py-px text-[10px] text-white/60">
                             {t}
                           </span>
                         ))}
@@ -125,7 +125,7 @@ export default function Research() {
                           href={p.href}
                           target="_blank"
                           rel="noreferrer"
-                          className="text-[11px] text-white/50 hover:text-white/90 transition-colors"
+                          className="text-[11px] text-white/60 hover:text-white/90 transition-colors"
                         >
                           View publication ↗
                         </a>
@@ -140,17 +140,17 @@ export default function Research() {
 
         {/* ── RIGHT: Active Research ── */}
         <div className="section-enter">
-          <div className="mb-3 text-xs font-medium tracking-widest text-white/40 uppercase">Active Research Initiatives</div>
-          <div className="rounded-xl border border-amber-400/15 bg-amber-400/[0.03] p-5">
+          <div className="mb-3 text-xs font-medium tracking-widest text-white/50 uppercase">Active Research Initiatives</div>
+          <div className="rounded-xl border border-amber-400/20 bg-amber-400/[0.05] p-5">
             <h3 className="text-sm font-bold text-amber-400 mb-2">Cross-Domain Pattern Recognition via Machine Learning</h3>
-            <p className="text-xs leading-relaxed text-white/60 mb-4">
+            <p className="text-xs leading-relaxed text-white/70 mb-4">
               My core thesis explores how mathematically rigorous pattern-detection architectures—such as State Space Models, Spectral Clustering, and Hierarchical MoE—can be universally applied to extract latent structural signals from extreme noise.
             </p>
             <div className="space-y-2.5">
               {ACTIVE_THREADS.map((t) => (
-                <div key={t.label} className="rounded-lg border border-white/6 bg-white/[0.03] px-4 py-3">
-                  <div className="text-xs font-semibold text-white/80 mb-0.5">{t.label}</div>
-                  <p className="text-[11px] leading-relaxed text-white/50">{t.desc}</p>
+                <div key={t.label} className="rounded-lg border border-white/10 bg-white/[0.05] px-4 py-3">
+                  <div className="text-xs font-semibold text-white/85 mb-0.5">{t.label}</div>
+                  <p className="text-[11px] leading-relaxed text-white/65">{t.desc}</p>
                 </div>
               ))}
             </div>

@@ -65,13 +65,13 @@ export default function Writing() {
   return (
     <div ref={sectionRef} className="mx-auto max-w-6xl px-5 py-14">
       <div className="section-enter mb-10">
-        <div className="mb-2 text-xs font-medium tracking-widest text-white/40 uppercase">Blog</div>
+        <div className="mb-2 text-xs font-medium tracking-widest text-white/50 uppercase">Blog</div>
         <h1 className="text-3xl font-semibold tracking-tight text-white/95 md:text-4xl">
           <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">
             Writing
           </span>
         </h1>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/65">
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/75">
           Technical writing on LLMs, system design, and engineering at scale. Auto-synced from{' '}
           <a
             href={`https://medium.com/@${MEDIUM_USERNAME}`}
@@ -82,13 +82,13 @@ export default function Writing() {
             Medium
           </a>
         </p>
-        <div className="mt-4 h-px w-full bg-white/10" />
+        <div className="mt-4 h-px w-full bg-white/14" />
       </div>
 
       {loading ? (
         <div className="grid gap-5 md:grid-cols-2">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="rounded-2xl border border-white/10 bg-white/5 p-6 animate-pulse">
+            <div key={i} className="rounded-2xl border border-white/14 bg-white/[0.06] p-6 animate-pulse">
               <div className="h-3 w-16 bg-white/10 rounded mb-4" />
               <div className="h-4 w-full bg-white/10 rounded mb-2" />
               <div className="h-4 w-3/4 bg-white/10 rounded mb-4" />
@@ -105,19 +105,19 @@ export default function Writing() {
               href={w.link}
               target="_blank"
               rel="noreferrer"
-              className="section-enter group rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10"
+              className="section-enter group rounded-2xl border border-white/14 bg-white/[0.06] p-6 transition hover:bg-white/[0.10]"
             >
               <div className="mb-3 flex items-center justify-between gap-3">
-                <span className="text-xs text-white/40">{w.pubDate}</span>
+                <span className="text-xs text-white/50">{w.pubDate}</span>
                 {w.categories[0] && (
-                  <span className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-white/60">
+                  <span className="rounded-full border border-white/14 bg-white/[0.06] px-2 py-0.5 text-xs text-white/70">
                     {w.categories[0]}
                   </span>
                 )}
               </div>
               <div className="mb-2 font-semibold leading-snug text-white/95">{w.title}</div>
-              <p className="text-sm leading-relaxed text-white/65">{w.description}</p>
-              <div className="mt-4 text-xs text-white/50 group-hover:text-white/80 transition-colors">Read on Medium</div>
+              <p className="text-sm leading-relaxed text-white/75">{w.description}</p>
+              <div className="mt-4 text-xs text-white/60 group-hover:text-white/85 transition-colors">Read on Medium</div>
             </a>
           ))}
         </div>

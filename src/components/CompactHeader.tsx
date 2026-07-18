@@ -28,10 +28,10 @@ export default function CompactHeader() {
         className="flex flex-shrink-0 z-50 items-center relative"
         style={{
           height: 76,  /* Matched precisely to the Home Piano header height */
-          background: 'rgba(5,3,0,0.96)',
+          background: 'rgba(10,15,26,0.97)',
           backdropFilter: 'blur(10px)',
           borderBottom: `1px solid ${ac}22`,
-          boxShadow: `0 1px 0 ${ac}10, 0 4px 20px rgba(0,0,0,0.7)`,
+          boxShadow: `0 1px 0 ${ac}10, 0 4px 24px rgba(0,0,0,0.8), 0 1px 6px ${ac}08`,
           padding: '0 32px',
           gap: 0,
         }}
@@ -88,7 +88,7 @@ export default function CompactHeader() {
                 fontWeight: isActive ? 900 : 400,
                 letterSpacing: '0.14em',
                 textTransform: 'uppercase',
-                color: isActive ? ac : 'rgba(255,255,255,0.58)',
+                color: isActive ? ac : 'rgba(255,255,255,0.72)',
                 background: isActive ? `${ac}14` : 'transparent',
                 borderBottom: isActive ? `2px solid ${ac}` : '2px solid transparent',
                 transition: 'color 0.15s, background 0.15s, border-color 0.15s',

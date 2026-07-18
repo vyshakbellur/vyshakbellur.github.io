@@ -95,11 +95,11 @@ export default function Speak() {
         <h1 className="text-2xl font-semibold tracking-tight text-white/95 md:text-3xl">
           <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">Speaking</span>
         </h1>
-        <p className="mt-2 max-w-2xl text-xs leading-relaxed text-white/50">
+        <p className="mt-2 max-w-2xl text-xs leading-relaxed text-white/65">
           Available for keynotes, technical sessions, panel discussions, and judging roles.{' '}
           <a href="/contact" className="text-yellow-400 hover:text-yellow-300 transition-colors">Get in touch →</a>
         </p>
-        <div className="mt-3 h-px w-full bg-white/10" />
+        <div className="mt-3 h-px w-full bg-white/14" />
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
@@ -111,7 +111,7 @@ export default function Speak() {
             <h2 className="text-sm font-semibold text-white/80 mb-3 uppercase tracking-widest">Invited Talks</h2>
             <div className="space-y-2">
               {INVITED_TALKS.map((talk, idx) => (
-                <div key={talk.title} className="rounded-xl border border-yellow-400/15 bg-yellow-400/[0.02] overflow-hidden">
+                <div key={talk.title} className="rounded-xl border border-yellow-400/20 bg-yellow-400/[0.04] overflow-hidden">
                   <button
                     onClick={() => setExpandedInvited(expandedInvited === idx ? null : idx)}
                     className="w-full px-5 py-3.5 flex items-center justify-between gap-3 text-left hover:bg-yellow-400/[0.03] transition-colors"
@@ -120,23 +120,23 @@ export default function Speak() {
                       <div className="text-[10px] text-yellow-400/60 mb-0.5 uppercase tracking-wider font-medium">{talk.event} · {talk.year}</div>
                       <h3 className="text-sm font-semibold text-white/90 leading-snug truncate">{talk.title}</h3>
                     </div>
-                    <svg className={`w-4 h-4 shrink-0 text-white/30 transition-transform duration-200 ${expandedInvited === idx ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className={`w-4 h-4 shrink-0 text-white/40 transition-transform duration-200 ${expandedInvited === idx ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
                   {expandedInvited === idx && (
                     <div className="px-5 pb-4 border-t border-yellow-400/10 pt-3 space-y-2">
                       <div>
-                        <span className="text-[10px] font-medium tracking-wider text-white/30 uppercase">Audience</span>
-                        <p className="text-xs text-white/55 mt-0.5">{talk.audience}</p>
+                        <span className="text-[10px] font-medium tracking-wider text-white/45 uppercase">Audience</span>
+                        <p className="text-xs text-white/70 mt-0.5">{talk.audience}</p>
                       </div>
                       <div>
-                        <span className="text-[10px] font-medium tracking-wider text-white/30 uppercase">Overview</span>
-                        <p className="text-xs leading-relaxed text-white/60 mt-0.5">{talk.overview}</p>
+                        <span className="text-[10px] font-medium tracking-wider text-white/45 uppercase">Overview</span>
+                        <p className="text-xs leading-relaxed text-white/70 mt-0.5">{talk.overview}</p>
                       </div>
                       <div className="flex flex-wrap gap-1.5 pt-1">
                         {talk.badges.map((b) => (
-                          <span key={b} className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] text-white/45">{b}</span>
+                          <span key={b} className="rounded-full border border-white/14 bg-white/[0.06] px-2 py-0.5 text-[10px] text-white/60">{b}</span>
                         ))}
                       </div>
                     </div>
@@ -149,38 +149,38 @@ export default function Speak() {
           {/* Speaking Topics — Collapsible */}
           <div className="section-enter">
             <h2 className="text-sm font-semibold text-white/80 mb-2 uppercase tracking-widest">Speaking Topics</h2>
-            <p className="text-[10px] text-white/35 mb-3">Click to expand. Use Copy to export any topic into your event schedule.</p>
+            <p className="text-[10px] text-white/50 mb-3">Click to expand. Use Copy to export any topic into your event schedule.</p>
             <div className="space-y-1.5">
               {SPEAKING_TOPICS.map((topic, idx) => (
-                <div key={topic.title} className="rounded-xl border border-white/8 bg-white/[0.02] overflow-hidden">
+                <div key={topic.title} className="rounded-xl border border-white/12 bg-white/[0.04] overflow-hidden">
                   <button
                     onClick={() => setExpandedTopic(expandedTopic === idx ? null : idx)}
-                    className="w-full px-4 py-3 flex items-center justify-between gap-3 text-left hover:bg-white/[0.03] transition-colors"
+                    className="w-full px-4 py-3 flex items-center justify-between gap-3 text-left hover:bg-white/[0.06] transition-colors"
                   >
                     <div className="flex items-center gap-2.5 flex-1 min-w-0">
-                      <span className="text-[10px] font-mono text-white/20 shrink-0">{String(idx + 1).padStart(2, '0')}</span>
+                      <span className="text-[10px] font-mono text-white/35 shrink-0">{String(idx + 1).padStart(2, '0')}</span>
                       <h3 className="text-xs font-semibold text-white/85 leading-snug truncate">{topic.title}</h3>
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
                       <button
                         onClick={(e) => copyTopic(idx, e)}
-                        className="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-[10px] font-medium text-white/50 hover:bg-white/10 hover:text-white/80 transition-colors"
+                        className="rounded-md border border-white/14 bg-white/[0.06] px-2 py-1 text-[10px] font-medium text-white/60 hover:bg-white/[0.10] hover:text-white/85 transition-colors"
                       >
                         {copiedIdx === idx ? '✓' : 'Copy'}
                       </button>
-                      <svg className={`w-3.5 h-3.5 text-white/25 transition-transform duration-200 ${expandedTopic === idx ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className={`w-3.5 h-3.5 text-white/35 transition-transform duration-200 ${expandedTopic === idx ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                       </svg>
                     </div>
                   </button>
                   {expandedTopic === idx && (
-                    <div className="px-4 pb-4 border-t border-white/5 pt-3">
+                    <div className="px-4 pb-4 border-t border-white/8 pt-3">
                       <div className="flex flex-wrap gap-1.5 mb-2">
                         {topic.badges.map((b) => (
-                          <span key={b} className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] text-white/45">{b}</span>
+                          <span key={b} className="rounded-full border border-white/14 bg-white/[0.06] px-2 py-0.5 text-[10px] text-white/60">{b}</span>
                         ))}
                       </div>
-                      <p className="text-xs leading-relaxed text-white/55">{topic.abstract}</p>
+                      <p className="text-xs leading-relaxed text-white/70">{topic.abstract}</p>
                     </div>
                   )}
                 </div>
@@ -193,18 +193,18 @@ export default function Speak() {
         <div className="section-enter space-y-4">
           <h2 className="text-sm font-semibold text-white/80 uppercase tracking-widest">Speaker Bio</h2>
 
-          <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
-            <p className="text-xs leading-relaxed text-white/55 mb-4">{PRESS_BIO}</p>
+          <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5">
+            <p className="text-xs leading-relaxed text-white/70 mb-4">{PRESS_BIO}</p>
             <button
               onClick={copyBio}
               id="copy-bio-btn"
-              className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-[10px] font-semibold text-white/70 hover:bg-white/10 transition-colors"
+              className="w-full rounded-lg border border-white/14 bg-white/[0.06] px-3 py-2 text-[10px] font-semibold text-white/75 hover:bg-white/[0.10] transition-colors"
             >
               {copiedBio ? '✓ Copied to Clipboard' : 'Copy Bio'}
             </button>
           </div>
 
-          <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5 space-y-3">
+          <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5 space-y-3">
             <a
               href="/Vyshak_Bellur_Resume.pdf"
               target="_blank"
@@ -220,14 +220,14 @@ export default function Speak() {
             </a>
             <a
               href="/contact"
-              className="flex items-center justify-center w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-semibold text-white/70 hover:bg-white/10 transition-colors"
+              className="flex items-center justify-center w-full rounded-lg border border-white/14 bg-white/[0.06] px-4 py-2.5 text-xs font-semibold text-white/75 hover:bg-white/[0.10] transition-colors"
             >
               Invite to Speak
             </a>
           </div>
 
-          <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
-            <div className="text-[10px] font-medium tracking-widest uppercase text-white/30 mb-2">Available For</div>
+          <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5">
+            <div className="text-[10px] font-medium tracking-widest uppercase text-white/45 mb-2">Available For</div>
             <div className="flex flex-wrap gap-1.5">
               {['Keynotes', 'Technical Sessions', 'Panel Discussions', 'Hackathon Judging', 'ML Mentorship'].map(t => (
                 <span key={t} className="rounded-full border border-yellow-400/25 bg-yellow-400/10 px-2.5 py-0.5 text-[10px] text-yellow-300">{t}</span>

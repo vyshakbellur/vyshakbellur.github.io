@@ -109,7 +109,7 @@ export default function About() {
               className={`px-4 py-2 rounded-lg text-xs font-medium transition-all duration-200 ${
                 activeTab === tab.id
                   ? 'bg-white/10 text-white/95 border border-white/15'
-                  : 'text-white/40 hover:text-white/70 hover:bg-white/5 border border-transparent'
+                  : 'text-white/55 hover:text-white/80 hover:bg-white/5 border border-transparent'
               }`}
             >
               {tab.label}
@@ -210,7 +210,7 @@ function CareerTab() {
                   <h3 className="text-2xl font-black tracking-widest uppercase mb-2 transition-colors duration-500" style={{ color, textShadow: `0 0 15px ${color}60` }}>{selected.company}</h3>
                   <div className="flex items-center gap-4 border-b border-white/10 pb-4 mb-6 shrink-0">
                     <span className="text-sm font-semibold tracking-wide text-white/90">{selected.role}</span>
-                    <span className="text-xs font-mono px-2.5 py-1 rounded-sm bg-white/5 text-white/50 border border-white/5">{selected.period}</span>
+                    <span className="text-xs font-mono px-2.5 py-1 rounded-sm bg-white/[0.06] text-white/60 border border-white/8">{selected.period}</span>
                   </div>
                   <ul className="space-y-4 overflow-y-auto holo-scrollbar pr-2 pb-2 flex-grow">
                     {selected.commits.map((commit: string, i: number) => (
@@ -231,7 +231,7 @@ function CareerTab() {
 
       {/* ── MOBILE ── */}
       <div className="lg:hidden flex flex-col px-6 py-8 font-mono text-[#c9d1d9]">
-        <div className="flex flex-col gap-10 border-l border-white/10 ml-2 pb-16">
+        <div className="flex flex-col gap-10 border-l border-white/14 ml-2 pb-16">
           {GIT_NODES.map(node => {
             const dt = CAREER_DATA[node.id];
             return (
@@ -240,7 +240,7 @@ function CareerTab() {
                 <h3 className="text-lg font-black tracking-widest uppercase mb-1" style={{ color: node.color }}>{dt.company}</h3>
                 <div className="flex flex-col gap-1.5 mb-5 border-b border-white/10 pb-4">
                   <span className="text-white/90 font-bold text-sm tracking-wide">{dt.role}</span>
-                  <span className="text-[10px] uppercase font-mono tracking-[0.1em] text-white/40">{dt.period}</span>
+                  <span className="text-[10px] uppercase font-mono tracking-[0.1em] text-white/50">{dt.period}</span>
                 </div>
                 <ul className="space-y-4">
                   {dt.commits.map((c: string, idx: number) => (
@@ -387,7 +387,7 @@ function EducationTab() {
           )}
           {activeNode.courses && activeNode.courses.length > 0 && (
             <div className="mb-4 p-4 rounded-xl bg-white/[0.02] border border-white/5">
-              <span className="text-xs font-mono uppercase tracking-widest block mb-3 text-white/40">Key Coursework</span>
+              <span className="text-xs font-mono uppercase tracking-widest block mb-3 text-white/50">Key Coursework</span>
               <ul className="space-y-2">
                 {activeNode.courses.map((course, i) => (
                   <li key={i} className="flex gap-2 text-xs text-white/70 items-start">
@@ -401,7 +401,7 @@ function EducationTab() {
           <div className="flex-1 min-h-[20px]" />
           {activeNode.url && (
             <a href={activeNode.url} target="_blank" rel="noreferrer"
-              className="mt-4 px-4 py-3 rounded bg-white/[0.03] text-sm font-mono tracking-widest text-center border hover:bg-white/10 transition-colors shadow-lg flex items-center justify-center gap-2"
+              className="mt-4 px-4 py-3 rounded bg-white/[0.06] text-sm font-mono tracking-widest text-center border hover:bg-white/10 transition-colors shadow-lg flex items-center justify-center gap-2"
               style={{ color: activeNode.color, borderColor: `${activeNode.color}44` }}>
               VERIFY CREDENTIAL
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -420,16 +420,16 @@ function EducationTab() {
 function RunningTab() {
   return (
     <div className="grid gap-5 md:grid-cols-2 max-w-3xl mx-auto px-5 py-6">
-      <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
+      <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5">
         <div className="text-xs font-medium tracking-widest uppercase text-pink-400/70 mb-3">Race Stats</div>
         <ul className="text-sm space-y-3 text-white/70 font-mono">
           <li className="flex justify-between border-b border-white/5 pb-2"><span>Full Marathons</span><span className="text-white font-bold">1</span></li>
           <li className="flex justify-between border-b border-white/5 pb-2"><span>Half Marathons</span><span className="text-white font-bold">6</span></li>
-          <li className="text-xs text-white/40 italic pt-1">Racing the streets of NYC.</li>
+          <li className="text-xs text-white/55 italic pt-1">Racing the streets of NYC.</li>
         </ul>
         <a href={hobbiesInfo.running.nyrrHref} target="_blank" rel="noreferrer" className="mt-4 inline-block text-[10px] font-bold tracking-widest uppercase text-pink-400/80 hover:text-pink-400 transition-colors">NYRR Results ↗</a>
       </div>
-      <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
+      <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5">
         <div className="text-xs font-medium tracking-widest uppercase text-pink-400/70 mb-3">Philosophy</div>
         <p className="text-sm leading-relaxed text-white/60">
           Long-distance running is structured endurance — the same discipline that drives deep research and complex engineering. Every marathon teaches patience, pacing, and the art of pushing through walls.
@@ -464,7 +464,7 @@ function TravelTab() {
   return (
     <div className="max-w-6xl mx-auto px-5 py-6">
       <div className="grid gap-5 md:grid-cols-3 mb-6">
-        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
+        <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5">
           <div className="text-xs font-medium tracking-widest uppercase text-blue-400/70 mb-3">Exploration</div>
           <ul className="text-sm space-y-2 text-white/70 font-mono">
             <li className="flex justify-between border-b border-white/5 pb-2"><span>US States</span><span className="text-white font-bold">43</span></li>
@@ -472,15 +472,15 @@ function TravelTab() {
             <li className="flex justify-between"><span>Coast to Coast Drives</span><span className="text-amber-400 font-bold">2x</span></li>
           </ul>
         </div>
-        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
+        <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5">
           <div className="text-xs font-medium tracking-widest uppercase text-emerald-400/70 mb-3">Adrenaline</div>
           <ul className="text-sm space-y-2 text-white/70 font-mono">
             <li className="flex justify-between border-b border-white/5 pb-2"><span>Skydives</span><span className="text-white font-bold">3</span></li>
-            <li className="text-xs text-white/40 italic pt-1">Six continents and counting.</li>
+            <li className="text-xs text-white/55 italic pt-1">Six continents and counting.</li>
           </ul>
         </div>
-        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5 flex items-center justify-center">
-          <p className="text-xs text-white/40 text-center italic leading-relaxed">"The world is a book and those who do not travel read only one page."</p>
+        <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5 flex items-center justify-center">
+          <p className="text-xs text-white/55 text-center italic leading-relaxed">"The world is a book and those who do not travel read only one page."</p>
         </div>
       </div>
 

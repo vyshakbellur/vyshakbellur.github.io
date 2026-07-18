@@ -6,7 +6,7 @@ const DS = {
   mesh:       'rgba(0,255,120,0.12)',
   meshFocus:  'rgba(255,255,255,0.4)',
   text:       '#7fffd4',
-  textDim:    'rgba(127,255,212,0.35)',
+  textDim:    'rgba(127,255,212,0.50)',
   gold:       '#F5A623',
 };
 

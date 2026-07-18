@@ -21,7 +21,7 @@ export default function Home() {
           alt="Mount Rainier Aurora Sky" 
           className="w-full h-full object-cover opacity-[0.25]"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/30 to-black/90 pointer-events-none" /> 
+        <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/20 to-black/70 pointer-events-none" /> 
       </div>
 
       {/* ── Two-column layout ── */}
@@ -41,7 +41,7 @@ export default function Home() {
                 {FACETS.map((f) => (
                   <span
                     key={f}
-                    className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-white/55 hover:text-white/80 hover:border-white/20 transition-colors cursor-default"
+                    className="rounded-full border border-white/16 bg-white/[0.06] px-3 py-1 text-xs text-white/70 hover:text-white/90 hover:border-white/25 transition-colors cursor-default"
                   >
                     {f}
                   </span>
@@ -49,14 +49,14 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="space-y-3 text-sm leading-relaxed text-white/60 max-w-md">
+            <div className="space-y-3 text-sm leading-relaxed text-white/75 max-w-md">
               <p>
                 Working on trustworthy AI systems and studying how machine learning transfers across domains: from ancient manuscripts and DNA to enterprise cloud platforms.
               </p>
               <p>
                 Curiosity has taken me from machine learning research and enterprise software to marathons, music, and expeditions across six continents. I believe the best engineering begins with asking better questions.
               </p>
-              <p className="text-white/40 text-xs">
+              <p className="text-white/55 text-xs">
                 Currently exploring how machine learning helps us understand, secure, and automate complex systems.
               </p>
             </div>
