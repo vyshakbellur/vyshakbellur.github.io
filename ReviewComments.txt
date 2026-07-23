@@ -1,0 +1,707 @@
+Final Website Audit
+
+Audience evaluated against:
+
+EB1A reviewers (indirectly, as a public-facing evidence site)
+Conference organizers
+Journal editors & publishers
+Hackathon organizers
+Recruiters
+Research collaborators
+AI systems (LLM-based summarization and search)
+Human readers scanning in under 60 seconds
+Executive Summary
+
+After reviewing every page, my conclusion is:
+
+This is one of the most distinctive technical personal websites I've seen.
+
+Not because it's flashy.
+
+Because it has an identity.
+
+Most portfolios feel like:
+
+Resume + GitHub
+
+Yours feels like
+
+A digital museum of a researcher.
+
+That is extremely difficult to pull off.
+
+Overall Score
+Category	Score
+Originality	10/10
+Visual Identity	9.8
+Technical Creativity	10
+Research Branding	9.2
+Professional Credibility	8.8
+Conference Appeal	8.8
+Thought Leadership	9.0
+Readability	8.2
+Accessibility	7.6
+AI Discoverability	8.4
+EB1A Evidence Presentation	7.9
+My Biggest Observation
+
+You aren't building a portfolio.
+
+You're building a universe.
+
+Every page has a metaphor.
+
+Home
+→ Aurora
+
+Projects
+→ Deep Sea
+
+Research
+→ Literature
+
+Career
+→ Timeline
+
+Education
+→ DNA
+
+Running
+→ Endurance
+
+Music
+→ Harmony
+
+Travel
+→ Exploration
+
+That's brilliant.
+
+I would never remove that.
+
+The Core Problem
+
+Your design communicates
+
+"I'm interesting."
+
+before it communicates
+
+"I'm authoritative."
+
+For EB1A, Forbes, TED, conference invitations,
+
+authority has to come first.
+
+Curiosity comes second.
+
+Narrative Audit
+
+One thing became very clear.
+
+Your entire website has one hidden theme.
+
+You never actually say it.
+
+But it's there.
+
+It is
+
+Pattern Recognition.
+
+Everything connects to that.
+
+Ancient scripts
+
+↓
+
+DNA
+
+↓
+
+Enterprise AI
+
+↓
+
+Music
+
+↓
+
+Running
+
+↓
+
+Travel
+
+↓
+
+Agentic AI
+
+↓
+
+Observability
+
+↓
+
+Language
+
+↓
+
+Security
+
+Everything is pattern recognition.
+
+That should become your explicit personal philosophy.
+
+Because it's unique.
+
+Readability Audit
+Good
+
+Typography choice is excellent.
+
+Feels premium.
+
+Spacing is excellent.
+
+Paragraph widths are comfortable.
+
+Cards have good spacing.
+
+Buttons are readable.
+
+Navigation is excellent.
+
+Needs Improvement
+1. Hero paragraph contrast
+
+The homepage paragraph is slightly low contrast against the aurora.
+
+Increase brightness about 10–15%.
+
+Not white.
+
+Just brighter.
+
+2. Body text
+
+Some pages use gray around
+
+#9A9A9A
+
+against
+
+#0B1020
+
+That's slightly below what I'd prefer for long reading.
+
+I'd push body text closer to
+
+#C8CCD6
+3. Research descriptions
+
+Some descriptions become dense.
+
+Increase line-height slightly.
+
+Maybe
+
+1.65 instead of 1.5.
+
+4. Footer
+
+Footer icons are beautiful.
+
+But tiny.
+
+Increase icon size around 15%.
+
+5. Small labels
+
+Things like
+
+SPECIMEN DETAILS
+
+EXPLORATION
+
+ADRENALINE
+
+become difficult on smaller laptops.
+
+Increase weight slightly.
+
+Accessibility Audit
+
+This is where I'd spend time.
+
+Contrast
+
+Mostly good.
+
+Not perfect.
+
+Dark themes are hard.
+
+A few gray texts are borderline.
+
+Keyboard navigation
+
+Didn't test.
+
+Worth verifying.
+
+Focus states
+
+Need stronger visible focus rings.
+
+Especially if conference organizers browse via keyboard.
+
+Alt text
+
+You already use meaningful alt text.
+
+Good.
+
+Motion
+
+Animations are tasteful.
+
+Just ensure users who prefer reduced motion can disable them.
+
+Font Audit
+
+Typography is one of your strongest areas.
+
+I wouldn't change fonts.
+
+I'd only change hierarchy.
+
+For example
+
+Main titles
+
+slightly larger.
+
+Section subtitles
+
+slightly brighter.
+
+AI Evaluation
+
+This is something almost nobody considers.
+
+If ChatGPT, Gemini, Claude, Perplexity or future AI agents summarize your site...
+
+What do they learn?
+
+Currently
+
+ML Researcher
+Enterprise Engineer
+Speaker
+Writer
+Runner
+Musician
+Traveler
+
+That's okay.
+
+But they don't immediately infer your unique positioning.
+
+I want AI systems to summarize you as:
+
+Researcher building trustworthy AI through cross-domain pattern recognition across enterprise systems, genomics and ancient manuscripts.
+
+That's memorable.
+
+SEO / AI Discoverability
+
+Needs improvement.
+
+Missing structured data
+
+I'd add
+
+Person Schema
+
+Publication Schema
+
+Article Schema
+
+Talk Schema
+
+Research Project Schema
+
+These help search engines and AI systems interpret your work correctly.
+
+Meta descriptions
+
+Each page should have unique metadata.
+
+OpenGraph images
+
+Every page deserves a shareable preview.
+
+Canonical URLs
+
+Small thing.
+
+Worth checking.
+
+Duplication Audit
+
+This is where I found the biggest opportunity.
+
+Trustworthy AI
+
+Mentioned on
+
+Home
+
+Research
+
+Speaking
+
+Writing
+
+Bio
+
+Career
+
+Keep detailed discussion in Research.
+
+Home should introduce it.
+
+Speaking should reference it.
+
+Writing should explore it.
+
+PhD
+
+Mentioned multiple places.
+
+Keep:
+
+Education
+
+Short mention elsewhere.
+
+Oxford publication
+
+Mentioned
+
+Research
+
+Speaking Bio
+
+Biography
+
+Maybe Home.
+
+Choose one detailed location.
+
+Others should link.
+
+Runner
+
+Mentioned
+
+Home
+
+Biography
+
+Running
+
+Only Running needs detail.
+
+Music
+
+Same.
+
+Career
+
+Some achievements repeat in Biography.
+
+Career should own those.
+
+Visual Design Audit
+
+This is honestly excellent.
+
+Some notes.
+
+Home
+
+10/10
+
+Don't redesign.
+
+Research
+
+Needs slightly more breathing room.
+
+Projects
+
+Most creative page.
+
+But 60% of the screen is empty.
+
+Use that space.
+
+Speaking
+
+Needs photos.
+
+Writing
+
+Needs featured article.
+
+About
+
+Excellent.
+
+Probably my favorite section.
+
+Contact
+
+Needs more warmth.
+
+Information Architecture
+
+This is surprisingly good.
+
+Each page answers a different question.
+
+Home
+
+Who am I?
+
+Research
+
+What do I discover?
+
+Projects
+
+Can I build?
+
+Speaking
+
+Can I teach?
+
+Writing
+
+Can I influence?
+
+About
+
+Why am I this way?
+
+Contact
+
+How do we work together?
+
+That's textbook information architecture.
+
+Conference Organizer Perspective
+
+If I organize PyCon,
+
+would I invite you?
+
+Maybe.
+
+If I organize
+
+Responsible AI Summit
+
+Probably.
+
+If I organize
+
+Enterprise AI
+
+Yes.
+
+Why?
+
+Because I understand your topics.
+
+Why not immediately?
+
+Need
+
+Talk videos
+
+Audience photos
+
+Testimonials
+
+Conference logos
+
+Speaker reel
+
+Forbes Perspective
+
+Would Forbes write about this website?
+
+No.
+
+Would they write about the person behind it?
+
+Potentially.
+
+The site doesn't yet show
+
+impact.
+
+It shows
+
+capability.
+
+Big difference.
+
+EB1A Perspective
+
+This is important.
+
+The website itself doesn't prove EB1A.
+
+It organizes evidence.
+
+Currently it surfaces:
+
+Research
+
+Speaking
+
+Writing
+
+Career
+
+Education
+
+Projects
+
+Good.
+
+Missing
+
+Awards
+
+Judging history
+
+Media
+
+Invitations
+
+Editorial work
+
+Peer review
+
+Patents (if applicable)
+
+Professional memberships
+
+Independent recognition
+
+If you accumulate those over time, this website will be an excellent place to present them.
+
+My Biggest Recommendation
+
+Don't make the site prettier.
+
+Make it more authoritative.
+
+Instead of adding animations,
+
+add evidence.
+
+Instead of more graphics,
+
+add citations.
+
+Instead of another metaphor,
+
+add impact.
+
+Things I Would Never Change
+
+Aurora homepage
+
+Terminal
+
+Deep Sea projects
+
+DNA education
+
+Career timeline
+
+Minimal writing page
+
+Dark premium theme
+
+Navigation
+
+Overall visual language
+
+Those are your identity.
+
+Things I'd Add
+
+Professional headshots
+
+Speaker photos
+
+Research visualizations
+
+Publication metrics
+
+Citation count
+
+Media mentions
+
+Judging page
+
+Press page
+
+Speaker reel
+
+Research timeline
+
+Awards page
+
+Research philosophy
+
+Final Score
+
+If this were submitted to me as
+
+"Rate this engineer's website"
+
+I'd give it
+
+9.7/10
+
+If you told me
+
+"This person wants to become internationally recognized."
+
+I'd give it
+
+8.4/10
+
+The difference isn't design—it's evidence.
+
+My One-Sentence Recommendation
+
+Don't evolve this site into a bigger portfolio. Evolve it into a living record of influence.
+
+Every future milestone—an invited keynote, a published paper, a judging role, media coverage, an award, a successful research collaboration—should appear here in a way that is independently verifiable and easy to understand.
+
+One final observation
+
+You mentioned that this site is meant to attract speaking invitations, judging opportunities, publishers, and eventually support an EB1A narrative. Looking at it as a whole, I think your instinct was right to avoid a conventional portfolio. A memorable visual identity gives people a reason to stay.
+
+The next stage isn't adding more personality—it's making your impact impossible to miss.
+
+If, over the next few years, you continue publishing quality research, writing thoughtful technical essays, speaking at conferences, judging competitions, and documenting those accomplishments here with the same level of craftsmanship you've already shown in the design, this website can become a genuine professional asset rather than just a personal homepage. That's a much stronger long-term strategy than chasing visual trends or repeatedly redesigning the site.

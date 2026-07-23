@@ -61,10 +61,10 @@ export default function Research() {
   }, []);
 
   return (
-    <div ref={sectionRef} className="mx-auto max-w-6xl px-5 py-8">
+    <div ref={sectionRef} className="mx-auto max-w-6xl px-5 py-10">
       {/* Compact Header */}
       <div className="section-enter mb-6">
-        <h1 className="text-2xl font-semibold tracking-tight text-white/95 md:text-3xl">
+        <h1 className="text-3xl font-semibold tracking-tight text-white/95 md:text-4xl">
           <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">
             Research &amp; Literature
           </span>
@@ -73,11 +73,11 @@ export default function Research() {
       </div>
 
       {/* Two-column layout */}
-      <div className="grid gap-6 lg:grid-cols-2 items-start">
+      <div className="grid gap-8 lg:grid-cols-2 items-start">
         {/* ── LEFT: Published Literature ── */}
         <div className="section-enter">
-          <div className="mb-3 text-xs font-medium tracking-widest text-white/50 uppercase">Published Literature</div>
-          <div className="flex flex-col gap-3">
+          <div className="mb-3 text-xs font-semibold tracking-widest text-white/55 uppercase">Published Literature</div>
+          <div className="flex flex-col gap-4">
             {pubs.map((p, idx) => {
               const isOpen = expanded === idx;
               return (
@@ -112,7 +112,7 @@ export default function Research() {
                   {/* Expanded details */}
                   {isOpen && (
                     <div className="px-5 pb-4 border-t border-white/8 pt-3">
-                      <p className="text-xs leading-relaxed text-white/70 mb-3">{p.abstract}</p>
+                      <p className="text-xs leading-[1.65] text-white/75 mb-3">{p.abstract}</p>
                       <div className="flex flex-wrap gap-1.5 mb-2">
                         {p.tags.map((t) => (
                           <span key={t} className="rounded-full border border-white/14 bg-white/[0.06] px-2 py-px text-[10px] text-white/60">
@@ -140,17 +140,17 @@ export default function Research() {
 
         {/* ── RIGHT: Active Research ── */}
         <div className="section-enter">
-          <div className="mb-3 text-xs font-medium tracking-widest text-white/50 uppercase">Active Research Initiatives</div>
+          <div className="mb-3 text-xs font-semibold tracking-widest text-white/55 uppercase">Active Research Initiatives</div>
           <div className="rounded-xl border border-amber-400/20 bg-amber-400/[0.05] p-5">
             <h3 className="text-sm font-bold text-amber-400 mb-2">Cross-Domain Pattern Recognition via Machine Learning</h3>
-            <p className="text-xs leading-relaxed text-white/70 mb-4">
+            <p className="text-xs leading-[1.65] text-white/75 mb-4">
               My core thesis explores how mathematically rigorous pattern-detection architectures—such as State Space Models, Spectral Clustering, and Hierarchical MoE—can be universally applied to extract latent structural signals from extreme noise.
             </p>
             <div className="space-y-2.5">
               {ACTIVE_THREADS.map((t) => (
                 <div key={t.label} className="rounded-lg border border-white/10 bg-white/[0.05] px-4 py-3">
                   <div className="text-xs font-semibold text-white/85 mb-0.5">{t.label}</div>
-                  <p className="text-[11px] leading-relaxed text-white/65">{t.desc}</p>
+                  <p className="text-[11px] leading-[1.65] text-white/70">{t.desc}</p>
                 </div>
               ))}
             </div>

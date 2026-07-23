@@ -3,11 +3,11 @@ import { profile } from '../data/profile';
 import mtRainierUrl from '../assets/mt_rainier_aurora.png';
 
 const FACETS = [
-  'Enterprise AI Engineer',
-  'Speaker · Writer',
-  'Runner',
-  'Musician',
-  'Adventure Traveler',
+  'Published Researcher',
+  'Enterprise AI Architect',
+  'Technical Speaker',
+  'PhD Candidate',
+  'Open-Source Contributor',
 ];
 
 export default function Home() {
@@ -31,12 +31,15 @@ export default function Home() {
         <div className="flex-1 flex flex-col justify-center min-w-0 lg:max-w-[440px] xl:max-w-[480px]">
           
           <div className="mb-5">
-            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white/95 leading-tight mb-4">
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white/95 leading-tight mb-2">
               Machine Learning Researcher
             </h1>
+            <p className="text-xs md:text-sm font-medium tracking-wide text-amber-400/95 mb-5">
+              Trustworthy AI Across Enterprise Systems, Genomics, and Cultural Heritage
+            </p>
             
             <div className="mb-5">
-              <span className="text-[10px] font-medium tracking-widest uppercase text-white/30 block mb-2">who happens to be</span>
+              <span className="text-[10px] font-semibold tracking-widest uppercase text-white/45 block mb-2">credentials</span>
               <div className="flex flex-wrap gap-2">
                 {FACETS.map((f) => (
                   <span
@@ -49,15 +52,12 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="space-y-3 text-sm leading-relaxed text-white/75 max-w-md">
+            <div className="space-y-3 text-sm leading-[1.65] text-white/85 max-w-md">
               <p>
-                Working on trustworthy AI systems and studying how machine learning transfers across domains: from ancient manuscripts and DNA to enterprise cloud platforms.
+                My work spans trustworthy AI, production machine learning, metagenomics, and document intelligence. I have built systems used in enterprise environments, published research across interdisciplinary domains, and contributed to technical communities through speaking, mentoring, reviewing, and judging.
               </p>
-              <p>
-                Curiosity has taken me from machine learning research and enterprise software to marathons, music, and expeditions across six continents. I believe the best engineering begins with asking better questions.
-              </p>
-              <p className="text-white/55 text-xs">
-                Currently exploring how machine learning helps us understand, secure, and automate complex systems.
+              <p className="text-white/65 text-xs">
+                Oxford-published · JPMorgan Chase · Walmart · Ford · 43 US states · 14 countries · marathon runner
               </p>
             </div>
           </div>

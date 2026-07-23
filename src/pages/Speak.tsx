@@ -89,13 +89,13 @@ export default function Speak() {
   };
 
   return (
-    <div ref={sectionRef} className="mx-auto max-w-6xl px-5 py-8">
+    <div ref={sectionRef} className="mx-auto max-w-6xl px-5 py-10">
       {/* Header */}
       <div className="section-enter mb-6">
-        <h1 className="text-2xl font-semibold tracking-tight text-white/95 md:text-3xl">
+        <h1 className="text-3xl font-semibold tracking-tight text-white/95 md:text-4xl">
           <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">Speaking</span>
         </h1>
-        <p className="mt-2 max-w-2xl text-xs leading-relaxed text-white/65">
+        <p className="mt-2 max-w-2xl text-xs leading-[1.65] text-white/70">
           Available for keynotes, technical sessions, panel discussions, and judging roles.{' '}
           <a href="/contact" className="text-yellow-400 hover:text-yellow-300 transition-colors">Get in touch →</a>
         </p>
@@ -108,7 +108,7 @@ export default function Speak() {
 
           {/* Invited Talks — Collapsible */}
           <div className="section-enter">
-            <h2 className="text-sm font-semibold text-white/80 mb-3 uppercase tracking-widest">Invited Talks</h2>
+            <h2 className="text-sm font-semibold text-white/85 mb-3 uppercase tracking-widest">Invited Talks</h2>
             <div className="space-y-2">
               {INVITED_TALKS.map((talk, idx) => (
                 <div key={talk.title} className="rounded-xl border border-yellow-400/20 bg-yellow-400/[0.04] overflow-hidden">
@@ -128,11 +128,11 @@ export default function Speak() {
                     <div className="px-5 pb-4 border-t border-yellow-400/10 pt-3 space-y-2">
                       <div>
                         <span className="text-[10px] font-medium tracking-wider text-white/45 uppercase">Audience</span>
-                        <p className="text-xs text-white/70 mt-0.5">{talk.audience}</p>
+                        <p className="text-xs text-white/75 mt-0.5">{talk.audience}</p>
                       </div>
                       <div>
                         <span className="text-[10px] font-medium tracking-wider text-white/45 uppercase">Overview</span>
-                        <p className="text-xs leading-relaxed text-white/70 mt-0.5">{talk.overview}</p>
+                        <p className="text-xs leading-[1.65] text-white/75 mt-0.5">{talk.overview}</p>
                       </div>
                       <div className="flex flex-wrap gap-1.5 pt-1">
                         {talk.badges.map((b) => (
@@ -148,7 +148,7 @@ export default function Speak() {
 
           {/* Speaking Topics — Collapsible */}
           <div className="section-enter">
-            <h2 className="text-sm font-semibold text-white/80 mb-2 uppercase tracking-widest">Speaking Topics</h2>
+            <h2 className="text-sm font-semibold text-white/85 mb-2 uppercase tracking-widest">Speaking Topics</h2>
             <p className="text-[10px] text-white/50 mb-3">Click to expand. Use Copy to export any topic into your event schedule.</p>
             <div className="space-y-1.5">
               {SPEAKING_TOPICS.map((topic, idx) => (
@@ -180,7 +180,7 @@ export default function Speak() {
                           <span key={b} className="rounded-full border border-white/14 bg-white/[0.06] px-2 py-0.5 text-[10px] text-white/60">{b}</span>
                         ))}
                       </div>
-                      <p className="text-xs leading-relaxed text-white/70">{topic.abstract}</p>
+                      <p className="text-xs leading-[1.65] text-white/75">{topic.abstract}</p>
                     </div>
                   )}
                 </div>
@@ -191,10 +191,10 @@ export default function Speak() {
 
         {/* ── RIGHT: Speaker Bio (1/3 width) ── */}
         <div className="section-enter space-y-4">
-          <h2 className="text-sm font-semibold text-white/80 uppercase tracking-widest">Speaker Bio</h2>
+          <h2 className="text-sm font-semibold text-white/85 uppercase tracking-widest">Speaker Bio</h2>
 
           <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5">
-            <p className="text-xs leading-relaxed text-white/70 mb-4">{PRESS_BIO}</p>
+            <p className="text-xs leading-[1.65] text-white/75 mb-4">{PRESS_BIO}</p>
             <button
               onClick={copyBio}
               id="copy-bio-btn"

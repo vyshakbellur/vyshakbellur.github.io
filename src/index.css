@@ -7,12 +7,20 @@
   --surface-card: rgba(255,255,255,0.06);
   --border-card: rgba(255,255,255,0.14);
   --text-primary: rgba(255,255,255,0.92);
-  --text-secondary: rgba(255,255,255,0.70);
-  --text-muted: rgba(255,255,255,0.50);
+  --text-secondary: #C8CCD6;
+  --text-muted: rgba(255,255,255,0.55);
 }
 
 html, body, #root { height: 100%; }
 
+/* ── Keyboard accessibility ── */
+*:focus-visible {
+  outline: 2px solid rgba(251,191,36,0.6);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Section entry animation ── */
 .section-enter {
   opacity: 0;
   transform: translateY(24px);
@@ -23,7 +31,21 @@ html, body, #root { height: 100%; }
   transform: translateY(0);
 }
 
-/* Dark-theme scrollbar */
+/* ── Respect reduced motion preference ── */
+@media (prefers-reduced-motion: reduce) {
+  .section-enter {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Dark-theme scrollbar ── */
 .no-scrollbar::-webkit-scrollbar { width: 6px; }
 .no-scrollbar::-webkit-scrollbar-track { background: transparent; }
 .no-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.10); border-radius: 3px; }

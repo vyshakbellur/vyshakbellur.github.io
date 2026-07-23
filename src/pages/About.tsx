@@ -421,7 +421,7 @@ function RunningTab() {
   return (
     <div className="grid gap-5 md:grid-cols-2 max-w-3xl mx-auto px-5 py-6">
       <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5">
-        <div className="text-xs font-medium tracking-widest uppercase text-pink-400/70 mb-3">Race Stats</div>
+        <div className="text-xs font-semibold tracking-widest uppercase text-pink-400/70 mb-3">Race Stats</div>
         <ul className="text-sm space-y-3 text-white/70 font-mono">
           <li className="flex justify-between border-b border-white/5 pb-2"><span>Full Marathons</span><span className="text-white font-bold">1</span></li>
           <li className="flex justify-between border-b border-white/5 pb-2"><span>Half Marathons</span><span className="text-white font-bold">6</span></li>
@@ -430,7 +430,7 @@ function RunningTab() {
         <a href={hobbiesInfo.running.nyrrHref} target="_blank" rel="noreferrer" className="mt-4 inline-block text-[10px] font-bold tracking-widest uppercase text-pink-400/80 hover:text-pink-400 transition-colors">NYRR Results ↗</a>
       </div>
       <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5">
-        <div className="text-xs font-medium tracking-widest uppercase text-pink-400/70 mb-3">Philosophy</div>
+        <div className="text-xs font-semibold tracking-widest uppercase text-pink-400/70 mb-3">Philosophy</div>
         <p className="text-sm leading-relaxed text-white/60">
           Long-distance running is structured endurance — the same discipline that drives deep research and complex engineering. Every marathon teaches patience, pacing, and the art of pushing through walls.
         </p>
@@ -465,7 +465,7 @@ function TravelTab() {
     <div className="max-w-6xl mx-auto px-5 py-6">
       <div className="grid gap-5 md:grid-cols-3 mb-6">
         <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5">
-          <div className="text-xs font-medium tracking-widest uppercase text-blue-400/70 mb-3">Exploration</div>
+          <div className="text-xs font-semibold tracking-widest uppercase text-blue-400/70 mb-3">Exploration</div>
           <ul className="text-sm space-y-2 text-white/70 font-mono">
             <li className="flex justify-between border-b border-white/5 pb-2"><span>US States</span><span className="text-white font-bold">43</span></li>
             <li className="flex justify-between border-b border-white/5 pb-2"><span>Passports Stamped</span><span className="text-white font-bold">14</span></li>
@@ -473,7 +473,7 @@ function TravelTab() {
           </ul>
         </div>
         <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5">
-          <div className="text-xs font-medium tracking-widest uppercase text-emerald-400/70 mb-3">Adrenaline</div>
+          <div className="text-xs font-semibold tracking-widest uppercase text-emerald-400/70 mb-3">Adrenaline</div>
           <ul className="text-sm space-y-2 text-white/70 font-mono">
             <li className="flex justify-between border-b border-white/5 pb-2"><span>Skydives</span><span className="text-white font-bold">3</span></li>
             <li className="text-xs text-white/55 italic pt-1">Six continents and counting.</li>
