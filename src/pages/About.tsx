@@ -1,5 +1,7 @@
 import { useState, useMemo } from 'react';
 import { hobbiesInfo } from '../data/content';
+import speakerHeadshotUrl from '../assets/VyshakInnovationWeek.jpg';
+import innovationFlyerUrl from '../assets/InnovationWeekFlyer.jpg';
 
 /* ─── Sub-section definitions ─── */
 const TABS = [
@@ -98,7 +100,7 @@ export default function About() {
     <div className="h-full flex flex-col overflow-hidden">
       {/* ── Header + Tabs ── */}
       <div className="flex-shrink-0 px-5 pt-6 pb-0 max-w-6xl mx-auto w-full">
-        <h1 className="text-2xl font-semibold tracking-tight text-white/95 md:text-3xl mb-3">
+        <h1 className="text-3xl font-semibold tracking-tight text-white/95 md:text-4xl mb-3">
           <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">About</span>
         </h1>
         <div className="flex flex-wrap gap-1 mb-1">
@@ -136,7 +138,15 @@ export default function About() {
 /* ═══ BIOGRAPHY ═══ */
 function BiographyTab() {
   return (
-    <div className="max-w-3xl mx-auto px-5 py-6 space-y-5 text-sm leading-relaxed text-white/70">
+    <div className="max-w-3xl mx-auto px-5 py-6 space-y-5 text-sm leading-[1.65] text-white/75">
+      {/* Professional headshot */}
+      <div className="float-right ml-5 mb-4 w-40 rounded-xl overflow-hidden border border-white/14 shadow-lg shadow-black/40">
+        <img
+          src={speakerHeadshotUrl}
+          alt="Vyshak Bellur — AI Researcher and Senior Software Engineer"
+          className="w-full h-auto object-cover"
+        />
+      </div>
       <p>
         I am a Senior Software Engineer at JPMorgan Chase and an applied ML researcher whose work spans three domains: financial infrastructure, computational biology, and digital humanities — connected by a single obsession: <em className="text-white/90 not-italic font-medium">finding structure in complex, noisy systems.</em>
       </p>
@@ -222,6 +232,21 @@ function CareerTab() {
                       </li>
                     ))}
                   </ul>
+                  {/* Innovation Week evidence for JPMC */}
+                  {selectedNode === 'jpmc' && (
+                    <div className="mt-4 pt-3 border-t border-white/8">
+                      <div className="rounded-lg overflow-hidden border border-white/10 hover:border-white/20 transition-colors">
+                        <img
+                          src={innovationFlyerUrl}
+                          alt="JPMorgan Chase Innovation Week 2026 — Vyshak Bellur listed as speaker"
+                          className="w-full h-auto object-cover opacity-85 hover:opacity-100 transition-opacity"
+                        />
+                        <div className="px-3 py-1.5 text-[9px] text-white/40 italic bg-white/[0.03]">
+                          Innovation Week 2026 — Selected speaker on Agentic AI Security
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

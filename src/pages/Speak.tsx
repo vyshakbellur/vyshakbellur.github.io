@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import speakerHeadshotUrl from '../assets/VyshakInnovationWeek.jpg';
+import innovationScheduleUrl from '../assets/InnovationWeekDisplay.jpg';
 
 const SPEAKING_TOPICS = [
   {
@@ -51,10 +53,11 @@ const INVITED_TALKS = [
     overview: 'Presented a deterministic Guard\u2013Classifier\u2013Verifier architecture for securing agentic AI workflows in regulated financial environments. The session demonstrated how policy enforcement, intent verification, and human approval mechanisms can reduce the risks associated with autonomous tool-calling agents while maintaining auditability and compliance.',
     badges: ['Agentic AI', 'AI Governance', 'Runtime Security'],
     year: '2026',
+    schedulePhoto: innovationScheduleUrl,
   },
 ];
 
-const PRESS_BIO = `Vyshak Athreya Bellur Keshavamurthy is a Senior Full-Stack and Platform Engineer at JPMorgan Chase & Co., where he builds production AI systems including an LLM-powered client intelligence platform serving wealth advisors. He is a PhD candidate in Computer Science at the University of the Cumberlands, with research focused on AI-driven self-healing API frameworks. A published co-author in Oxford University Press's Digital Scholarship in the Humanities, Vyshak is recognized for his rare ability to transfer ML intuition across radically different domains from financial infrastructure to genomic sequence analysis. Outside the terminal, he is an avid marathon runner and adventure traveler who has visited 43 U.S. states and 14 countries.`;
+const PRESS_BIO = `Vyshak Athreya Bellur Keshavamurthy is an AI Researcher and Senior Software Engineer at JPMorgan Chase & Co., where he builds production ML systems and was a selected speaker at Innovation Week 2026 on agentic AI security. He is a PhD candidate in Computer Science at the University of the Cumberlands, with research focused on AI-driven self-healing API frameworks. A published co-author in Oxford University Press's Digital Scholarship in the Humanities, Vyshak's work spans trustworthy AI, metagenomics, and document intelligence — connected by a focus on cross-domain pattern recognition. He has contributed to technical communities through speaking, mentoring, reviewing, and judging. Outside the terminal, he is a marathon runner and adventure traveler who has visited 43 U.S. states and 14 countries.`;
 
 export default function Speak() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -96,7 +99,7 @@ export default function Speak() {
           <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">Speaking</span>
         </h1>
         <p className="mt-2 max-w-2xl text-xs leading-[1.65] text-white/70">
-          Available for keynotes, technical sessions, panel discussions, and judging roles.{' '}
+          Selected speaker at JPMorgan Chase Innovation Week 2026. Topics span trustworthy AI, agentic security, cross-domain pattern recognition, and production ML systems. Available for keynotes, technical sessions, panel discussions, and judging roles.{' '}
           <a href="/contact" className="text-yellow-400 hover:text-yellow-300 transition-colors">Get in touch →</a>
         </p>
         <div className="mt-3 h-px w-full bg-white/14" />
@@ -125,7 +128,20 @@ export default function Speak() {
                     </svg>
                   </button>
                   {expandedInvited === idx && (
-                    <div className="px-5 pb-4 border-t border-yellow-400/10 pt-3 space-y-2">
+                    <div className="px-5 pb-4 border-t border-yellow-400/10 pt-3 space-y-3">
+                      {/* Event photo evidence */}
+                      {talk.schedulePhoto && (
+                        <div className="rounded-lg overflow-hidden border border-yellow-400/15 mb-3">
+                          <img
+                            src={talk.schedulePhoto}
+                            alt={`${talk.event} event schedule showing ${talk.title}`}
+                            className="w-full h-auto object-cover opacity-90 hover:opacity-100 transition-opacity"
+                          />
+                          <div className="bg-yellow-400/[0.05] px-3 py-1.5 text-[9px] text-yellow-300/60 italic">
+                            Official event schedule — {talk.event}
+                          </div>
+                        </div>
+                      )}
                       <div>
                         <span className="text-[10px] font-medium tracking-wider text-white/45 uppercase">Audience</span>
                         <p className="text-xs text-white/75 mt-0.5">{talk.audience}</p>
@@ -192,6 +208,19 @@ export default function Speak() {
         {/* ── RIGHT: Speaker Bio (1/3 width) ── */}
         <div className="section-enter space-y-4">
           <h2 className="text-sm font-semibold text-white/85 uppercase tracking-widest">Speaker Bio</h2>
+
+          {/* Professional headshot */}
+          <div className="rounded-xl overflow-hidden border border-white/14 relative group">
+            <img
+              src={speakerHeadshotUrl}
+              alt="Vyshak Bellur at JPMorgan Chase Innovation Week 2026"
+              className="w-full h-auto object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            <div className="absolute bottom-3 left-3 right-3">
+              <div className="text-[9px] font-semibold tracking-widest uppercase text-amber-400/80">JPMorgan Chase Innovation Week 2026</div>
+            </div>
+          </div>
 
           <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5">
             <p className="text-xs leading-[1.65] text-white/75 mb-4">{PRESS_BIO}</p>
