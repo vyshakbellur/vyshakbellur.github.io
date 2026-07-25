@@ -1,7 +1,8 @@
 import { useState, useMemo } from 'react';
 import { hobbiesInfo } from '../data/content';
-import speakerHeadshotUrl from '../assets/VyshakInnovationWeek.jpg';
+import speakerHeadshotUrl from '../assets/Vyshak_speaker.jpeg';
 import innovationFlyerUrl from '../assets/InnovationWeekFlyer.jpg';
+import runningMedalsUrl from '../assets/running_medals.png';
 
 /* ─── Sub-section definitions ─── */
 const TABS = [
@@ -81,12 +82,20 @@ const EDU_NODES: EduNode[] = [
   { id: 'phd', strand: 0, u: 1050, title: 'PhD in Machine Learning', institution: 'University of the Cumberlands', period: '2022 – Present', description: 'Current research focusing on ML architectures, DNA Language Modeling, and reliability engineering.', impact: 'Driving cutting-edge applied research to build fault-tolerant learning architectures for complex, noisy systems.', courses: ['Advanced Neural Architectures', 'Computational Metagenomics', 'Stochastic Processes Data Modeling'], color: '#8b5cf6' },
 ];
 
-/* ─── Dynamic adventure images ─── */
+/* ─── Dynamic adventure images with captions ─── */
 const ADVENTURE_IMAGES = [
-  "1181332_317541653_XLarge.jpg", "4e63cf4b-9641-4bf6-a5f0-033bcf089dde.jpg",
-  "5FDB777C-75EE-447F-83E6-6F73D2FB2A82.jpg", "89a27617-600e-4c19-ba6d-4554aa1405ce.jpg",
-  "GEO_5480.jpg", "GEO_5496.jpg", "IMG_1245.JPG", "IMG_1247.JPG",
-  "IMG_6329.jpeg", "IMG_9181 2.jpg", "Skydive-00061.jpeg", "a30a4386-d447-47e3-9246-495a67c078e5.jpg",
+  { src: "Skydive-00061.jpeg", caption: "Skydiving — Florida Keys" },
+  { src: "GEO_5480.jpg", caption: "Grand Canyon Exploration" },
+  { src: "GEO_5496.jpg", caption: "Desert Landscapes — Southwest" },
+  { src: "IMG_6329.jpeg", caption: "Mountain Trail — Pacific Northwest" },
+  { src: "1181332_317541653_XLarge.jpg", caption: "Whitewater Kayaking" },
+  { src: "4e63cf4b-9641-4bf6-a5f0-033bcf089dde.jpg", caption: "Canyon Country" },
+  { src: "5FDB777C-75EE-447F-83E6-6F73D2FB2A82.jpg", caption: "Summit Push" },
+  { src: "89a27617-600e-4c19-ba6d-4554aa1405ce.jpg", caption: "Alpine Traverse" },
+  { src: "IMG_1245.JPG", caption: "Coastal Drive — California" },
+  { src: "IMG_1247.JPG", caption: "Pacific Coast Highway" },
+  { src: "IMG_9181 2.jpg", caption: "National Park Sunset" },
+  { src: "a30a4386-d447-47e3-9246-495a67c078e5.jpg", caption: "Rope Bridge Crossing" },
 ];
 
 
@@ -138,7 +147,7 @@ export default function About() {
 /* ═══ BIOGRAPHY ═══ */
 function BiographyTab() {
   return (
-    <div className="max-w-3xl mx-auto px-5 py-6 space-y-5 text-sm leading-[1.65] text-white/75">
+    <div className="max-w-3xl mx-auto px-5 py-6 space-y-5 text-sm leading-[1.7] text-white/80">
       {/* Professional headshot */}
       <div className="float-right ml-5 mb-4 w-40 rounded-xl overflow-hidden border border-white/14 shadow-lg shadow-black/40">
         <img
@@ -148,7 +157,7 @@ function BiographyTab() {
         />
       </div>
       <p>
-        I am a Senior Software Engineer at JPMorgan Chase and an applied ML researcher whose work spans three domains: financial infrastructure, computational biology, and digital humanities — connected by a single obsession: <em className="text-white/90 not-italic font-medium">finding structure in complex, noisy systems.</em>
+        I am an AI Researcher and Senior Software Engineer at JPMorgan Chase, and an applied ML researcher whose work spans three domains: financial infrastructure, computational biology, and digital humanities — connected by a single obsession: <em className="text-white/95 not-italic font-medium">finding structure in complex, noisy systems.</em>
       </p>
       <p>
         At JPMorgan Chase, I work on production-grade ML systems focused on autonomous reliability, utilizing anomaly detection and automated recovery pipelines to reduce MTTR to under 15 minutes.
@@ -159,6 +168,20 @@ function BiographyTab() {
       <p>
         Outside of the terminal, I run long distances, do adventure travel, and produce music under the channel <strong className="text-amber-400 font-serif italic">v_naada</strong>. I am a Royal Challengers Bengaluru fan, a mountain person, and a believer that pattern recognition is a universal language.
       </p>
+
+      {/* Character vignette — skydiving reinforces risk-taker brand */}
+      <div className="clear-both pt-2">
+        <div className="rounded-xl overflow-hidden border border-white/10 max-w-sm">
+          <img
+            src="/adventure/Skydive-00061.jpeg"
+            alt="Vyshak Bellur skydiving — risk-taker and adventurer"
+            className="w-full h-auto object-cover opacity-85 hover:opacity-100 transition-opacity"
+          />
+          <div className="px-3 py-1.5 text-[9px] text-white/40 italic bg-white/[0.03]">
+            Taking calculated risks — in research and in free fall.
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -444,21 +467,35 @@ function EducationTab() {
 /* ═══ RUNNING ═══ */
 function RunningTab() {
   return (
-    <div className="grid gap-5 md:grid-cols-2 max-w-3xl mx-auto px-5 py-6">
-      <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5">
-        <div className="text-xs font-semibold tracking-widest uppercase text-pink-400/70 mb-3">Race Stats</div>
-        <ul className="text-sm space-y-3 text-white/70 font-mono">
-          <li className="flex justify-between border-b border-white/5 pb-2"><span>Full Marathons</span><span className="text-white font-bold">1</span></li>
-          <li className="flex justify-between border-b border-white/5 pb-2"><span>Half Marathons</span><span className="text-white font-bold">6</span></li>
-          <li className="text-xs text-white/55 italic pt-1">Racing the streets of NYC.</li>
-        </ul>
-        <a href={hobbiesInfo.running.nyrrHref} target="_blank" rel="noreferrer" className="mt-4 inline-block text-[10px] font-bold tracking-widest uppercase text-pink-400/80 hover:text-pink-400 transition-colors">NYRR Results ↗</a>
+    <div className="max-w-3xl mx-auto px-5 py-6 space-y-5">
+      {/* Running medals hero image */}
+      <div className="rounded-xl overflow-hidden border border-white/10 shadow-lg shadow-black/30">
+        <img
+          src={runningMedalsUrl}
+          alt="Marathon and half-marathon medals — evidence of sustained discipline"
+          className="w-full h-auto object-cover max-h-[260px] opacity-80 hover:opacity-100 transition-opacity"
+        />
+        <div className="px-3 py-1.5 text-[9px] text-white/40 italic bg-white/[0.03]">
+          NYC marathon medals — sustained discipline across distance.
+        </div>
       </div>
-      <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5">
-        <div className="text-xs font-semibold tracking-widest uppercase text-pink-400/70 mb-3">Philosophy</div>
-        <p className="text-sm leading-relaxed text-white/60">
-          Long-distance running is structured endurance — the same discipline that drives deep research and complex engineering. Every marathon teaches patience, pacing, and the art of pushing through walls.
-        </p>
+
+      <div className="grid gap-5 md:grid-cols-2">
+        <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5">
+          <div className="text-xs font-semibold tracking-widest uppercase text-pink-400/70 mb-3">Race Stats</div>
+          <ul className="text-sm space-y-3 text-white/70 font-mono">
+            <li className="flex justify-between border-b border-white/5 pb-2"><span>Full Marathons</span><span className="text-white font-bold">1</span></li>
+            <li className="flex justify-between border-b border-white/5 pb-2"><span>Half Marathons</span><span className="text-white font-bold">6</span></li>
+            <li className="text-xs text-white/55 italic pt-1">Racing the streets of NYC.</li>
+          </ul>
+          <a href={hobbiesInfo.running.nyrrHref} target="_blank" rel="noreferrer" className="mt-4 inline-block text-[10px] font-bold tracking-widest uppercase text-pink-400/80 hover:text-pink-400 transition-colors">NYRR Results ↗</a>
+        </div>
+        <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5">
+          <div className="text-xs font-semibold tracking-widest uppercase text-pink-400/70 mb-3">Philosophy</div>
+          <p className="text-sm leading-relaxed text-white/65">
+            Long-distance running is structured endurance — the same discipline that drives deep research and complex engineering. Every marathon teaches patience, pacing, and the art of pushing through walls.
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -513,10 +550,13 @@ function TravelTab() {
         <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-[#02040a] to-transparent z-10 hidden md:block pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-[#02040a] to-transparent z-10 hidden md:block pointer-events-none" />
         <div className="flex overflow-x-auto gap-3 snap-x snap-mandatory no-scrollbar pb-4">
-          {ADVENTURE_IMAGES.map((src, idx) => (
+          {ADVENTURE_IMAGES.map((img, idx) => (
             <div key={idx} className="snap-center shrink-0 w-[250px] aspect-[4/3] group overflow-hidden rounded-xl border border-white/5 relative">
-              <img src={`/adventure/${src}`} alt="Exploration" className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105 opacity-80 group-hover:opacity-100 cursor-grab active:cursor-grabbing" draggable={false} />
+              <img src={`/adventure/${img.src}`} alt={img.caption} className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105 opacity-80 group-hover:opacity-100 cursor-grab active:cursor-grabbing" draggable={false} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none" />
+              <div className="absolute bottom-0 left-0 right-0 px-2.5 py-1.5 text-[9px] text-white/70 font-medium tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
+                {img.caption}
+              </div>
             </div>
           ))}
         </div>
