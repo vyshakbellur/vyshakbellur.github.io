@@ -65,14 +65,14 @@ export default function Writing() {
   return (
     <div ref={sectionRef} className="mx-auto max-w-6xl px-5 py-14">
       <div className="section-enter mb-10">
-        <div className="mb-2 text-xs font-semibold tracking-widest text-white/55 uppercase">Blog</div>
+        <div className="mb-2 text-xs font-semibold tracking-widest text-white/55 uppercase">Thought Leadership</div>
         <h1 className="text-3xl font-semibold tracking-tight text-white/95 md:text-4xl">
           <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">
             Writing
           </span>
         </h1>
-        <p className="mt-3 max-w-2xl text-sm leading-[1.65] text-white/80">
-          Technical writing on LLMs, system design, and engineering at scale. Auto-synced from{' '}
+        <p className="mt-3 max-w-2xl text-sm leading-[1.7] text-white/80">
+          Technical writing on enterprise AI, system design, and engineering at scale. Each article represents original analysis from production experience and applied research. Auto-synced from{' '}
           <a
             href={`https://medium.com/@${MEDIUM_USERNAME}`}
             target="_blank"
@@ -142,8 +142,8 @@ export default function Writing() {
                   )}
                 </div>
                 <div className="mb-2 font-semibold leading-snug text-white/95">{w.title}</div>
-                <p className="text-sm leading-[1.65] text-white/80">{w.description}</p>
-                <div className="mt-4 text-xs text-white/60 group-hover:text-white/85 transition-colors">Read on Medium</div>
+                <p className="text-sm leading-[1.7] text-white/75">{w.description}</p>
+                <div className="mt-4 text-xs font-medium text-white/60 group-hover:text-amber-400 transition-colors">Read on Medium ↗</div>
               </a>
             ))}
           </div>

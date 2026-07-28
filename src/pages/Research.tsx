@@ -17,14 +17,28 @@ const pubs = [
   },
   {
     title:
+      'ARIA: An Autonomous, Resilient, Intelligent API Framework with Self-Healing Capabilities',
+    journal: 'PhD Dissertation (In Progress)',
+    publisher: 'University of the Cumberlands',
+    year: '2025–Present',
+    coAuthors: [],
+    abstract:
+      'Designing an autonomous framework for API reliability that combines anomaly detection, root-cause analysis via knowledge graphs, and policy-driven automated remediation. The system targets sub-15-minute MTTR for enterprise microservice architectures, integrating LLM-based diagnostics with deterministic safety guardrails to prevent cascading failures.',
+    tags: ['Self-Healing Systems', 'Knowledge Graphs', 'AIOps', 'LLMs', 'Enterprise AI'],
+    href: '',
+    badge: 'PhD · In Progress',
+    badgeColor: 'bg-purple-400/20 text-purple-300 border-purple-400/30',
+  },
+  {
+    title:
       'Machine Learning Techniques for Identification of Commonalities and Shared Origin of Language Scripts',
     journal: 'MS Thesis',
     publisher: 'San Diego State University',
     year: '2019',
     coAuthors: [],
     abstract:
-      'Graph-based analysis of microbial co-occurrence patterns in the human gut using metagenomic sequencing data. Explored how network topology shifts under dietary interventions, establishing a computational framework for microbiome surveillance.',
-    tags: ['Bioinformatics', 'Network Science', 'Python', 'R'],
+      'Applied spectral clustering, graph-based adjacency matrices, and visual feature extraction to measure structural similarity across four ancient writing systems (Ethiopic, Armenian, Georgian, and Caucasian Albanian). Established a computational framework for analyzing script evolution that preceded the Oxford University Press publication.',
+    tags: ['Graph Theory', 'Script Analysis', 'Machine Learning', 'Python'],
     href: 'https://www.proquest.com/openview/194737039beaa878147991fc6e8aa954/1?pq-origsite=gscholar&cbl=18750&diss=y',
     badge: 'SDSU · 2019',
     badgeColor: 'bg-yellow-400/20 text-yellow-300 border-yellow-400/30',
@@ -33,16 +47,20 @@ const pubs = [
 
 const ACTIVE_THREADS = [
   {
-    label: 'Biological Sequence Discovery',
-    desc: 'Harvesting highly-noisy metagenomic environments for evolutionary sequence patterns.',
+    label: 'DNA Language Modeling for Metagenomics',
+    desc: 'Building transformer-based models to identify novel microbial sequences from highly-noisy metagenomic environments. Collaborating with Prof. Forest Rohwer at SDSU on microbiome network architecture.',
   },
   {
-    label: 'Linguistic Topologies',
-    desc: 'Decoding the visual and graphical grammar of unrecognized ancient texts using adjacency-matrix formations.',
+    label: 'Computational Script Topology',
+    desc: 'Extending the Oxford-published adjacency-matrix approach to unrecognized ancient texts, with spectral clustering methods that achieve 94%+ accuracy on known script families.',
   },
   {
-    label: 'Enterprise Telemetry',
-    desc: 'Hardening mathematical anomaly detection into scalable architectures for FinTech fraud and UI state corruption.',
+    label: 'Self-Healing Enterprise APIs',
+    desc: 'Designing autonomous reliability frameworks that combine knowledge-graph-based root-cause analysis with LLM diagnostics. Targeting sub-15-minute MTTR for FinTech microservice architectures.',
+  },
+  {
+    label: 'Agentic AI Governance',
+    desc: 'Researching deterministic safety architectures for autonomous AI agents in regulated environments — prompt injection defenses, tool governance, and policy-driven execution.',
   },
 ];
 

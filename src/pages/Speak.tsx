@@ -57,7 +57,38 @@ const INVITED_TALKS = [
   },
 ];
 
-const PRESS_BIO = `Vyshak Athreya Bellur Keshavamurthy is an AI Researcher and Senior Software Engineer at JPMorgan Chase & Co., where he builds production ML systems and was a selected speaker at Innovation Week 2026 on agentic AI security. He is a PhD candidate in Computer Science at the University of the Cumberlands, with research focused on AI-driven self-healing API frameworks. A published co-author in Oxford University Press's Digital Scholarship in the Humanities, Vyshak's work spans trustworthy AI, metagenomics, and document intelligence — connected by a focus on cross-domain pattern recognition. He has contributed to technical communities through speaking, mentoring, reviewing, and judging. Outside the terminal, he is a marathon runner and adventure traveler who has visited 43 U.S. states and 14 countries.`;
+const PRESS_BIO = `Vyshak Athreya Bellur Keshavamurthy is an AI Researcher and Senior Software Engineer at JPMorgan Chase & Co., where he builds production ML systems and was a selected speaker at Innovation Week 2026 on agentic AI security. He is a PhD candidate in Computer Science at the University of the Cumberlands, with research focused on AI-driven self-healing API frameworks. A published co-author in Oxford University Press’s Digital Scholarship in the Humanities, Vyshak’s work spans trustworthy AI, metagenomics, and document intelligence — connected by a focus on cross-domain pattern recognition. He has contributed to technical communities through speaking, mentoring, reviewing, and judging. Outside the terminal, he is a marathon runner and adventure traveler who has visited 43 U.S. states and 14 countries.`;
+
+const COMMUNITY_ROLES = [
+  {
+    role: 'Innovation Week Speaker',
+    org: 'JPMorgan Chase & Co.',
+    desc: 'Selected to present on agentic AI security to engineering cohorts and technology leadership.',
+    year: '2026',
+    icon: '🎙️',
+  },
+  {
+    role: 'Hackathon Judge',
+    org: 'Enterprise & University Events',
+    desc: 'Evaluated technical solutions, architectural decisions, and presentation quality across ML and software engineering tracks.',
+    year: 'Ongoing',
+    icon: '🏆',
+  },
+  {
+    role: 'Technical Mentor',
+    org: 'ML & Software Engineering',
+    desc: 'Mentoring early-career engineers and graduate researchers on production ML, system design, and career development.',
+    year: 'Ongoing',
+    icon: '🧑‍🏫',
+  },
+  {
+    role: 'Peer Reviewer',
+    org: 'Interdisciplinary Research',
+    desc: 'Reviewing research manuscripts at the intersection of machine learning, computational biology, and digital humanities.',
+    year: 'Ongoing',
+    icon: '📝',
+  },
+];
 
 export default function Speak() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -96,10 +127,10 @@ export default function Speak() {
       {/* Header */}
       <div className="section-enter mb-6">
         <h1 className="text-3xl font-semibold tracking-tight text-white/95 md:text-4xl">
-          <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">Speaking</span>
+          <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">Speaking & Leadership</span>
         </h1>
-        <p className="mt-2 max-w-2xl text-xs leading-[1.65] text-white/70">
-          Selected speaker at JPMorgan Chase Innovation Week 2026. Topics span trustworthy AI, agentic security, cross-domain pattern recognition, and production ML systems. Available for keynotes, technical sessions, panel discussions, and judging roles.{' '}
+        <p className="mt-2 max-w-2xl text-xs leading-[1.7] text-white/75">
+          Selected speaker at JPMorgan Chase Innovation Week 2026. Topics span trustworthy AI, agentic security, enterprise AI governance, and cross-domain pattern recognition. Available for keynotes, technical sessions, panel discussions, CISO-track events, and judging roles.{' '}
           <a href="/contact" className="text-yellow-400 hover:text-yellow-300 transition-colors">Get in touch →</a>
         </p>
         <div className="mt-3 h-px w-full bg-white/14" />
@@ -199,6 +230,28 @@ export default function Speak() {
                       <p className="text-xs leading-[1.65] text-white/75">{topic.abstract}</p>
                     </div>
                   )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Community Leadership */}
+          <div className="section-enter">
+            <h2 className="text-sm font-semibold text-white/85 mb-3 uppercase tracking-widest">Community Leadership</h2>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {COMMUNITY_ROLES.map((role) => (
+                <div key={role.role} className="rounded-xl border border-white/12 bg-white/[0.04] p-4 hover:bg-white/[0.06] transition-colors">
+                  <div className="flex items-start gap-3">
+                    <span className="text-lg mt-0.5">{role.icon}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-2 mb-1">
+                        <h3 className="text-xs font-semibold text-white/90">{role.role}</h3>
+                        <span className="text-[9px] text-white/40 font-mono shrink-0">{role.year}</span>
+                      </div>
+                      <div className="text-[10px] text-amber-400/70 font-medium mb-1">{role.org}</div>
+                      <p className="text-[10px] leading-[1.6] text-white/60">{role.desc}</p>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>

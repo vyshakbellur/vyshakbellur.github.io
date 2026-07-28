@@ -3,11 +3,21 @@ import { profile } from '../data/profile';
 import mtRainierUrl from '../assets/mt_rainier_aurora.png';
 
 const FACETS = [
-  'Published Researcher',
+  'Oxford-Published Researcher',
+  'Innovation Week 2026 Speaker',
   'Enterprise AI Architect',
-  'Technical Speaker',
-  'PhD Candidate',
-  'Open-Source Contributor',
+  'PhD Candidate (ML)',
+  'Hackathon Judge & Mentor',
+];
+
+const PROOF_POINTS = [
+  'Oxford University Press',
+  'JPMorgan Chase',
+  'Walmart',
+  'Ford',
+  '43 US States',
+  '14 Countries',
+  'Marathon Runner',
 ];
 
 export default function Home() {
@@ -32,10 +42,10 @@ export default function Home() {
           
           <div className="mb-5">
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white/95 leading-tight mb-2">
-              Machine Learning Researcher
+              AI Researcher &<br className="hidden md:inline" /> Senior Software Engineer
             </h1>
             <p className="text-xs md:text-sm font-medium tracking-wide text-amber-400/95 mb-5">
-              Trustworthy AI Across Enterprise Systems, Genomics, and Cultural Heritage
+              Trustworthy AI Across Enterprise Systems, Genomics & Cultural Heritage
             </p>
             
             <div className="mb-5">
@@ -52,13 +62,20 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="space-y-3 text-sm leading-[1.65] text-white/85 max-w-md">
+            <div className="space-y-3 text-sm leading-[1.7] text-white/85 max-w-md">
               <p>
                 My work spans trustworthy AI, production machine learning, metagenomics, and document intelligence. I have built systems used in enterprise environments, published research across interdisciplinary domains, and contributed to technical communities through speaking, mentoring, reviewing, and judging.
               </p>
-              <p className="text-white/65 text-xs">
-                Oxford-published · JPMorgan Chase · Walmart · Ford · 43 US states · 14 countries · marathon runner
-              </p>
+            </div>
+
+            {/* Evidence micro-bar */}
+            <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] tracking-wide text-white/50">
+              {PROOF_POINTS.map((p, i) => (
+                <span key={p} className="flex items-center gap-2">
+                  {i > 0 && <span className="text-amber-400/40">·</span>}
+                  <span className="hover:text-white/75 transition-colors">{p}</span>
+                </span>
+              ))}
             </div>
           </div>
 

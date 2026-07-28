@@ -87,15 +87,29 @@ export default function Contact() {
         {/* ── Quick links ── */}
         <div className="section-enter space-y-4">
           <div className="rounded-xl border border-white/14 bg-white/[0.06] p-6">
-            <div className="text-[10px] font-semibold tracking-widest uppercase text-white/50 mb-3">Available For</div>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {['Technical Speaking', 'Panel Discussions', 'Hackathon Judging', 'ML Mentorship', 'GenAI Consulting'].map(t => (
-                <span key={t} className="rounded-full border border-yellow-400/30 bg-yellow-400/10 px-3 py-1 text-xs text-yellow-300">{t}</span>
+            <div className="text-[10px] font-semibold tracking-widest uppercase text-white/50 mb-4">Engagement Types</div>
+            <div className="space-y-3">
+              {[
+                { label: 'Technical Speaking', desc: 'Keynotes, conference talks, and tech sessions on trustworthy AI, enterprise ML, and agentic security.' },
+                { label: 'Panel Discussions', desc: 'Moderating or participating in panels on AI governance, cross-domain research, and engineering leadership.' },
+                { label: 'Hackathon Judging', desc: 'Evaluating projects across ML, software engineering, and product innovation tracks.' },
+                { label: 'ML Mentorship', desc: 'Guiding early-career engineers and graduate researchers on production ML and system design.' },
+                { label: 'Research Collaboration', desc: 'Joint research in metagenomics, computational linguistics, or self-healing systems.' },
+              ].map(t => (
+                <div key={t.label} className="flex items-start gap-3">
+                  <span className="mt-1 w-1.5 h-1.5 rounded-full bg-amber-400/80 shrink-0" />
+                  <div>
+                    <span className="text-xs font-semibold text-white/90">{t.label}</span>
+                    <p className="text-[10px] leading-[1.6] text-white/55 mt-0.5">{t.desc}</p>
+                  </div>
+                </div>
               ))}
             </div>
-            <p className="text-xs text-white/70 leading-[1.65]">
-              View the <a href="/speak" className="text-yellow-400 hover:text-yellow-300 transition-colors">Speaking page</a> for full topic list and press kit.
-            </p>
+            <div className="mt-4 pt-3 border-t border-white/8">
+              <p className="text-xs text-white/70 leading-[1.7]">
+                View the <a href="/speak" className="text-yellow-400 hover:text-yellow-300 transition-colors">Speaking & Leadership page</a> for full topic list and press kit.
+              </p>
+            </div>
           </div>
 
           <div className="rounded-xl border border-white/14 bg-white/[0.06] p-6">
