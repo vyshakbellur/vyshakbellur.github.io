@@ -1,11 +1,3 @@
-export type Project = {
-  title: string;
-  desc: string;
-  tags: string[];
-  status: 'production' | 'research' | 'published' | 'live';
-  href?: string;
-};
-
 export type Publication = {
   title: string;
   journal: string;
@@ -28,29 +20,6 @@ export type AdventurePhoto = {
   location: string;
 };
 
-export const projects: Project[] = [
-  {
-    title: 'Self-Healing API Systems',
-    desc: 'Production-grade API orchestration with automatic retry logic, circuit breakers, and observability hooks. Built for enterprise-scale fault tolerance.',
-    tags: ['Java', 'Spring Boot', 'AWS', 'Observability'],
-    status: 'production',
-  },
-
-  {
-    title: 'Computational Script Similarity',
-    desc: 'Published in Oxford University Press journal — computational analysis of structural similarity across ancient writing systems using graph-theoretic approaches.',
-    tags: ['Python', 'NLP', 'Graph Theory', 'Published'],
-    status: 'published',
-    href: 'https://academic.oup.com/dsh/advance-article/doi/10.1093/llc/fqag029/8539597?login=false',
-  },
-  {
-    title: 'vyshakbellur.github.io',
-    desc: 'This portfolio — React 19 + TypeScript + Vite + Tailwind CSS. Custom terminal AMA, adventure photo gallery, and GitHub Pages deployment.',
-    tags: ['React', 'TypeScript', 'Tailwind', 'Vite'],
-    status: 'live',
-    href: 'https://vyshakbellur.github.io',
-  },
-];
 
 export const publications: Publication[] = [
   {
