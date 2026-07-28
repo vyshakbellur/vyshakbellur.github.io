@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { hobbiesInfo } from '../data/content';
 import speakerHeadshotUrl from '../assets/Vyshak_speaker.jpeg';
 
-import runningMedalsUrl from '../assets/running_medals.png';
+
 
 /* ─── Sub-section definitions ─── */
 const TABS = [
@@ -454,15 +454,21 @@ function EducationTab() {
 function RunningTab() {
   return (
     <div className="max-w-3xl mx-auto px-5 py-6 space-y-5">
-      {/* Running medals hero image */}
-      <div className="rounded-xl overflow-hidden border border-white/10 shadow-lg shadow-black/30">
-        <img
-          src={runningMedalsUrl}
-          alt="Marathon and half-marathon medals — evidence of sustained discipline"
-          className="w-full h-auto object-cover max-h-[260px] opacity-80 hover:opacity-100 transition-opacity"
-        />
-        <div className="px-3 py-1.5 text-[9px] text-white/40 italic bg-white/[0.03]">
-          NYC marathon medals — sustained discipline across distance.
+      {/* Runner photos */}
+      <div className="grid grid-cols-2 gap-3">
+        <div className="rounded-xl overflow-hidden border border-white/10 shadow-lg shadow-black/30">
+          <img
+            src="/adventure/marathon_bib.jpg"
+            alt="Vyshak Bellur — TCS NYC Marathon 2025"
+            className="w-full h-[260px] object-cover object-top opacity-85 hover:opacity-100 transition-opacity"
+          />
+        </div>
+        <div className="rounded-xl overflow-hidden border border-white/10 shadow-lg shadow-black/30">
+          <img
+            src="/adventure/marathon_finish.jpg"
+            alt="Vyshak Bellur — NYC Marathon finish line"
+            className="w-full h-[260px] object-cover object-top opacity-85 hover:opacity-100 transition-opacity"
+          />
         </div>
       </div>
 
