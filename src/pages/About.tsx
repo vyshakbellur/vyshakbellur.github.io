@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { hobbiesInfo } from '../data/content';
 import speakerHeadshotUrl from '../assets/Vyshak_speaker.jpeg';
-import innovationFlyerUrl from '../assets/InnovationWeekFlyer.jpg';
+
 import runningMedalsUrl from '../assets/running_medals.png';
 
 /* ─── Sub-section definitions ─── */
@@ -255,21 +255,7 @@ function CareerTab() {
                       </li>
                     ))}
                   </ul>
-                  {/* Innovation Week evidence for JPMC */}
-                  {selectedNode === 'jpmc' && (
-                    <div className="mt-4 pt-3 border-t border-white/8">
-                      <div className="rounded-lg overflow-hidden border border-white/10 hover:border-white/20 transition-colors">
-                        <img
-                          src={innovationFlyerUrl}
-                          alt="JPMorgan Chase Innovation Week 2026 — Vyshak Bellur listed as speaker"
-                          className="w-full h-auto object-cover opacity-85 hover:opacity-100 transition-opacity"
-                        />
-                        <div className="px-3 py-1.5 text-[9px] text-white/40 italic bg-white/[0.03]">
-                          Innovation Week 2026 — Selected speaker on Agentic AI Security
-                        </div>
-                      </div>
-                    </div>
-                  )}
+
                 </div>
               )}
             </div>
