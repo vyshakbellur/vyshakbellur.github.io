@@ -11,13 +11,10 @@ const FACETS = [
 ];
 
 const PROOF_POINTS = [
-  'Oxford University Press',
   'JPMorgan Chase',
-  'Walmart',
-  'Ford',
-  '43 US States',
-  '14 Countries',
-  'Marathon Runner',
+  'ML Researcher',
+  'Adventure Traveller',
+  'Marathoner',
 ];
 
 export default function Home() {
