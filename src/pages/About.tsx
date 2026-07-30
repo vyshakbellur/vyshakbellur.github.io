@@ -33,21 +33,7 @@ const CAREER_DATA: Record<string, any> = {
     commits: ['Engineered Enterprise HR automation frameworks (Java Spring Boot, MySQL)', 'Reduced onboarding and background-check effort by ~70%', 'Designed extensible schemas and front-end workflows for employee platforms'] },
 };
 
-const GIT_NODES = [
-  { id: 'jpmc', y: 60, x: 40, color: '#38bdf8', label: 'JPMorgan Chase & Co.' },
-  { id: 'walmart', y: 240, x: 160, color: '#f472b6', label: 'Walmart Global Tech' },
-  { id: 'ford', y: 330, x: 100, color: '#4ade80', label: 'Ford Motor Co.' },
-  { id: 'synchrony', y: 450, x: 40, color: '#38bdf8', label: 'Synchrony' },
-  { id: 'sdsu', y: 540, x: 100, color: '#fbbf24', label: 'SDSU Research' },
-  { id: 'ubs', y: 630, x: 40, color: '#38bdf8', label: 'UBS' },
-];
 
-const GIT_EDGES = [
-  { color: '#38bdf8', path: 'M 40 680 L 40.01 0' },
-  { color: '#fbbf24', path: 'M 40 630 L 100 570 L 100 510 L 40 450' },
-  { color: '#4ade80', path: 'M 40 450 L 100 390 L 100 120 L 40 60' },
-  { color: '#f472b6', path: 'M 100 330 L 160 270 L 160 210 L 100 150' },
-];
 
 /* ═══════════════════════════════════════════
    EDUCATION DATA — DNA Helix
