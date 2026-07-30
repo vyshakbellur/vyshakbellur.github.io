@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react';
 import { hobbiesInfo } from '../data/content';
-import speakerHeadshotUrl from '../assets/Vyshak_speaker.jpeg';
 
 
 
@@ -108,24 +107,46 @@ export default function About() {
   return (
     <div className="h-full flex flex-col overflow-hidden">
       {/* ── Header + Tabs ── */}
-      <div className="flex-shrink-0 px-5 pt-6 pb-0 max-w-6xl mx-auto w-full">
-        <h1 className="text-3xl font-semibold tracking-tight text-white/95 md:text-4xl mb-3">
-          <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">About</span>
+      <div className="flex-shrink-0 px-5 pt-10 pb-0 max-w-6xl mx-auto w-full">
+        <h1 className="text-4xl font-bold tracking-tight text-white/95 md:text-5xl mb-8">
+          About
         </h1>
-        <div className="flex flex-wrap gap-1 mb-1">
-          {TABS.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2 rounded-lg text-xs font-medium transition-all duration-200 ${
-                activeTab === tab.id
-                  ? 'bg-white/10 text-white/95 border border-white/15'
-                  : 'text-white/55 hover:text-white/80 hover:bg-white/5 border border-transparent'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
+        <div className="flex flex-wrap items-center gap-4 mb-4">
+          {/* Core Credentials */}
+          <div className="flex flex-wrap gap-1 bg-white/[0.03] p-1 rounded-xl border border-white/5">
+            {TABS.slice(0, 3).map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-300 ${
+                  activeTab === tab.id
+                    ? 'bg-amber-400 text-amber-950 shadow-lg'
+                    : 'text-white/70 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+          
+          <div className="hidden md:block text-white/20 text-xl font-thin">|</div>
+          
+          {/* Supporting Actors (Personal) */}
+          <div className="flex flex-wrap gap-1">
+            {TABS.slice(3).map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-4 py-2 rounded-lg text-xs font-medium transition-all duration-200 ${
+                  activeTab === tab.id
+                    ? 'bg-white/10 text-white/95 border border-white/15'
+                    : 'text-white/40 hover:text-white/70 hover:bg-white/5 border border-transparent'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
         </div>
         <div className="h-px w-full bg-white/10" />
       </div>
@@ -148,14 +169,6 @@ export default function About() {
 function BiographyTab() {
   return (
     <div className="max-w-3xl mx-auto px-5 py-6 space-y-5 text-sm leading-[1.7] text-white/80">
-      {/* Professional headshot */}
-      <div className="float-right ml-5 mb-4 w-40 rounded-xl overflow-hidden border border-white/14 shadow-lg shadow-black/40">
-        <img
-          src={speakerHeadshotUrl}
-          alt="Vyshak Bellur — AI Researcher and Senior Software Engineer"
-          className="w-full h-auto object-cover"
-        />
-      </div>
       <p>
         I am an AI Researcher and Senior Software Engineer at JPMorgan Chase, and an applied ML researcher whose work spans three domains: financial infrastructure, computational biology, and digital humanities — connected by a single obsession: <em className="text-white/95 not-italic font-medium">finding structure in complex, noisy systems.</em>
       </p>
@@ -166,7 +179,7 @@ function BiographyTab() {
         Currently pursuing a PhD from the University of the Cumberlands. For my research, I collaborate with Prof. Forest Rohwer at San Diego State University on microbiome network architecture and DNA Language Modeling for metagenomics. Previously, my published work with Prof. Sam Kassegne in Oxford University Press applied computational pattern recognition to measure structural similarity across ancient writing systems.
       </p>
       <p>
-        Outside of the terminal, I run long distances, do adventure travel, and produce music under the channel <strong className="text-amber-400 font-serif italic">v_naada</strong>. I am a Royal Challengers Bengaluru fan, a mountain person, and a believer that pattern recognition is a universal language.
+        Outside of the terminal, I run long distances and do adventure travel. I am a Royal Challengers Bengaluru fan, a mountain person, and a believer that pattern recognition is a universal language.
       </p>
 
       {/* Character vignette — skydiving reinforces risk-taker brand */}
@@ -187,111 +200,37 @@ function BiographyTab() {
 }
 
 
-/* ═══ CAREER — Git-Graph (from original Experience page) ═══ */
+/* ═══ CAREER ═══ */
 function CareerTab() {
-  const [selectedNode, setSelectedNode] = useState('jpmc');
-  const selected = CAREER_DATA[selectedNode];
-  const selectedSvgNode = GIT_NODES.find(n => n.id === selectedNode);
-  const color = selectedSvgNode?.color || '#38bdf8';
+  const CAREER_LIST = [
+    { id: 'jpmc', ...CAREER_DATA['jpmc'] },
+    { id: 'walmart', ...CAREER_DATA['walmart'] },
+    { id: 'ford', ...CAREER_DATA['ford'] },
+    { id: 'synchrony', ...CAREER_DATA['synchrony'] },
+    { id: 'sdsu', ...CAREER_DATA['sdsu'] },
+    { id: 'ubs', ...CAREER_DATA['ubs'] },
+  ];
 
   return (
-    <>
-      <style>{`
-        .holo-scrollbar::-webkit-scrollbar { width: 6px; }
-        .holo-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .holo-scrollbar::-webkit-scrollbar-thumb { background: rgba(51, 255, 0, 0.4); border-radius: 4px; }
-        .holo-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(51, 255, 0, 0.8); }
-      `}</style>
-
-      {/* ── DESKTOP ── */}
-      <div className="hidden lg:flex h-full items-center justify-center px-12 gap-12">
-        <div className="w-1/2 flex items-center justify-end pr-12 min-h-[500px]">
-          <svg viewBox="0 0 520 680" className="w-[520px] h-[680px] drop-shadow-[0_0_20px_rgba(255,255,255,0.03)]">
-            <defs>
-              <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur1" />
-                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur2" />
-                <feMerge><feMergeNode in="blur2" /><feMergeNode in="blur1" /><feMergeNode in="SourceGraphic" /></feMerge>
-              </filter>
-            </defs>
-            {GIT_EDGES.map((edge, idx) => (
-              <path key={`edge-${idx}`} d={edge.path} fill="none" stroke={edge.color} strokeWidth="4" filter="url(#neonGlow)" className="opacity-80" strokeLinejoin="round" strokeLinecap="round" />
-            ))}
-            {GIT_NODES.map((node) => {
-              const isSelected = selectedNode === node.id;
-              return (
-                <g key={node.id} onClick={() => setSelectedNode(node.id)} className="cursor-pointer group">
-                  <circle cx={node.x} cy={node.y} r="20" fill="transparent" />
-                  <circle cx={node.x} cy={node.y} r={isSelected ? 9 : 6} fill={node.color} stroke="#050505" strokeWidth="3" filter={isSelected ? "url(#neonGlow)" : ""} className="transition-all duration-300 group-hover:scale-125" style={{ transformOrigin: `${node.x}px ${node.y}px` }} />
-                  <text x="210" y={node.y + 6} fill={isSelected ? '#ffffff' : '#8b949e'} fontSize={isSelected ? '16' : '15'} fontWeight={isSelected ? '800' : '500'} className="font-mono tracking-tight transition-all duration-300" style={isSelected ? { textShadow: `0 0 15px ${node.color}` } : {}}>
-                    {node.label}
-                  </text>
-                  <line x1={node.x + 15} y1={node.y} x2="195" y2={node.y} stroke={node.color} strokeWidth="1" strokeDasharray="3 3" className={`transition-opacity duration-300 ${isSelected ? 'opacity-40' : 'opacity-10'}`} />
-                </g>
-              );
-            })}
-          </svg>
-        </div>
-
-        <div className="w-1/2 flex flex-col items-center justify-center h-full">
-          <div className="w-full max-w-[550px] flex flex-col rounded-2xl bg-[#06080D]/60 backdrop-blur-3xl overflow-hidden relative transition-all duration-500 border border-white/5 shadow-2xl" style={{ boxShadow: `0 25px 50px -12px rgba(0,0,0,0.8), inset 0 0 20px ${color}15` }}>
-            <div className="h-1.5 w-full transition-colors duration-500" style={{ backgroundColor: color, boxShadow: `0 0 20px ${color}` }} />
-            <div className="flex flex-col p-10 z-10 relative h-[450px]">
-              <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] opacity-20 pointer-events-none transition-colors duration-500" style={{ backgroundColor: color }} />
-              {selected && (
-                <div className="flex flex-col z-20 h-full">
-                  <h3 className="text-2xl font-black tracking-widest uppercase mb-2 transition-colors duration-500" style={{ color, textShadow: `0 0 15px ${color}60` }}>{selected.company}</h3>
-                  <div className="flex items-center gap-4 border-b border-white/10 pb-4 mb-6 shrink-0">
-                    <span className="text-sm font-semibold tracking-wide text-white/90">{selected.role}</span>
-                    <span className="text-xs font-mono px-2.5 py-1 rounded-sm bg-white/[0.06] text-white/60 border border-white/8">{selected.period}</span>
-                  </div>
-                  <ul className="space-y-4 overflow-y-auto holo-scrollbar pr-2 pb-2 flex-grow">
-                    {selected.commits.map((commit: string, i: number) => (
-                      <li key={i} className="flex gap-4 items-start text-sm leading-relaxed text-[#8b949e]">
-                        <svg className="w-5 h-5 mt-0.5 shrink-0 transition-colors duration-500" style={{ color }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                        <span className="tracking-wide transition-colors duration-300 hover:text-[#c9d1d9]">{commit}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                </div>
-              )}
-            </div>
+    <div className="max-w-3xl mx-auto px-5 py-8 space-y-12">
+      {CAREER_LIST.map((job) => (
+        <div key={job.id} className="relative group">
+          <div className="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-4 mb-4 border-b border-white/10 pb-3">
+            <h3 className="text-xl font-bold tracking-tight text-white/95">{job.company}</h3>
+            <span className="text-sm font-medium text-amber-400/90">{job.role}</span>
+            <span className="text-xs font-mono text-white/40 md:ml-auto">{job.period}</span>
           </div>
+          <ul className="space-y-3">
+            {job.commits.map((commit: string, i: number) => (
+              <li key={i} className="text-sm leading-relaxed text-white/60 flex items-start gap-3 group-hover:text-white/80 transition-colors">
+                <span className="text-amber-400/50 mt-1 text-[10px]">▹</span>
+                <span>{commit}</span>
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
-
-      {/* ── MOBILE ── */}
-      <div className="lg:hidden flex flex-col px-6 py-8 font-mono text-[#c9d1d9]">
-        <div className="flex flex-col gap-10 border-l border-white/14 ml-2 pb-16">
-          {GIT_NODES.map(node => {
-            const dt = CAREER_DATA[node.id];
-            return (
-              <div key={node.id} className="relative pl-8">
-                <div className="absolute left-[-6px] top-1.5 w-3 h-3 rounded-full" style={{ background: node.color, boxShadow: `0 0 10px ${node.color}` }} />
-                <h3 className="text-lg font-black tracking-widest uppercase mb-1" style={{ color: node.color }}>{dt.company}</h3>
-                <div className="flex flex-col gap-1.5 mb-5 border-b border-white/10 pb-4">
-                  <span className="text-white/90 font-bold text-sm tracking-wide">{dt.role}</span>
-                  <span className="text-[10px] uppercase font-mono tracking-[0.1em] text-white/50">{dt.period}</span>
-                </div>
-                <ul className="space-y-4">
-                  {dt.commits.map((c: string, idx: number) => (
-                    <li key={idx} className="flex gap-3 text-xs leading-relaxed text-[#8b949e]">
-                      <svg className="w-4 h-4 mt-0.5 shrink-0" style={{ color: node.color }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                      <span>{c}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </>
+      ))}
+    </div>
   );
 }
 
@@ -477,7 +416,7 @@ function RunningTab() {
           <div className="text-xs font-semibold tracking-widest uppercase text-pink-400/70 mb-3">Race Stats</div>
           <ul className="text-sm space-y-3 text-white/70 font-mono">
             <li className="flex justify-between border-b border-white/5 pb-2"><span>Full Marathons</span><span className="text-white font-bold">1</span></li>
-            <li className="flex justify-between border-b border-white/5 pb-2"><span>Half Marathons</span><span className="text-white font-bold">6</span></li>
+            <li className="flex justify-between border-b border-white/5 pb-2"><span>Half Marathons</span><span className="text-white font-bold">5</span></li>
             <li className="text-xs text-white/55 italic pt-1">Racing the streets of NYC.</li>
           </ul>
           <a href={hobbiesInfo.running.nyrrHref} target="_blank" rel="noreferrer" className="mt-4 inline-block text-[10px] font-bold tracking-widest uppercase text-pink-400/80 hover:text-pink-400 transition-colors">NYRR Results ↗</a>
@@ -530,6 +469,7 @@ function TravelTab() {
           <div className="text-xs font-semibold tracking-widest uppercase text-emerald-400/70 mb-3">Adrenaline</div>
           <ul className="text-sm space-y-2 text-white/70 font-mono">
             <li className="flex justify-between border-b border-white/5 pb-2"><span>Skydives</span><span className="text-white font-bold">3</span></li>
+            <li className="flex justify-between border-b border-white/5 pb-2"><span>Snuba</span><span className="text-white font-bold">1</span></li>
             <li className="text-xs text-white/55 italic pt-1">Six continents and counting.</li>
           </ul>
         </div>

@@ -26,16 +26,31 @@ export default function Contact() {
 
   return (
     <div ref={sectionRef} className="mx-auto max-w-6xl px-5 py-10">
-      <div className="section-enter mb-8">
-        <h1 className="text-3xl font-semibold tracking-tight text-white/95 md:text-4xl">
-          <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">
-            Contact
-          </span>
+      <div className="section-enter mb-12">
+        <h1 className="text-4xl font-bold tracking-tight text-white/95 md:text-5xl mb-6 leading-tight">
+          Let's build something<br />extraordinary.
         </h1>
-        <p className="mt-3 max-w-xl text-sm leading-[1.65] text-white/75">
-          I'm always open to meaningful conversations — whether it's a speaking invitation, research collaboration, mentorship opportunity, or an interesting problem to solve together.
+        <p className="mt-3 max-w-2xl text-lg md:text-xl text-white/60 font-light leading-relaxed mb-6">
+          I am currently accepting invitations for keynote speaking, hackathon judging, and panel discussions. I am also open to targeted research collaborations and mentorship opportunities.
         </p>
-        <div className="mt-4 h-px w-full bg-white/14" />
+
+        {/* Quick Links */}
+        <div className="flex items-center gap-6">
+          <a title="GitHub" href={profile.links.github} target="_blank" rel="noreferrer" className="text-white/40 hover:text-white transition-colors">
+            <span className="text-xs font-semibold tracking-wider uppercase">GitHub ↗</span>
+          </a>
+          <a title="LinkedIn" href={profile.links.linkedin} target="_blank" rel="noreferrer" className="text-white/40 hover:text-white transition-colors">
+            <span className="text-xs font-semibold tracking-wider uppercase">LinkedIn ↗</span>
+          </a>
+          <a title="Medium" href={profile.links.medium} target="_blank" rel="noreferrer" className="text-white/40 hover:text-white transition-colors">
+            <span className="text-xs font-semibold tracking-wider uppercase">Medium ↗</span>
+          </a>
+          <a title="Google Scholar" href={profile.links.scholar} target="_blank" rel="noreferrer" className="text-white/40 hover:text-white transition-colors">
+            <span className="text-xs font-semibold tracking-wider uppercase">Scholar ↗</span>
+          </a>
+        </div>
+
+        <div className="mt-8 h-px w-full bg-white/10" />
       </div>
 
       <div className="grid gap-8 md:grid-cols-2">
@@ -112,15 +127,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-white/14 bg-white/[0.06] p-6">
-            <div className="text-[10px] font-semibold tracking-widest uppercase text-white/50 mb-3">Links</div>
-            <div className="flex flex-col gap-2.5 text-sm">
-              <a href={profile.links.github} target="_blank" rel="noreferrer" className="text-white/72 hover:text-white transition-colors text-xs">GitHub ↗</a>
-              <a href={profile.links.linkedin} target="_blank" rel="noreferrer" className="text-white/72 hover:text-white transition-colors text-xs">LinkedIn ↗</a>
-              <a href={profile.links.medium} target="_blank" rel="noreferrer" className="text-white/72 hover:text-white transition-colors text-xs">Medium ↗</a>
-              <a href={profile.links.scholar} target="_blank" rel="noreferrer" className="text-white/72 hover:text-white transition-colors text-xs">Google Scholar ↗</a>
-            </div>
-          </div>
+
         </div>
       </div>
     </div>

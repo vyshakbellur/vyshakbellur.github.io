@@ -5,7 +5,6 @@ import { nav } from '../data/nav';
 /* Per-page accent colours — complement each page's content palette */
 const PAGE_ACCENT: Record<string, string> = {
   '/about':        '#F2E8D0',  /* warm ivory — about */
-  '/research':     '#F2E8D0',  /* warm ivory — papers */
   '/speak':        '#facc15',  /* gold — speaking engagements */
   '/writing':      '#38bdf8',  /* sky blue — blog / writing */
   '/contact':      '#c084fc',  /* lavender — message */

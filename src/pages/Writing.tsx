@@ -1,5 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
 
+/* ── Published Literature ── */
+const PUBLICATIONS = [
+  {
+    title: 'Machine learning techniques for exploring influence, commonalities, and shared origin of scripts',
+    subtitle: 'Ethiopic, Armenian, Georgian, and Caucasian Albanian scripts',
+    journal: 'Digital Scholarship in the Humanities',
+    publisher: 'Oxford University Press',
+    year: '2024',
+    coAuthor: 'Prof. Sam Kassegne',
+    href: 'https://academic.oup.com/dsh/article/41/2/1092/8539597',
+  },
+  {
+    title: 'Machine Learning Techniques for Identification of Commonalities and Shared Origin of Language Scripts',
+    journal: 'MS Thesis',
+    publisher: 'San Diego State University',
+    year: '2019',
+    href: 'https://www.proquest.com/openview/194737039beaa878147991fc6e8aa954/1?pq-origsite=gscholar&cbl=18750&diss=y',
+  },
+];
+
+/* ── Medium Feed ── */
 const MEDIUM_USERNAME = 'vyshak.x.bellur';
 const RSS_URL = `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@${MEDIUM_USERNAME}`;
 
@@ -8,7 +29,7 @@ const SEED_ARTICLES = [
     title: 'Bridging the Context Gap: A Technical Analysis of LLM Limitations and Enterprise Architectures',
     link: 'https://medium.com/@vyshak.x.bellur/bridging-the-context-gap-a-technical-analysis-of-llm-limitations-and-enterprise-architectures-d961dc35dcfc',
     pubDate: '2024-01-01',
-    description: 'A technical deep dive into why context breaks at scale and how enterprise architectures can mitigate limitations with retrieval, orchestration, and governance.',
+    description: 'A technical deep dive into why context breaks at scale and how enterprise architectures can mitigate limitations.',
     categories: ['LLMs', 'Enterprise'],
   },
 ];
@@ -22,7 +43,7 @@ type Article = {
 };
 
 function stripHtml(html: string): string {
-  return html.replace(/<[^>]*>/g, '').replace(/&[a-z]+;/gi, ' ').slice(0, 180).trim() + '...';
+  return html.replace(/<[^>]*>/g, '').replace(/&[a-z]+;/gi, ' ').slice(0, 140).trim() + '…';
 }
 
 export default function Writing() {
@@ -36,7 +57,7 @@ export default function Writing() {
       .then((data) => {
         if (data.status === 'ok' && data.items?.length) {
           setArticles(
-            data.items.slice(0, 8).map((item: Record<string, unknown>) => ({
+            data.items.slice(0, 6).map((item: Record<string, unknown>) => ({
               title: item.title as string,
               link: item.link as string,
               pubDate: ((item.pubDate as string) ?? '').slice(0, 10),
@@ -63,92 +84,96 @@ export default function Writing() {
   }, [articles]);
 
   return (
-    <div ref={sectionRef} className="mx-auto max-w-6xl px-5 py-14">
-      <div className="section-enter mb-10">
-        <div className="mb-2 text-xs font-semibold tracking-widest text-white/55 uppercase">Thought Leadership</div>
-        <h1 className="text-3xl font-semibold tracking-tight text-white/95 md:text-4xl">
-          <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">
-            Writing
-          </span>
+    <div ref={sectionRef} className="mx-auto max-w-6xl px-5 py-8">
+      {/* Header */}
+      <div className="section-enter mb-12">
+        <h1 className="text-4xl font-bold tracking-tight text-white/95 md:text-5xl mb-6">
+          Research & Writing
         </h1>
-        <p className="mt-3 max-w-2xl text-sm leading-[1.7] text-white/80">
-          Technical writing on enterprise AI, system design, and engineering at scale. Each article represents original analysis from production experience and applied research. Auto-synced from{' '}
-          <a
-            href={`https://medium.com/@${MEDIUM_USERNAME}`}
-            target="_blank"
-            rel="noreferrer"
-            className="text-yellow-400 hover:text-yellow-300 transition-colors"
-          >
-            Medium
-          </a>
+        <p className="text-lg md:text-xl text-white/60 font-light max-w-3xl leading-relaxed">
+          Exploring the intersection of algorithms and origins. My published work and technical writing focus on applying modern machine learning architectures to complex, unstructured data — from ancient linguistics to enterprise systems.
         </p>
-        <div className="mt-4 h-px w-full bg-white/14" />
+        <div className="mt-10 h-px w-full bg-white/10" />
       </div>
 
-      {loading ? (
-        <div className="grid gap-5 md:grid-cols-2">
-          {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="rounded-2xl border border-white/14 bg-white/[0.06] p-6 animate-pulse">
-              <div className="h-3 w-16 bg-white/10 rounded mb-4" />
-              <div className="h-4 w-full bg-white/10 rounded mb-2" />
-              <div className="h-4 w-3/4 bg-white/10 rounded mb-4" />
-              <div className="h-3 w-full bg-white/5 rounded mb-1" />
-              <div className="h-3 w-2/3 bg-white/5 rounded" />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="space-y-6">
-          {/* Featured Article (first one) */}
-          {articles.length > 0 && (
-            <a
-              key={articles[0].link}
-              href={articles[0].link}
-              target="_blank"
-              rel="noreferrer"
-              className="section-enter group block rounded-2xl border border-amber-400/20 bg-amber-400/[0.04] p-8 transition hover:bg-amber-400/[0.07]"
-            >
-              <div className="mb-2 text-[10px] font-semibold tracking-widest uppercase text-amber-400/70">Featured</div>
-              <div className="mb-3 flex items-center justify-between gap-3">
-                <span className="text-xs text-white/55">{articles[0].pubDate}</span>
-                {articles[0].categories[0] && (
-                  <span className="rounded-full border border-amber-400/25 bg-amber-400/10 px-2.5 py-0.5 text-xs text-amber-300">
-                    {articles[0].categories[0]}
-                  </span>
-                )}
-              </div>
-              <div className="mb-3 text-lg font-bold leading-snug text-white/95">{articles[0].title}</div>
-              <p className="text-sm leading-[1.65] text-white/80 mb-4">{articles[0].description}</p>
-              <div className="text-xs font-semibold text-amber-400/70 group-hover:text-amber-400 transition-colors">Read on Medium ↗</div>
-            </a>
-          )}
+      {/* Two-column: Published | Articles */}
+      <div className="grid gap-8 lg:grid-cols-2 items-start">
 
-          {/* Remaining articles */}
-          <div className="grid gap-5 md:grid-cols-2">
-            {articles.slice(1).map((w) => (
+        {/* ── LEFT: Published Literature ── */}
+        <div className="section-enter">
+          <div className="mb-8 text-[10px] font-semibold tracking-[0.2em] text-white/40 uppercase">Academic Publications</div>
+          <div className="space-y-10">
+            {PUBLICATIONS.map((p) => (
               <a
-                key={w.link}
-                href={w.link}
+                key={p.title}
+                href={p.href}
                 target="_blank"
                 rel="noreferrer"
-                className="section-enter group rounded-2xl border border-white/14 bg-white/[0.06] p-6 transition hover:bg-white/[0.10]"
+                className="group block"
               >
-                <div className="mb-3 flex items-center justify-between gap-3">
-                  <span className="text-xs text-white/50">{w.pubDate}</span>
-                  {w.categories[0] && (
-                    <span className="rounded-full border border-white/14 bg-white/[0.06] px-2 py-0.5 text-xs text-white/70">
-                      {w.categories[0]}
-                    </span>
-                  )}
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-[10px] font-bold tracking-[0.15em] text-amber-900 uppercase bg-amber-400 px-2 py-0.5 rounded-sm">
+                    {p.publisher}
+                  </span>
+                  <span className="text-xs font-mono text-white/40">{p.year}</span>
                 </div>
-                <div className="mb-2 font-semibold leading-snug text-white/95">{w.title}</div>
-                <p className="text-sm leading-[1.7] text-white/75">{w.description}</p>
-                <div className="mt-4 text-xs font-medium text-white/60 group-hover:text-amber-400 transition-colors">Read on Medium ↗</div>
+                <h3 className="text-xl md:text-2xl font-bold leading-tight text-white/95 mb-2 group-hover:text-white transition-colors">
+                  {p.title}
+                </h3>
+                {p.subtitle && (
+                  <p className="text-base text-white/60 font-light italic mb-4">{p.subtitle}</p>
+                )}
+                <div className="flex items-center justify-between border-t border-white/10 pt-4 mt-2">
+                  <span className="text-xs text-white/50 font-mono">
+                    {p.journal}{p.coAuthor ? ` · ${p.coAuthor}` : ''}
+                  </span>
+                  <span className="text-sm text-amber-400/0 group-hover:text-amber-400/90 transition-colors transform group-hover:translate-x-1">→</span>
+                </div>
               </a>
             ))}
           </div>
         </div>
-      )}
+
+        {/* ── RIGHT: Medium Articles ── */}
+        <div className="section-enter">
+          <div className="flex items-center justify-between mb-4">
+            <div className="text-[10px] font-semibold tracking-[0.2em] text-white/40 uppercase">Articles</div>
+            <a
+              href={`https://medium.com/@${MEDIUM_USERNAME}`}
+              target="_blank"
+              rel="noreferrer"
+              className="text-[10px] font-semibold tracking-wider text-white/30 hover:text-amber-400/70 transition-colors uppercase"
+            >
+              Medium ↗
+            </a>
+          </div>
+
+          {loading ? (
+            <div className="space-y-2">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="h-8 rounded-lg bg-white/5 animate-pulse" />
+              ))}
+            </div>
+          ) : (
+            <div className="space-y-1">
+              {articles.map((a) => (
+                <a
+                  key={a.link}
+                  href={a.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex items-center justify-between gap-3 rounded-lg px-3 py-2.5 hover:bg-white/[0.05] transition-colors"
+                >
+                  <h3 className="text-xs font-medium leading-snug text-white/70 group-hover:text-white/95 transition-colors truncate">
+                    {a.title}
+                  </h3>
+                  <span className="text-[10px] text-white/25 shrink-0">{a.pubDate.slice(0, 7)}</span>
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

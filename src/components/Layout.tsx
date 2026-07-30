@@ -7,6 +7,7 @@ import Console from './Console';
 import airJordansUrl from '../assets/air_jordans.png';
 import runningMedalsUrl from '../assets/running_medals.png';
 import rcbLogoUrl from '../assets/rcb_logo.png';
+import auroraUrl from '../assets/aurora_mountain.png';
 
 export default function Layout() {
   const location = useLocation();
@@ -16,9 +17,15 @@ export default function Layout() {
   return (
     <div className="h-screen overflow-hidden flex flex-col text-slate-100 bg-[#0a0f1a]">
       
-      {/* ── Global transformer backdrop ── */}
-      <div className="fixed inset-0 z-0 pointer-events-none"
-        style={{ backgroundImage: 'url(/transformer_backdrop.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.12 }} />
+      {/* ── Global Aurora backdrop ── */}
+      <div className="fixed inset-0 z-0 pointer-events-none bg-[#010610]">
+        <img 
+          src={auroraUrl} 
+          alt="Aurora Background" 
+          className="w-full h-full object-cover opacity-[0.25]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#010610] via-transparent to-[#010610]/80 pointer-events-none" />
+      </div>
 
       {/* ── Universally Sleek Header ── */}
       <div className="flex-shrink-0 z-50">

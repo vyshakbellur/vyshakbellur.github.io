@@ -1,322 +1,177 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import speakerHeadshotUrl from '../assets/VyshakInnovationWeek.jpg';
-import innovationScheduleUrl from '../assets/InnovationWeekDisplay.jpg';
 
-const SPEAKING_TOPICS = [
+const BIO = `Applied AI Researcher and Senior Software Engineer at JPMorgan Chase. Oxford-published. Keynote Speaker, Panelist, and Hackathon Judge focusing on trustworthy AI, agentic security, and cross-domain pattern recognition.`;
+
+/*
+ * To add a new talk: just push an object here.
+ * - status: 'upcoming' gets featured treatment, 'past' stacks below
+ * - format: 'Talk' | 'Panel' | 'Workshop' — shown as a subtle label
+ */
+const ENGAGEMENTS = [
   {
-    title: 'Building Self-Healing APIs with AI',
-    badges: ['Cloud Engineering', 'AIOps', 'Enterprise AI'],
-    abstract: 'Modern cloud platforms generate millions of logs, metrics, traces, and deployment events every day, yet most organizations remain reactive to production failures. This talk explores how machine learning and large language models can transform operational telemetry into actionable intelligence. Drawing from enterprise engineering experience and research into self-healing cloud architectures, the session demonstrates how knowledge graphs, dependency analysis, anomaly detection, and risk-aware automation can reduce incident resolution time while preserving operational safety. Attendees will learn practical architectural patterns for integrating AI into production systems without sacrificing observability, auditability, or human oversight.',
+    title: 'The Latency-vs-Security Curve',
+    subtitle: 'Operational Engineering for High-Scale Agentic Architectures',
+    venue: 'API World',
+    location: 'Santa Clara Convention Center, CA',
+    date: 'September 1, 2026',
+    format: 'Talk' as const,
+    duration: '50 min',
+    status: 'upcoming' as const,
+    abstract: 'Separating probabilistic LLM exploration from deterministic execution. A layered Guard-Classifier-Verifier pipeline balancing performance with security in regulated environments.',
+  },
+  /*
+  {
+    title: 'AI Camp Technical Session',
+    subtitle: 'Applied Machine Learning and Agentic Systems',
+    venue: 'AI Camp',
+    location: 'Santa Clara, CA',
+    date: 'September 2026 (TBC)',
+    format: 'Talk' as const,
+    status: 'upcoming' as const,
+    abstract: 'Upcoming technical talk focusing on the engineering challenges of deploying agentic systems in production.',
   },
   {
-    title: 'The Guardian Paradigm: Secure Agentic AI for Regulated Enterprises',
-    badges: ['Agentic AI', 'AI Security', 'Enterprise Architecture'],
-    abstract: 'As AI systems evolve from assistants into autonomous agents, traditional software security models must also evolve. This session introduces the Guardian Paradigm, a deterministic governance architecture designed to supervise AI agents operating in regulated environments. The talk covers prompt injection defenses, tool governance, intent verification, progressive validation, and policy-driven execution. Rather than trusting an AI model to make security decisions, the architecture separates probabilistic reasoning from deterministic enforcement, enabling secure adoption of agentic AI in enterprise systems.',
+    title: 'Expert Panel on Trustworthy AI',
+    subtitle: 'Navigating the Security-Latency Tradeoff',
+    venue: 'Industry Panel',
+    location: 'Santa Clara, CA',
+    date: 'September 2026 (TBC)',
+    format: 'Panel' as const,
+    status: 'upcoming' as const,
+    abstract: 'A deep-dive discussion with industry experts on implementing secure LLM architectures in enterprise environments.',
   },
+  */
   {
-    title: 'What Ancient Scripts Taught Me About Cloud Telemetry',
-    badges: ['Machine Learning', 'Digital Humanities', 'Applied AI'],
-    abstract: 'What do ancient Ethiopian manuscripts, microbial DNA sequences, and cloud microservice telemetry have in common? They are all structured sequences that can be analyzed using similar machine learning principles. Drawing from published research in historical manuscript analysis, genomic sequence modeling, and enterprise AI systems, this talk explores how representation learning, embeddings, similarity metrics, and anomaly detection transfer across seemingly unrelated domains.',
-  },
-  {
-    title: 'Designing AI Systems for Production, Not Prototypes',
-    badges: ['LLMs', 'Software Engineering', 'MLOps'],
-    abstract: 'Many AI demonstrations work well in isolation but fail under the demands of production systems. This talk discusses the engineering principles required to move beyond proof-of-concept applications toward reliable enterprise AI. Topics include architecture design, observability, evaluation, governance, deployment strategies, and operational guardrails.',
-  },
-  {
-    title: 'Beyond Chatbots: Enterprise Applications of Large Language Models',
-    badges: ['LLMs', 'Enterprise AI', 'Applied Machine Learning'],
-    abstract: 'Large language models are rapidly becoming foundational components of enterprise software, but successful adoption requires much more than conversational interfaces. This session explores practical architectural patterns for integrating LLMs into enterprise workflows, including intelligent search, operational assistance, incident management, decision support, and workflow automation.',
-  },
-  {
-    title: 'From Observability to Autonomous Operations',
-    badges: ['Cloud Platforms', 'DevOps', 'AI Infrastructure'],
-    abstract: 'Modern observability platforms provide unprecedented visibility into production systems, yet engineers often remain responsible for manually correlating alerts and diagnosing failures. This talk explores how AI can augment traditional observability by connecting logs, metrics, traces, deployment history, and service dependencies into actionable operational intelligence.',
-  },
-  {
-    title: 'Machine Learning Beyond Language: Lessons from Scripts, Genomes, and Software Systems',
-    badges: ['Machine Learning', 'AI Research'],
-    abstract: 'Machine learning techniques developed for natural language processing are increasingly being applied to biological sequences, historical manuscripts, source code, and distributed systems. This presentation examines the common statistical principles underlying these seemingly unrelated domains, including representation learning, sequence modeling, metric learning, and anomaly detection.',
-  },
-  {
-    title: 'Responsible AI in Enterprise Engineering',
-    badges: ['AI Governance', 'Security', 'Compliance'],
-    abstract: 'Responsible AI requires more than model accuracy. Enterprise AI systems must satisfy requirements for transparency, security, auditability, governance, and regulatory compliance. This talk discusses architectural approaches for building trustworthy AI systems, including human-in-the-loop decision making, policy enforcement, monitoring, explainability, and risk-based validation.',
+    title: 'Financial Guardrail Agent',
+    subtitle: 'A Security-First Approach to Agentic AI',
+    venue: 'JPMorgan Chase Innovation Week',
+    location: 'Internal Engineering Conference',
+    date: '2026',
+    format: 'Talk' as const,
+    status: 'past' as const,
+    abstract: 'Deterministic Guard–Classifier–Verifier architecture for securing agentic AI in regulated financial environments.',
   },
 ];
 
-const INVITED_TALKS = [
-  {
-    event: 'JPMorgan Chase Innovation Week 2026',
-    title: 'Financial Guardrail Agent: A Security-First Approach to Agentic AI',
-    audience: 'Internal engineering cohorts, application owners, and technology leadership stakeholders.',
-    overview: 'Presented a deterministic Guard\u2013Classifier\u2013Verifier architecture for securing agentic AI workflows in regulated financial environments. The session demonstrated how policy enforcement, intent verification, and human approval mechanisms can reduce the risks associated with autonomous tool-calling agents while maintaining auditability and compliance.',
-    badges: ['Agentic AI', 'AI Governance', 'Runtime Security'],
-    year: '2026',
-    schedulePhoto: innovationScheduleUrl,
-  },
-];
-
-const PRESS_BIO = `Vyshak Athreya Bellur Keshavamurthy is an AI Researcher and Senior Software Engineer at JPMorgan Chase & Co., where he builds production ML systems and was a selected speaker at Innovation Week 2026 on agentic AI security. He is a PhD candidate in Computer Science at the University of the Cumberlands, with research focused on AI-driven self-healing API frameworks. A published co-author in Oxford University Press’s Digital Scholarship in the Humanities, Vyshak’s work spans trustworthy AI, metagenomics, and document intelligence — connected by a focus on cross-domain pattern recognition. He has contributed to technical communities through speaking, mentoring, reviewing, and judging. Outside the terminal, he is a marathon runner and adventure traveler who has visited 43 U.S. states and 14 countries.`;
-
-const COMMUNITY_ROLES = [
-  {
-    role: 'Innovation Week Speaker',
-    org: 'JPMorgan Chase & Co.',
-    desc: 'Selected to present on agentic AI security to engineering cohorts and technology leadership.',
-    year: '2026',
-    icon: '🎙️',
-  },
-  {
-    role: 'Hackathon Judge',
-    org: 'Enterprise & University Events',
-    desc: 'Evaluated technical solutions, architectural decisions, and presentation quality across ML and software engineering tracks.',
-    year: 'Ongoing',
-    icon: '🏆',
-  },
-  {
-    role: 'Technical Mentor',
-    org: 'ML & Software Engineering',
-    desc: 'Mentoring early-career engineers and graduate researchers on production ML, system design, and career development.',
-    year: 'Ongoing',
-    icon: '🧑‍🏫',
-  },
-  {
-    role: 'Peer Reviewer',
-    org: 'Interdisciplinary Research',
-    desc: 'Reviewing research manuscripts at the intersection of machine learning, computational biology, and digital humanities.',
-    year: 'Ongoing',
-    icon: '📝',
-  },
+const TOPICS = [
+  'Building Self-Healing APIs with AI',
+  'The Guardian Paradigm: Secure Agentic AI for Regulated Enterprises',
+  'Designing AI Systems for Production, Not Prototypes',
+  'Beyond Chatbots: Enterprise Applications of Large Language Models',
+  'From Observability to Autonomous Operations',
+  'Machine Learning Beyond Language: Scripts, Genomes, and Software Systems',
+  'Responsible AI in Enterprise Engineering',
 ];
 
 export default function Speak() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
   const [copiedBio, setCopiedBio] = useState(false);
-  const [expandedInvited, setExpandedInvited] = useState<number | null>(0);
-  const [expandedTopic, setExpandedTopic] = useState<number | null>(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
-      { threshold: 0.1 }
-    );
-    const el = sectionRef.current;
-    if (el) el.querySelectorAll('.section-enter').forEach((item) => observer.observe(item));
-    return () => observer.disconnect();
-  }, []);
-
-  const copyTopic = (idx: number, e: React.MouseEvent) => {
-    e.stopPropagation();
-    const t = SPEAKING_TOPICS[idx];
-    const text = `${t.title}\n\n${t.badges.join(' \u2022 ')}\n\nAbstract\n\n${t.abstract}`;
-    navigator.clipboard.writeText(text);
-    setCopiedIdx(idx);
-    setTimeout(() => setCopiedIdx(null), 2000);
-  };
-
-  const copyBio = () => {
-    navigator.clipboard.writeText(PRESS_BIO);
-    setCopiedBio(true);
-    setTimeout(() => setCopiedBio(false), 2000);
-  };
+  const upcoming = ENGAGEMENTS.filter((e) => e.status === 'upcoming');
+  const past = ENGAGEMENTS.filter((e) => e.status === 'past');
 
   return (
-    <div ref={sectionRef} className="mx-auto max-w-6xl px-5 py-10">
-      {/* Header */}
-      <div className="section-enter mb-6">
-        <h1 className="text-3xl font-semibold tracking-tight text-white/95 md:text-4xl">
-          <span className="bg-gradient-to-r from-red-400 via-yellow-400 to-red-300 bg-clip-text text-transparent">Speaking & Leadership</span>
-        </h1>
-        <p className="mt-2 max-w-2xl text-xs leading-[1.7] text-white/75">
-          Selected speaker at JPMorgan Chase Innovation Week 2026. Topics span trustworthy AI, agentic security, enterprise AI governance, and cross-domain pattern recognition. Available for keynotes, technical sessions, panel discussions, CISO-track events, and judging roles.{' '}
-          <a href="/contact" className="text-yellow-400 hover:text-yellow-300 transition-colors">Get in touch →</a>
-        </p>
-        <div className="mt-3 h-px w-full bg-white/14" />
+    <div className="mx-auto max-w-4xl px-5">
+
+      {/* ── Hero: vertical photo + title side by side ── */}
+      <div className="flex gap-6 items-stretch mt-6 mb-12">
+        <div className="w-48 shrink-0 rounded-2xl overflow-hidden">
+          <img
+            src={speakerHeadshotUrl}
+            alt="Vyshak Bellur"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="flex flex-col justify-end py-2">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Speaking</h1>
+          <p className="text-sm text-white/50 leading-relaxed max-w-md mb-2">{BIO}</p>
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText(BIO);
+              setCopiedBio(true);
+              setTimeout(() => setCopiedBio(false), 2000);
+            }}
+            className="self-start text-[10px] text-white/25 hover:text-white/50 transition-colors"
+          >
+            {copiedBio ? '✓ Copied' : 'Copy bio'}
+          </button>
+        </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-3">
-        {/* ── LEFT: Invited + Topics (2/3 width) ── */}
-        <div className="lg:col-span-2 space-y-5">
-
-          {/* Invited Talks — Collapsible */}
-          <div className="section-enter">
-            <h2 className="text-sm font-semibold text-white/85 mb-3 uppercase tracking-widest">Invited Talks</h2>
-            <div className="space-y-2">
-              {INVITED_TALKS.map((talk, idx) => (
-                <div key={talk.title} className="rounded-xl border border-yellow-400/20 bg-yellow-400/[0.04] overflow-hidden">
-                  <button
-                    onClick={() => setExpandedInvited(expandedInvited === idx ? null : idx)}
-                    className="w-full px-5 py-3.5 flex items-center justify-between gap-3 text-left hover:bg-yellow-400/[0.03] transition-colors"
-                  >
-                    <div className="flex-1 min-w-0">
-                      <div className="text-[10px] text-yellow-400/60 mb-0.5 uppercase tracking-wider font-medium">{talk.event} · {talk.year}</div>
-                      <h3 className="text-sm font-semibold text-white/90 leading-snug truncate">{talk.title}</h3>
-                    </div>
-                    <svg className={`w-4 h-4 shrink-0 text-white/40 transition-transform duration-200 ${expandedInvited === idx ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-                  {expandedInvited === idx && (
-                    <div className="px-5 pb-4 border-t border-yellow-400/10 pt-3 space-y-3">
-                      {/* Event photo evidence */}
-                      {talk.schedulePhoto && (
-                        <div className="rounded-lg overflow-hidden border border-yellow-400/15 mb-3">
-                          <img
-                            src={talk.schedulePhoto}
-                            alt={`${talk.event} event schedule showing ${talk.title}`}
-                            className="w-full h-auto object-cover opacity-90 hover:opacity-100 transition-opacity"
-                          />
-                          <div className="bg-yellow-400/[0.05] px-3 py-1.5 text-[9px] text-yellow-300/60 italic">
-                            Official event schedule — {talk.event}
-                          </div>
-                        </div>
-                      )}
-                      <div>
-                        <span className="text-[10px] font-medium tracking-wider text-white/45 uppercase">Audience</span>
-                        <p className="text-xs text-white/75 mt-0.5">{talk.audience}</p>
-                      </div>
-                      <div>
-                        <span className="text-[10px] font-medium tracking-wider text-white/45 uppercase">Overview</span>
-                        <p className="text-xs leading-[1.65] text-white/75 mt-0.5">{talk.overview}</p>
-                      </div>
-                      <div className="flex flex-wrap gap-1.5 pt-1">
-                        {talk.badges.map((b) => (
-                          <span key={b} className="rounded-full border border-white/14 bg-white/[0.06] px-2 py-0.5 text-[10px] text-white/60">{b}</span>
-                        ))}
-                      </div>
-                    </div>
+      {/* ── Upcoming ── */}
+      {upcoming.length > 0 && (
+        <div className="mb-16">
+          <h2 className="text-xl font-bold tracking-tight text-white/95 mb-8 border-b border-white/10 pb-4">Upcoming Engagements</h2>
+          <div className="space-y-10">
+            {upcoming.map((talk) => (
+              <div key={talk.title} className="relative pl-6 md:pl-8 border-l border-white/10">
+                <div className="absolute left-[-5px] top-1.5 w-2.5 h-2.5 rounded-full bg-amber-400" />
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-amber-900 bg-amber-400 px-2 py-0.5 rounded-sm">
+                    {talk.format}
+                  </span>
+                  <span className="text-xs font-mono text-white/40">{talk.date}</span>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-white/95 leading-tight mb-1">
+                  {talk.title}
+                </h3>
+                <p className="text-base md:text-lg text-white/60 font-light mb-4">{talk.subtitle}</p>
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-white/40 mb-4 font-mono">
+                  <span>{talk.venue}</span>
+                  <span className="text-white/15">·</span>
+                  <span>{talk.location}</span>
+                  {talk.duration && (
+                    <>
+                      <span className="text-white/15">·</span>
+                      <span>{talk.duration}</span>
+                    </>
                   )}
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Speaking Topics — Collapsible */}
-          <div className="section-enter">
-            <h2 className="text-sm font-semibold text-white/85 mb-2 uppercase tracking-widest">Speaking Topics</h2>
-            <p className="text-[10px] text-white/50 mb-3">Click to expand. Use Copy to export any topic into your event schedule.</p>
-            <div className="space-y-1.5">
-              {SPEAKING_TOPICS.map((topic, idx) => (
-                <div key={topic.title} className="rounded-xl border border-white/12 bg-white/[0.04] overflow-hidden">
-                  <button
-                    onClick={() => setExpandedTopic(expandedTopic === idx ? null : idx)}
-                    className="w-full px-4 py-3 flex items-center justify-between gap-3 text-left hover:bg-white/[0.06] transition-colors"
-                  >
-                    <div className="flex items-center gap-2.5 flex-1 min-w-0">
-                      <span className="text-[10px] font-mono text-white/35 shrink-0">{String(idx + 1).padStart(2, '0')}</span>
-                      <h3 className="text-xs font-semibold text-white/85 leading-snug truncate">{topic.title}</h3>
-                    </div>
-                    <div className="flex items-center gap-2 shrink-0">
-                      <button
-                        onClick={(e) => copyTopic(idx, e)}
-                        className="rounded-md border border-white/14 bg-white/[0.06] px-2 py-1 text-[10px] font-medium text-white/60 hover:bg-white/[0.10] hover:text-white/85 transition-colors"
-                      >
-                        {copiedIdx === idx ? '✓' : 'Copy'}
-                      </button>
-                      <svg className={`w-3.5 h-3.5 text-white/35 transition-transform duration-200 ${expandedTopic === idx ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </div>
-                  </button>
-                  {expandedTopic === idx && (
-                    <div className="px-4 pb-4 border-t border-white/8 pt-3">
-                      <div className="flex flex-wrap gap-1.5 mb-2">
-                        {topic.badges.map((b) => (
-                          <span key={b} className="rounded-full border border-white/14 bg-white/[0.06] px-2 py-0.5 text-[10px] text-white/60">{b}</span>
-                        ))}
-                      </div>
-                      <p className="text-xs leading-[1.65] text-white/75">{topic.abstract}</p>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Community Leadership */}
-          <div className="section-enter">
-            <h2 className="text-sm font-semibold text-white/85 mb-3 uppercase tracking-widest">Community Leadership</h2>
-            <div className="grid gap-2 sm:grid-cols-2">
-              {COMMUNITY_ROLES.map((role) => (
-                <div key={role.role} className="rounded-xl border border-white/12 bg-white/[0.04] p-4 hover:bg-white/[0.06] transition-colors">
-                  <div className="flex items-start gap-3">
-                    <span className="text-lg mt-0.5">{role.icon}</span>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between gap-2 mb-1">
-                        <h3 className="text-xs font-semibold text-white/90">{role.role}</h3>
-                        <span className="text-[9px] text-white/40 font-mono shrink-0">{role.year}</span>
-                      </div>
-                      <div className="text-[10px] text-amber-400/70 font-medium mb-1">{role.org}</div>
-                      <p className="text-[10px] leading-[1.6] text-white/60">{role.desc}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+                <p className="text-sm leading-[1.7] text-white/50 max-w-2xl">{talk.abstract}</p>
+              </div>
+            ))}
           </div>
         </div>
+      )}
 
-        {/* ── RIGHT: Speaker Bio (1/3 width) ── */}
-        <div className="section-enter space-y-4">
-          <h2 className="text-sm font-semibold text-white/85 uppercase tracking-widest">Speaker Bio</h2>
-
-          {/* Professional headshot */}
-          <div className="rounded-xl overflow-hidden border border-white/14 relative group">
-            <img
-              src={speakerHeadshotUrl}
-              alt="Vyshak Bellur at JPMorgan Chase Innovation Week 2026"
-              className="w-full h-auto object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-            <div className="absolute bottom-3 left-3 right-3">
-              <div className="text-[9px] font-semibold tracking-widest uppercase text-amber-400/80">JPMorgan Chase Innovation Week 2026</div>
+      {/* ── Past ── */}
+      {past.length > 0 && (
+        <div className="mb-12">
+          <div className="text-[10px] font-semibold tracking-[0.2em] uppercase text-white/25 mb-4">Past</div>
+          {past.map((talk) => (
+            <div key={talk.title} className="py-4 border-t border-white/6 last:border-b">
+              <h3 className="text-lg font-semibold text-white/85 mb-0.5">{talk.title}</h3>
+              <p className="text-sm text-white/40 mb-2">{talk.subtitle}</p>
+              <div className="flex flex-wrap items-center gap-x-3 text-xs text-white/30">
+                <span>{talk.venue}</span>
+                <span className="text-white/10">·</span>
+                <span>{talk.date}</span>
+              </div>
             </div>
-          </div>
-
-          <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5">
-            <p className="text-xs leading-[1.65] text-white/75 mb-4">{PRESS_BIO}</p>
-            <button
-              onClick={copyBio}
-              id="copy-bio-btn"
-              className="w-full rounded-lg border border-white/14 bg-white/[0.06] px-3 py-2 text-[10px] font-semibold text-white/75 hover:bg-white/[0.10] transition-colors"
-            >
-              {copiedBio ? '✓ Copied to Clipboard' : 'Copy Bio'}
-            </button>
-          </div>
-
-          <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5 space-y-3">
-            <a
-              href="/Vyshak_Bellur_Resume.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center justify-center gap-2 w-full rounded-lg bg-gradient-to-r from-red-600 via-yellow-500 to-red-500 px-4 py-2.5 text-xs font-bold text-slate-950"
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1="12" y1="15" x2="12" y2="3" />
-              </svg>
-              Download Speaker Bio PDF
-            </a>
-            <a
-              href="/contact"
-              className="flex items-center justify-center w-full rounded-lg border border-white/14 bg-white/[0.06] px-4 py-2.5 text-xs font-semibold text-white/75 hover:bg-white/[0.10] transition-colors"
-            >
-              Invite to Speak
-            </a>
-          </div>
-
-          <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5">
-            <div className="text-[10px] font-medium tracking-widest uppercase text-white/45 mb-2">Available For</div>
-            <div className="flex flex-wrap gap-1.5">
-              {['Keynotes', 'Technical Sessions', 'Panel Discussions', 'Hackathon Judging', 'ML Mentorship'].map(t => (
-                <span key={t} className="rounded-full border border-yellow-400/25 bg-yellow-400/10 px-2.5 py-0.5 text-[10px] text-yellow-300">{t}</span>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
+      )}
+
+      {/* ── Topics ── */}
+      <div className="mb-12">
+        <div className="text-[10px] font-semibold tracking-[0.2em] uppercase text-white/25 mb-4">Also speaks on</div>
+        <div className="space-y-2">
+          {TOPICS.map((topic) => (
+            <div key={topic} className="text-sm text-white/45 hover:text-white/70 transition-colors">
+              {topic}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── CTA ── */}
+      <div className="text-center pb-10">
+        <a
+          href="/contact"
+          className="text-sm text-white/40 hover:text-white/70 transition-colors"
+        >
+          Invite to speak →
+        </a>
       </div>
     </div>
   );
