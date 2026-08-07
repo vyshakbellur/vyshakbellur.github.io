@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { nav } from '../data/nav';
+import { profile } from '../data/profile';
 
 /* Per-page accent colours — complement each page's content palette */
 const PAGE_ACCENT: Record<string, string> = {
@@ -96,6 +97,22 @@ export default function CompactHeader() {
               {item.label}
             </NavLink>
           ))}
+          
+          <div className="w-px h-6 bg-white/10 mx-2" />
+          
+          <a
+            href={profile.links.resume}
+            target="_blank"
+            rel="noreferrer"
+            className="px-4 py-1.5 rounded text-[11px] font-black font-mono tracking-widest uppercase transition-all duration-200 hover:scale-105"
+            style={{ 
+              color: '#0a0f1a',
+              background: ac,
+              boxShadow: `0 0 12px ${ac}50`
+            }}
+          >
+            Resume
+          </a>
         </nav>
       </header>
 

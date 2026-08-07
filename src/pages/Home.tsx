@@ -27,7 +27,7 @@ export default function Home() {
             </h1>
             
             <p className="text-sm md:text-base font-semibold tracking-wide text-amber-400/90 mb-6 font-mono uppercase">
-              Applied AI Researcher <span className="text-amber-400/40 font-sans px-1">|</span> Senior Software Engineer
+              Cross-Domain ML Architect <span className="text-amber-400/40 font-sans px-1">|</span> Senior Systems Engineer
             </p>
 
             <p className="text-sm md:text-base leading-relaxed text-white/70 max-w-md mb-8">
@@ -36,7 +36,7 @@ export default function Home() {
 
             {/* Evidence micro-bar */}
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[11px] font-semibold tracking-widest uppercase text-white/40 mb-8">
-              {['JPMorgan Chase', 'Oxford-Published', 'Conference Speaker', 'Hackathon Judge'].map((p, i) => (
+              {['JPMorgan Chase', 'Oxford-Published', 'Conference Speaker'].map((p, i) => (
                 <span key={p} className="flex items-center gap-2">
                   {i > 0 && <span className="text-white/10">·</span>}
                   <span className="hover:text-white/80 transition-colors cursor-default">{p}</span>

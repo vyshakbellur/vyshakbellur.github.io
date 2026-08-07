@@ -103,34 +103,42 @@ export default function Writing() {
         <div className="section-enter">
           <div className="mb-8 text-[10px] font-semibold tracking-[0.2em] text-white/40 uppercase">Academic Publications</div>
           <div className="space-y-10">
-            {PUBLICATIONS.map((p) => (
-              <a
-                key={p.title}
-                href={p.href}
-                target="_blank"
-                rel="noreferrer"
-                className="group block"
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-[10px] font-bold tracking-[0.15em] text-amber-900 uppercase bg-amber-400 px-2 py-0.5 rounded-sm">
-                    {p.publisher}
-                  </span>
-                  <span className="text-xs font-mono text-white/40">{p.year}</span>
-                </div>
-                <h3 className="text-xl md:text-2xl font-bold leading-tight text-white/95 mb-2 group-hover:text-white transition-colors">
-                  {p.title}
-                </h3>
-                {p.subtitle && (
-                  <p className="text-base text-white/60 font-light italic mb-4">{p.subtitle}</p>
-                )}
-                <div className="flex items-center justify-between border-t border-white/10 pt-4 mt-2">
-                  <span className="text-xs text-white/50 font-mono">
-                    {p.journal}{p.coAuthor ? ` · ${p.coAuthor}` : ''}
-                  </span>
-                  <span className="text-sm text-amber-400/0 group-hover:text-amber-400/90 transition-colors transform group-hover:translate-x-1">→</span>
-                </div>
-              </a>
-            ))}
+            {PUBLICATIONS.map((p, index) => {
+              const isHero = index === 0;
+              return (
+                <a
+                  key={p.title}
+                  href={p.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`group block ${isHero ? 'bg-white/[0.02] p-6 -mx-6 rounded-2xl border border-white/5 hover:bg-white/[0.05] hover:border-white/10 transition-all' : ''}`}
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className={`text-[10px] font-bold tracking-[0.15em] uppercase px-2 py-0.5 rounded-sm ${isHero ? 'bg-amber-400 text-amber-950' : 'text-amber-400/80 border border-amber-400/20'}`}>
+                      {p.publisher}
+                    </span>
+                    {isHero && (
+                      <span className="text-[10px] font-bold tracking-[0.1em] text-emerald-400/90 uppercase border border-emerald-400/20 px-2 py-0.5 rounded-sm">
+                        Peer-Reviewed
+                      </span>
+                    )}
+                    <span className="text-xs font-mono text-white/40">{p.year}</span>
+                  </div>
+                  <h3 className={`${isHero ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'} font-bold leading-tight text-white/95 mb-3 group-hover:text-white transition-colors`}>
+                    {p.title}
+                  </h3>
+                  {p.subtitle && (
+                    <p className={`${isHero ? 'text-lg' : 'text-base'} text-white/60 font-light italic mb-5`}>{p.subtitle}</p>
+                  )}
+                  <div className={`flex items-center justify-between border-t ${isHero ? 'border-white/10 pt-5 mt-3' : 'border-white/5 pt-4 mt-2'}`}>
+                    <span className="text-xs text-white/50 font-mono">
+                      {p.journal}{p.coAuthor ? ` · ${p.coAuthor}` : ''}
+                    </span>
+                    <span className="text-sm text-amber-400/0 group-hover:text-amber-400/90 transition-colors transform group-hover:translate-x-1">→</span>
+                  </div>
+                </a>
+              );
+            })}
           </div>
         </div>
 
