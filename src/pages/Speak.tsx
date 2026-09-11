@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import speakerHeadshotUrl from '../assets/VyshakInnovationWeek.jpg';
 
-const BIO = `Applied AI Researcher and Senior Software Engineer at JPMorgan Chase. Oxford-published. Keynote Speaker, Panelist, and Hackathon Judge focusing on trustworthy AI, agentic security, and cross-domain pattern recognition.`;
+const BIO = `Applied AI researcher and Senior Software Engineer at JPMorgan Chase. Oxford-published conference speaker focused on trustworthy AI, agentic security, and production-scale systems.`;
 
 /*
  * To add a new talk: just push an object here.
@@ -10,6 +10,20 @@ const BIO = `Applied AI Researcher and Senior Software Engineer at JPMorgan Chas
  */
 const ENGAGEMENTS = [
   {
+    title: 'Attack Surface Expansion Through Generative AI Adoption & Governance',
+    subtitle: 'How generative AI changes exposure, data access, monitoring, and governance',
+    venue: 'CISO New York 2026',
+    location: 'W Hoboken, New Jersey',
+    date: 'September 24, 2026',
+    format: 'Panel' as const,
+    status: 'upcoming' as const,
+    abstract: 'A practitioner panel on hidden risks from generative AI adoption, shadow AI, unmanaged integrations, and governance that keeps pace with a rapidly changing attack surface.',
+    evidence: [
+      { label: 'Official agenda', href: 'https://ciso-east.coriniumintelligence.com/agenda' },
+      { label: 'Speaker roster', href: 'https://ciso-east.coriniumintelligence.com/speakers' },
+    ],
+  },
+  {
     title: 'The Latency-vs-Security Curve',
     subtitle: 'Operational Engineering for High-Scale Agentic Architectures',
     venue: 'API World',
@@ -17,8 +31,12 @@ const ENGAGEMENTS = [
     date: 'September 1, 2026',
     format: 'Talk' as const,
     duration: '50 min',
-    status: 'upcoming' as const,
+    status: 'past' as const,
     abstract: 'Separating probabilistic LLM exploration from deterministic execution. A layered Guard-Classifier-Verifier pipeline balancing performance with security in regulated environments.',
+    evidence: [
+      { label: 'Official agenda', href: 'https://apiworld.co/conference/' },
+      { label: 'Speaker roster', href: 'https://cloudxconf.com/speakers/' },
+    ],
   },
   /*
   {
@@ -51,6 +69,17 @@ const ENGAGEMENTS = [
     format: 'Talk' as const,
     status: 'past' as const,
     abstract: 'Deterministic Guard–Classifier–Verifier architecture for securing agentic AI in regulated financial environments.',
+    evidence: [],
+  },
+];
+
+const SELECTED_FORUMS = [
+  {
+    venue: 'HotTopics Studio Nashville 2026',
+    date: 'October 26-28, 2026',
+    location: 'Country Music Hall of Fame, Nashville',
+    status: 'Attendance confirmed; panel decision pending',
+    href: 'https://hottopics.ht/hottopics-studio-nashville',
   },
 ];
 
@@ -128,6 +157,15 @@ export default function Speak() {
                   )}
                 </div>
                 <p className="text-sm leading-[1.7] text-white/50 max-w-2xl">{talk.abstract}</p>
+                {talk.evidence.length > 0 && (
+                  <div className="mt-4 flex flex-wrap gap-4">
+                    {talk.evidence.map((item) => (
+                      <a key={item.href} href={item.href} target="_blank" rel="noreferrer" className="text-xs text-amber-300/70 hover:text-amber-300 transition-colors">
+                        {item.label} ↗
+                      </a>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -147,10 +185,36 @@ export default function Speak() {
                 <span className="text-white/10">·</span>
                 <span>{talk.date}</span>
               </div>
+              {talk.evidence.length > 0 && (
+                <div className="mt-2 flex flex-wrap gap-4">
+                  {talk.evidence.map((item) => (
+                    <a key={item.href} href={item.href} target="_blank" rel="noreferrer" className="text-xs text-amber-300/55 hover:text-amber-300 transition-colors">
+                      {item.label} ↗
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
       )}
+
+      {/* ── Selected forums ── */}
+      <div className="mb-14 rounded-2xl border border-white/10 bg-white/[0.025] p-5 md:p-6">
+        <div className="text-[10px] font-semibold tracking-[0.2em] uppercase text-white/25 mb-4">Selected professional forums</div>
+        {SELECTED_FORUMS.map((forum) => (
+          <div key={forum.venue} className="grid gap-3 md:grid-cols-[1fr_auto] md:items-center">
+            <div>
+              <h3 className="text-lg font-semibold text-white/85">{forum.venue}</h3>
+              <p className="mt-1 text-xs font-mono text-white/35">{forum.date} · {forum.location}</p>
+              <p className="mt-3 text-xs text-amber-300/70">{forum.status}</p>
+            </div>
+            <a href={forum.href} target="_blank" rel="noreferrer" className="text-xs text-white/45 hover:text-white/75 transition-colors">
+              Event site ↗
+            </a>
+          </div>
+        ))}
+      </div>
 
       {/* ── Topics ── */}
       <div className="mb-12">

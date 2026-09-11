@@ -15,10 +15,17 @@ const TABS = [
 
 type TabId = typeof TABS[number]['id'];
 
+type CareerItem = {
+  company: string;
+  role: string;
+  period: string;
+  commits: string[];
+};
+
 /* ═══════════════════════════════════════════
    CAREER DATA — Git-Graph Topology
    ═══════════════════════════════════════════ */
-const CAREER_DATA: Record<string, any> = {
+const CAREER_DATA: Record<string, CareerItem> = {
   'jpmc': { company: 'JPMorgan Chase & Co.', role: 'Senior Full-Stack Engineer', period: 'Jun 2023 – Present',
     commits: ['Spearheading modernization of Investment Discovery APIs (SOAP → REST)', 'Catapulted test coverage from 18% to 80%, securing zero P1 incidents in 2025', 'Architected "Magic Button" — an LLM tool delivering wealth intelligence', 'Owned critical TLS and ADFS certificate lifecycle rotation across prod'] },
   'walmart': { company: 'Walmart Global Tech', role: 'Software Engineer', period: 'Dec 2022 – Jun 2023',
@@ -47,6 +54,8 @@ type EduNode = {
 
 const D = 1200; const A = 130;
 const FREQ = (Math.PI * 2) / 800;
+const BOUNDS_U = [0, D] as const;
+const HELIX_RESOLUTION = 15;
 
 const getPos = (u: number, strand: 0 | 1) => {
   const pct = u / D;
@@ -226,30 +235,27 @@ function EducationTab() {
   const [hovered, setHovered] = useState<string>('phd');
   const activeNode = EDU_NODES.find((n) => n.id === hovered) || EDU_NODES[EDU_NODES.length - 1];
 
-  const boundsU = [0, 1200];
-  const resolution = 15;
-
   const strand0Points = useMemo(() => {
     let d = '';
-    for (let u = boundsU[0]; u <= boundsU[1]; u += resolution) {
+    for (let u = BOUNDS_U[0]; u <= BOUNDS_U[1]; u += HELIX_RESOLUTION) {
       const pos = getPos(u, 0);
-      d += `${u === boundsU[0] ? 'M' : 'L'} ${pos.x},${pos.y} `;
+      d += `${u === BOUNDS_U[0] ? 'M' : 'L'} ${pos.x},${pos.y} `;
     }
     return d;
   }, []);
 
   const strand1Points = useMemo(() => {
     let d = '';
-    for (let u = boundsU[0]; u <= boundsU[1]; u += resolution) {
+    for (let u = BOUNDS_U[0]; u <= BOUNDS_U[1]; u += HELIX_RESOLUTION) {
       const pos = getPos(u, 1);
-      d += `${u === boundsU[0] ? 'M' : 'L'} ${pos.x},${pos.y} `;
+      d += `${u === BOUNDS_U[0] ? 'M' : 'L'} ${pos.x},${pos.y} `;
     }
     return d;
   }, []);
 
   const basePairs = useMemo(() => {
     const pairs = [];
-    for (let u = boundsU[0] + 15; u < boundsU[1]; u += 25) {
+    for (let u = BOUNDS_U[0] + 15; u < BOUNDS_U[1]; u += 25) {
       pairs.push({ u, p1: getPos(u, 0), p2: getPos(u, 1) });
     }
     return pairs;

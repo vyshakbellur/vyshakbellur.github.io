@@ -7,8 +7,8 @@ const PUBLICATIONS = [
     subtitle: 'Ethiopic, Armenian, Georgian, and Caucasian Albanian scripts',
     journal: 'Digital Scholarship in the Humanities',
     publisher: 'Oxford University Press',
-    year: '2024',
-    coAuthor: 'Prof. Sam Kassegne',
+    year: '2026',
+    coAuthor: 'Co-authored research',
     href: 'https://academic.oup.com/dsh/article/41/2/1092/8539597',
   },
   {
@@ -17,6 +17,30 @@ const PUBLICATIONS = [
     publisher: 'San Diego State University',
     year: '2019',
     href: 'https://www.proquest.com/openview/194737039beaa878147991fc6e8aa954/1?pq-origsite=gscholar&cbl=18750&diss=y',
+  },
+];
+
+const FEATURED_ANALYSIS = [
+  {
+    title: 'Why Every Enterprise AI Agent Needs a Rollback Strategy',
+    outlet: 'Towards AI',
+    date: 'July 2026',
+    href: 'https://pub.towardsai.net/why-every-enterprise-ai-agent-needs-a-rollback-strategy-before-it-becomes-your-most-expensive-aa7086956faa',
+    description: 'A practitioner argument for treating rollback as a first-class control in production agentic systems.',
+  },
+  {
+    title: 'The Missing Layer Between LLMs and Kubernetes',
+    outlet: 'Artificial Intelligence in Plain English',
+    date: 'July 2026',
+    href: 'https://ai.plainenglish.io/the-missing-layer-between-llms-and-kubernetes-95d13c0bb033',
+    description: 'An operating-model view of the control plane required to run enterprise AI reliably at scale.',
+  },
+  {
+    title: 'What AWS + NVIDIA\'s Agents of Impact Taught Me About Why Enterprise AI Projects Fail',
+    outlet: 'Medium',
+    date: 'August 2026',
+    href: 'https://medium.com/@vyshak.x.bellur/what-aws-nvidias-agents-of-impact-taught-me-about-the-real-reason-enterprise-ai-projects-fail-bff8fd1dce1c',
+    description: 'Field notes translated into practical lessons for leaders moving from prototypes to accountable systems.',
   },
 ];
 
@@ -88,15 +112,15 @@ export default function Writing() {
       {/* Header */}
       <div className="section-enter mb-12">
         <h1 className="text-4xl font-bold tracking-tight text-white/95 md:text-5xl mb-6">
-          Research & Writing
+          Publications & Industry Analysis
         </h1>
         <p className="text-lg md:text-xl text-white/60 font-light max-w-3xl leading-relaxed">
-          Exploring the intersection of algorithms and origins. My published work and technical writing focus on applying modern machine learning architectures to complex, unstructured data — from ancient linguistics to enterprise systems.
+          Peer-reviewed research and practitioner analysis on trustworthy AI, production-scale agentic systems, and machine learning applied across domains.
         </p>
         <div className="mt-10 h-px w-full bg-white/10" />
       </div>
 
-      {/* Two-column: Published | Articles */}
+      {/* Two-column: Published | Industry analysis */}
       <div className="grid gap-8 lg:grid-cols-2 items-start">
 
         {/* ── LEFT: Published Literature ── */}
@@ -142,19 +166,35 @@ export default function Writing() {
           </div>
         </div>
 
-        {/* ── RIGHT: Medium Articles ── */}
+        {/* ── RIGHT: Industry analysis + Medium feed ── */}
         <div className="section-enter">
           <div className="flex items-center justify-between mb-4">
-            <div className="text-[10px] font-semibold tracking-[0.2em] text-white/40 uppercase">Articles</div>
+            <div className="text-[10px] font-semibold tracking-[0.2em] text-white/40 uppercase">Industry Analysis</div>
             <a
               href={`https://medium.com/@${MEDIUM_USERNAME}`}
               target="_blank"
               rel="noreferrer"
               className="text-[10px] font-semibold tracking-wider text-white/30 hover:text-amber-400/70 transition-colors uppercase"
             >
-              Medium ↗
+              All writing ↗
             </a>
           </div>
+
+          <div className="space-y-3 mb-9">
+            {FEATURED_ANALYSIS.map((article) => (
+              <a key={article.href} href={article.href} target="_blank" rel="noreferrer" className="group block rounded-xl border border-white/5 bg-white/[0.02] p-4 hover:border-white/10 hover:bg-white/[0.045] transition-all">
+                <div className="mb-2 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-amber-300/70">
+                  <span>{article.outlet}</span>
+                  <span className="text-white/15">·</span>
+                  <span className="text-white/30">{article.date}</span>
+                </div>
+                <h3 className="text-sm font-semibold leading-snug text-white/85 group-hover:text-white transition-colors">{article.title}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-white/40">{article.description}</p>
+              </a>
+            ))}
+          </div>
+
+          <div className="mb-3 text-[10px] font-semibold tracking-[0.2em] text-white/30 uppercase">Latest notes & essays</div>
 
           {loading ? (
             <div className="space-y-2">
