@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import speakerHeadshotUrl from '../assets/VyshakInnovationWeek.jpg';
+import apiWorldSpeakingUrl from '../assets/api-world-speaking.jpg';
 
 const BIO = `Applied AI researcher and Senior Software Engineer at JPMorgan Chase. Oxford-published conference speaker focused on trustworthy AI, agentic security, and production-scale systems.`;
 
@@ -102,16 +102,9 @@ export default function Speak() {
   return (
     <div className="mx-auto max-w-4xl px-5">
 
-      {/* ── Hero: vertical photo + title side by side ── */}
-      <div className="flex gap-6 items-stretch mt-6 mb-12">
-        <div className="w-48 shrink-0 rounded-2xl overflow-hidden">
-          <img
-            src={speakerHeadshotUrl}
-            alt="Vyshak Bellur"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="flex flex-col justify-end py-2">
+      {/* ── Hero: positioning + verifiable conference image ── */}
+      <div className="grid gap-6 mt-6 mb-12 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.5fr)] md:items-center">
+        <div className="flex flex-col justify-center py-2">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Speaking</h1>
           <p className="text-sm text-white/50 leading-relaxed max-w-md mb-2">{BIO}</p>
           <button
@@ -125,6 +118,20 @@ export default function Speak() {
             {copiedBio ? '✓ Copied' : 'Copy bio'}
           </button>
         </div>
+        <figure className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.025] shadow-2xl shadow-black/30">
+          <img
+            src={apiWorldSpeakingUrl}
+            alt="Vyshak Bellur presenting The Latency-Security Curve at API World 2026"
+            width={2000}
+            height={1500}
+            fetchPriority="high"
+            className="aspect-[4/3] w-full object-cover"
+          />
+          <figcaption className="flex flex-wrap items-center justify-between gap-2 border-t border-white/10 px-4 py-3 text-[10px] font-mono uppercase tracking-[0.12em] text-white/40">
+            <span>API World 2026</span>
+            <span className="text-amber-300/70">The Latency-Security Curve</span>
+          </figcaption>
+        </figure>
       </div>
 
       {/* ── Upcoming ── */}
