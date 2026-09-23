@@ -83,6 +83,36 @@ const SELECTED_FORUMS = [
   },
 ];
 
+const PROFESSIONAL_SERVICE = [
+  {
+    role: 'Session Chair Candidate',
+    organization: 'Engineering, Technology and Innovation Conference (ETIC 2026)',
+    status: 'Invited; chair materials and domain alignment in progress',
+    detail: 'Proposed service across AI-enabled systems, trustworthy AI, software reliability, cybersecurity, and emerging technology tracks.',
+    href: 'https://eticonference.com/registration',
+  },
+  {
+    role: 'Judge — Invitation Pipeline',
+    organization: 'Cal Hacks 13.0 / HackBerkeley',
+    status: 'Organizer expressed interest; formal judge application pending release',
+    detail: 'The organizer invited participation in the judging process for the October 23–25, 2026 event. This is not listed as a completed judging engagement.',
+    href: 'https://calhacks.io/',
+  },
+  {
+    role: 'Mentor Offer',
+    organization: 'LA Hacks AI Hackathon 2026',
+    status: 'Mentor role offered after the judging pool filled',
+    detail: 'A separate service opportunity from Cal Hacks; retained here as mentoring rather than judging evidence.',
+    href: 'https://lahacks.com/',
+  },
+  {
+    role: 'Judge — Paused Opportunity',
+    organization: 'Creator Colosseum',
+    status: 'Organizer expressed interest; program currently paused',
+    detail: 'Tracked transparently as an opportunity in progress and not represented as a confirmed or completed judging role.',
+  },
+];
+
 const TOPICS = [
   'Building Self-Healing APIs with AI',
   'The Guardian Paradigm: Secure Agentic AI for Regulated Enterprises',
@@ -221,6 +251,32 @@ export default function Speak() {
             </a>
           </div>
         ))}
+      </div>
+
+      {/* ── Professional service ── */}
+      <div className="mb-14">
+        <div className="flex flex-wrap items-end justify-between gap-3 border-b border-white/10 pb-4 mb-5">
+          <div>
+            <h2 className="text-xl font-bold tracking-tight text-white/95">Professional service & selections</h2>
+            <p className="mt-1 text-xs text-white/35">Judging, mentoring, and conference leadership tracked at their current stage.</p>
+          </div>
+          <span className="text-[10px] font-mono uppercase tracking-[0.15em] text-amber-300/60">Verified status language</span>
+        </div>
+        <div className="grid gap-3 md:grid-cols-2">
+          {PROFESSIONAL_SERVICE.map((item) => (
+            <article key={`${item.organization}-${item.role}`} className="rounded-xl border border-white/10 bg-white/[0.025] p-5">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-amber-300/70">{item.role}</div>
+              <h3 className="mt-2 text-base font-semibold text-white/90">{item.organization}</h3>
+              <p className="mt-2 text-xs font-medium text-white/55">{item.status}</p>
+              <p className="mt-3 text-xs leading-relaxed text-white/35">{item.detail}</p>
+              {item.href && (
+                <a href={item.href} target="_blank" rel="noreferrer" className="mt-4 inline-block text-xs text-amber-300/60 hover:text-amber-300 transition-colors">
+                  Official site ↗
+                </a>
+              )}
+            </article>
+          ))}
+        </div>
       </div>
 
       {/* ── Topics ── */}
