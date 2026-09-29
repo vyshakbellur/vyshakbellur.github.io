@@ -3,12 +3,26 @@ import apiWorldSpeakingUrl from '../assets/api-world-speaking.jpg';
 
 const BIO = `Applied AI researcher and Senior Software Engineer at JPMorgan Chase. Oxford-published conference speaker focused on trustworthy AI, agentic security, and production-scale systems.`;
 
+type Engagement = {
+  title: string;
+  subtitle: string;
+  venue: string;
+  location: string;
+  date: string;
+  format: 'Talk' | 'Panel' | 'Workshop';
+  duration?: string;
+  status: 'featured' | 'upcoming' | 'past';
+  abstract: string;
+  evidence: Array<{ label: string; href: string }>;
+};
+
 /*
  * To add a new talk: just push an object here.
+ * - status: 'featured' highlights the latest verified engagement
  * - status: 'upcoming' gets featured treatment, 'past' stacks below
  * - format: 'Talk' | 'Panel' | 'Workshop' — shown as a subtle label
  */
-const ENGAGEMENTS = [
+const ENGAGEMENTS: Engagement[] = [
   {
     title: 'Attack Surface Expansion Through Generative AI Adoption & Governance',
     subtitle: 'How generative AI changes exposure, data access, monitoring, and governance',
@@ -16,11 +30,12 @@ const ENGAGEMENTS = [
     location: 'W Hoboken, New Jersey',
     date: 'September 24, 2026',
     format: 'Panel' as const,
-    status: 'upcoming' as const,
+    status: 'featured' as const,
     abstract: 'A practitioner panel on hidden risks from generative AI adoption, shadow AI, unmanaged integrations, and governance that keeps pace with a rapidly changing attack surface.',
     evidence: [
-      { label: 'Official agenda', href: 'https://ciso-east.coriniumintelligence.com/agenda' },
-      { label: 'Speaker roster', href: 'https://ciso-east.coriniumintelligence.com/speakers' },
+      { label: 'Official agenda & panel listing', href: 'https://ciso-east.coriniumintelligence.com/agenda' },
+      { label: 'Official speaker profile', href: 'https://ciso-east.coriniumintelligence.com/speakers' },
+      { label: 'Organizer announcement', href: 'https://www.linkedin.com/posts/business-of-infosec_cisony-activity-7498379065633021952-BU7q' },
     ],
   },
   {
@@ -86,6 +101,7 @@ const TOPICS = [
 export default function Speak() {
   const [copiedBio, setCopiedBio] = useState(false);
 
+  const featured = ENGAGEMENTS.filter((e) => e.status === 'featured');
   const upcoming = ENGAGEMENTS.filter((e) => e.status === 'upcoming');
   const past = ENGAGEMENTS.filter((e) => e.status === 'past');
 
@@ -123,6 +139,47 @@ export default function Speak() {
           </figcaption>
         </figure>
       </div>
+
+      {/* ── Latest verified engagement ── */}
+      {featured.map((talk) => (
+        <article
+          key={talk.title}
+          className="relative mb-16 overflow-hidden rounded-2xl border border-amber-300/20 bg-gradient-to-br from-amber-300/[0.09] via-white/[0.035] to-transparent p-6 shadow-2xl shadow-black/20 md:p-8"
+        >
+          <div className="absolute right-0 top-0 h-48 w-48 rounded-full bg-amber-300/[0.07] blur-3xl" aria-hidden="true" />
+          <div className="relative">
+            <div className="mb-5 flex flex-wrap items-center gap-3">
+              <span className="rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-amber-200">
+                Latest verified engagement
+              </span>
+              <span className="text-xs font-mono text-white/45">{talk.date}</span>
+            </div>
+            <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-start">
+              <div>
+                <div className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-amber-300/75">
+                  {talk.format} · {talk.venue}
+                </div>
+                <h2 className="max-w-3xl text-2xl font-bold leading-tight tracking-tight text-white md:text-4xl">
+                  {talk.title}
+                </h2>
+                <p className="mt-3 text-base font-light text-white/60 md:text-lg">{talk.subtitle}</p>
+                <p className="mt-5 max-w-2xl text-sm leading-[1.75] text-white/50">{talk.abstract}</p>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-left md:min-w-44 md:text-right">
+                <div className="text-[10px] uppercase tracking-[0.16em] text-white/30">Location</div>
+                <div className="mt-1 text-xs font-medium text-white/65">{talk.location}</div>
+              </div>
+            </div>
+            <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 border-t border-white/10 pt-5">
+              {talk.evidence.map((item) => (
+                <a key={item.href} href={item.href} target="_blank" rel="noreferrer" className="text-xs text-amber-300/75 transition-colors hover:text-amber-200">
+                  {item.label} ↗
+                </a>
+              ))}
+            </div>
+          </div>
+        </article>
+      ))}
 
       {/* ── Upcoming ── */}
       {upcoming.length > 0 && (
@@ -172,7 +229,7 @@ export default function Speak() {
       {/* ── Past ── */}
       {past.length > 0 && (
         <div className="mb-12">
-          <div className="text-[10px] font-semibold tracking-[0.2em] uppercase text-white/25 mb-4">Past</div>
+          <div className="text-[10px] font-semibold tracking-[0.2em] uppercase text-white/25 mb-4">Earlier engagements</div>
           {past.map((talk) => (
             <div key={talk.title} className="py-4 border-t border-white/6 last:border-b">
               <h3 className="text-lg font-semibold text-white/85 mb-0.5">{talk.title}</h3>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Console from '../components/Console';
 import { profile } from '../data/profile';
 import speakerHeadshotUrl from '../assets/Vyshak_speaker.jpeg';
@@ -36,7 +37,7 @@ export default function Home() {
 
             {/* Evidence micro-bar */}
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[11px] font-semibold tracking-widest uppercase text-white/40 mb-8">
-              {['JPMorgan Chase', 'Oxford-Published', 'Conference Speaker'].map((p, i) => (
+              {['JPMorgan Chase', 'Oxford-Published', 'CISO NY Panelist'].map((p, i) => (
                 <span key={p} className="flex items-center gap-2">
                   {i > 0 && <span className="text-white/10">·</span>}
                   <span className="hover:text-white/80 transition-colors cursor-default">{p}</span>
@@ -46,6 +47,12 @@ export default function Home() {
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-3">
+              <Link
+                to="/speak"
+                className="inline-flex items-center gap-2 rounded-lg bg-amber-400 px-4 py-2 text-xs font-semibold text-slate-950 hover:bg-amber-300 transition-all"
+              >
+                Speaking
+              </Link>
               <a
                 href={profile.links.resume}
                 target="_blank"
