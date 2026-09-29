@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import apiWorldSpeakingUrl from '../assets/api-world-speaking.jpg';
+import cisoNewYorkPanelUrl from '../assets/ciso-new-york-panel.jpg';
 
 const BIO = `Applied AI researcher and Senior Software Engineer at JPMorgan Chase. Oxford-published conference speaker focused on trustworthy AI, agentic security, and production-scale systems.`;
 
@@ -170,6 +171,20 @@ export default function Speak() {
                 <div className="mt-1 text-xs font-medium text-white/65">{talk.location}</div>
               </div>
             </div>
+            <figure className="mt-7 overflow-hidden rounded-xl border border-white/10 bg-black/20">
+              <img
+                src={cisoNewYorkPanelUrl}
+                alt="Vyshak Bellur participating in the CISO New York 2026 panel discussion"
+                width={2000}
+                height={1500}
+                loading="lazy"
+                className="aspect-[16/9] w-full object-cover object-[center_68%]"
+              />
+              <figcaption className="flex flex-wrap items-center justify-between gap-2 border-t border-white/10 px-4 py-3 text-[10px] font-mono uppercase tracking-[0.12em] text-white/40">
+                <span>CISO New York 2026</span>
+                <span className="text-amber-300/70">Generative AI adoption & governance panel</span>
+              </figcaption>
+            </figure>
             <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 border-t border-white/10 pt-5">
               {talk.evidence.map((item) => (
                 <a key={item.href} href={item.href} target="_blank" rel="noreferrer" className="text-xs text-amber-300/75 transition-colors hover:text-amber-200">
