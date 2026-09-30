@@ -26,13 +26,13 @@ type CareerItem = {
    CAREER DATA — Git-Graph Topology
    ═══════════════════════════════════════════ */
 const CAREER_DATA: Record<string, CareerItem> = {
-  'jpmc': { company: 'JPMorgan Chase & Co.', role: 'Senior Full-Stack Engineer', period: 'Jun 2023 – Present',
-    commits: ['Spearheading modernization of Investment Discovery APIs (SOAP → REST)', 'Catapulted test coverage from 18% to 80%, securing zero P1 incidents in 2025', 'Architected "Magic Button" — an LLM tool delivering wealth intelligence', 'Owned critical TLS and ADFS certificate lifecycle rotation across prod'] },
+  'jpmc': { company: 'JPMorgan Chase & Co.', role: 'Senior Software Engineer', period: 'Jun 2023 – Present',
+    commits: ['Modernizing investment-discovery services from SOAP to REST', 'Improved automated test coverage from 18% to 80%', 'Built an LLM-assisted tool for wealth-intelligence workflows', 'Supported production reliability, including TLS and ADFS certificate lifecycle work'] },
   'walmart': { company: 'Walmart Global Tech', role: 'Software Engineer', period: 'Dec 2022 – Jun 2023',
     commits: ['Built React analytics dashboards isolating shopper behavior & channel metrics', 'Enforced strict TDD universally with Jest, Cypress, and JUnit', 'Implemented complex role and region-based access control inside systems'] },
-  'ford': { company: 'Ford Motor Co.', role: 'Software Consultant', period: 'Mar 2021 – Dec 2022',
-    commits: ['Key developer on the EV Beta platform onboarding ~15k users across the U.S.', 'Full-stack delivery via React, TypeScript, Spring Boot, and MySQL', 'Masterminded integrations with Splunk and Amplitude for observability pipelines'] },
-  'synchrony': { company: 'Synchrony', role: 'Senior Software Engineer', period: 'Jun 2018 – Dec 2021',
+  'ford': { company: 'Altimetrik · Ford Motor Company engagement', role: 'Software Consultant', period: 'Mar 2021 – Dec 2022',
+    commits: ['Contributed to an EV beta platform serving approximately 15,000 U.S. users', 'Delivered full-stack features with React, TypeScript, Spring Boot, and MySQL', 'Integrated Splunk and Amplitude for application observability and product insights'] },
+  'synchrony': { company: 'Synchrony · Consulting engagement', role: 'Senior Software Engineer', period: 'Jun 2018 – Dec 2021',
     commits: ['Architected event-driven microservices processing 1.2M+ tx/day', 'Achieved sub-50ms latency utilizing Kafka, RabbitMQ, and Redis', 'Built a reusable React UI component library adopted across enterprise teams'] },
   'sdsu': { company: 'SDSU Research Foundation', role: 'Research Software Developer', period: '2019 – 2020',
     commits: ['Deployed CIBER Portal — robust program CMS empowering non-technical staff', 'Engineered bioinformatics data pipelines improving ingestion scalability'] },
@@ -69,11 +69,11 @@ const getPos = (u: number, strand: 0 | 1) => {
 const EDU_NODES: EduNode[] = [
   { id: 'be', strand: 0, u: 150, title: 'BE, Electronics & Communication', institution: 'Visvesvaraya Technological University', period: '2010 – 2014', description: 'Foundational engineering degree combining hardware systems with low-level software.', courses: ['Digital Signal Processing', 'Microcontrollers & Architecture', 'Data Structures'], color: '#06b6d4' },
   { id: 'ms', strand: 0, u: 300, title: 'MS in Computer Science', institution: 'San Diego State University', period: '2016 – 2019', description: 'Specialized in computer science fundamentals, applied research, and bioinformatics pipelines.', impact: 'Established the research foundation for large-scale computational analysis on biological networks.', courses: ['Bioinformatics & Network Science', 'Database Systems', 'Machine Learning'], color: '#3b82f6' },
-  { id: 'stan-algo', strand: 1, u: 450, title: 'Algorithms Specialization', institution: 'Stanford University (Coursera)', period: 'Dec 2017', url: 'https://www.coursera.org/account/accomplishments/specialization/GTU2NM3LEHMW', description: 'Rigorous specialization covering greedy algorithms, dynamic programming, and computationally intractable (NP) problems.', impact: 'Honed my ability to optimize bottlenecks in computationally heavy systems like DNA Language Models.', courses: ['Greedy Algorithms', 'Graph Theory', 'Dynamic Programming', 'NP-Completeness'], color: '#f97316' },
+  { id: 'stan-algo', strand: 1, u: 450, title: 'Algorithms Specialization', institution: 'Stanford University (Coursera)', period: 'Dec 2017', url: 'https://www.coursera.org/account/accomplishments/specialization/GTU2NM3LEHMW', description: 'Specialization covering greedy algorithms, dynamic programming, graph theory, and computationally difficult problems.', impact: 'Strengthened the algorithmic foundation used across software engineering and machine learning work.', courses: ['Greedy Algorithms', 'Graph Theory', 'Dynamic Programming', 'NP-Completeness'], color: '#f97316' },
   { id: 'grad-web', strand: 1, u: 600, title: 'Grad Cert Web & Mobile Apps', institution: 'San Diego State University', period: '2019', description: 'Advanced coursework spanning full-stack web architectures, mobile deployments, and API integrations.', impact: 'Provides the structural engineering background needed to build tangible UI/UX interfaces over complex back-end architectures.', courses: ['Advanced Web Applications', 'Mobile Development Frameworks'], color: '#10b981' },
   { id: 'aws-dev', strand: 1, u: 750, title: 'AWS Certified Developer – Associate', institution: 'Amazon Web Services', url: 'https://cp.certmetrics.com/amazon/en/public/verify/credential/9c863874de0e4e3b8279faae6cae39b3', description: 'Cloud-native application development, serverless computing, and robust CI/CD pipelines on AWS infrastructure.', impact: 'Validates my ability to turn research and models into reliable, highly-available production APIs.', courses: [], color: '#f59e0b' },
   { id: 'aws-arch', strand: 1, u: 900, title: 'AWS Solutions Architect – Associate', institution: 'Amazon Web Services', url: 'https://cp.certmetrics.com/amazon/en/public/verify/credential/J8X553629M4E1XG0', description: 'Designing highly available, scalable, fault-tolerant, and cost-optimized enterprise cloud architectures.', impact: 'Empowers me to architect resilient ML production pipelines and orchestration layers.', courses: [], color: '#ef4444' },
-  { id: 'phd', strand: 0, u: 1050, title: 'PhD in Machine Learning', institution: 'University of the Cumberlands', period: '2022 – Present', description: 'Current research focusing on ML architectures, DNA Language Modeling, and reliability engineering.', impact: 'Driving cutting-edge applied research to build fault-tolerant learning architectures for complex, noisy systems.', courses: ['Advanced Neural Architectures', 'Computational Metagenomics', 'Stochastic Processes Data Modeling'], color: '#8b5cf6' },
+  { id: 'phd', strand: 0, u: 1050, title: 'PhD Candidate', institution: 'University of the Cumberlands', period: '2022 – Present', description: 'Approved dissertation topic: “Predictors of Behavioral Intention to Adopt Governed Generative AI in Regulated Financial Document Workflows: A Quantitative UTAUT Study.”', impact: 'A quantitative study of the factors that influence whether professionals intend to adopt governed generative AI in high-accountability document workflows.', courses: [], color: '#8b5cf6' },
 ];
 
 /* ─── Dynamic adventure images with captions ─── */
@@ -100,7 +100,7 @@ export default function About() {
   const [activeTab, setActiveTab] = useState<TabId>('biography');
 
   return (
-    <div className="h-full flex flex-col overflow-hidden">
+    <div className="flex min-h-[calc(100vh-72px)] flex-col">
       {/* ── Header + Tabs ── */}
       <div className="flex-shrink-0 px-5 pt-10 pb-0 max-w-6xl mx-auto w-full">
         <h1 className="text-4xl font-bold tracking-tight text-white/95 md:text-5xl mb-8">
@@ -147,7 +147,7 @@ export default function About() {
       </div>
 
       {/* ── Tab content ── */}
-      <div className="flex-1 overflow-y-auto overflow-x-hidden min-h-0 no-scrollbar">
+      <div className="min-h-0 flex-1 overflow-x-hidden">
         {activeTab === 'biography' && <BiographyTab />}
         {activeTab === 'career' && <CareerTab />}
         {activeTab === 'education' && <EducationTab />}
@@ -165,13 +165,13 @@ function BiographyTab() {
   return (
     <div className="max-w-3xl mx-auto px-5 py-6 space-y-5 text-sm leading-[1.7] text-white/80">
       <p>
-        I am an AI Researcher and Senior Software Engineer at JPMorgan Chase, and an applied ML researcher whose work spans three domains: financial infrastructure, computational biology, and digital humanities — connected by a single obsession: <em className="text-white/95 not-italic font-medium">finding structure in complex, noisy systems.</em>
+        I am a Senior Software Engineer at JPMorgan Chase and an applied AI researcher. My work focuses on trustworthy adoption: how AI systems are governed, integrated, and relied upon in environments where accuracy, accountability, and operational resilience matter.
       </p>
       <p>
-        At JPMorgan Chase, I work on production-grade ML systems focused on autonomous reliability, utilizing anomaly detection and automated recovery pipelines to reduce MTTR to under 15 minutes.
+        In industry, I have worked across financial services, retail, and automotive technology, building production software, modernizing services, and improving system reliability. I speak about governed generative AI, agentic security, and the engineering decisions required to move from prototypes to dependable systems.
       </p>
       <p>
-        Currently pursuing a PhD from the University of the Cumberlands. For my research, I collaborate with Prof. Forest Rohwer at San Diego State University on microbiome network architecture and DNA Language Modeling for metagenomics. Previously, my published work with Prof. Sam Kassegne in Oxford University Press applied computational pattern recognition to measure structural similarity across ancient writing systems.
+        My approved PhD dissertation topic is <em className="text-white/95 not-italic font-medium">“Predictors of Behavioral Intention to Adopt Governed Generative AI in Regulated Financial Document Workflows: A Quantitative UTAUT Study.”</em> My published work with Prof. Sam Kassegne, released by Oxford University Press, applies machine learning to structural relationships among ancient writing systems. My earlier research also includes computational biology at San Diego State University.
       </p>
       <p>
         Outside of the terminal, I run long distances and do adventure travel. I am a Royal Challengers Bengaluru fan, a mountain person, and a believer that pattern recognition is a universal language.
@@ -262,7 +262,7 @@ function EducationTab() {
   }, []);
 
   return (
-    <div className="flex flex-col md:flex-row h-full overflow-hidden">
+    <div className="flex min-h-[900px] flex-col overflow-hidden md:h-[calc(100vh-190px)] md:min-h-[620px] md:flex-row">
       {/* SVG Map */}
       <div className="flex-1 flex flex-col min-w-0 relative">
         <div className="flex-1 relative overflow-hidden flex items-center justify-center p-4 min-h-0">
@@ -346,7 +346,7 @@ function EducationTab() {
           <p className="text-white/80 leading-relaxed text-sm mb-4">{activeNode.description}</p>
           {activeNode.impact && (
             <div className="mb-6 border-l-2 pl-4 py-1" style={{ borderColor: `${activeNode.color}88` }}>
-              <span className="text-xs font-mono uppercase tracking-widest block mb-1" style={{ color: activeNode.color }}>Impact</span>
+              <span className="text-xs font-mono uppercase tracking-widest block mb-1" style={{ color: activeNode.color }}>Focus</span>
               <p className="text-white/60 text-xs leading-relaxed">{activeNode.impact}</p>
             </div>
           )}

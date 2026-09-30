@@ -1,14 +1,17 @@
 export const consoleKnowledge: Record<string, string> = {
-  'who are you': 'I am Vyshak Athreya Bellur Keshavamurthy — ML engineer at JPMorgan Chase, researcher, musician, and marathon runner based in New Jersey.',
+  'who are you': 'I am Vyshak Athreya Bellur Keshavamurthy — a senior software engineer at JPMorgan Chase, applied AI researcher, speaker, musician, and marathon runner based in New Jersey.',
   'publications': 'Published in Oxford University Press (Digital Scholarship in the Humanities, 2026). Co-authored research applying machine learning and deep learning to structural relationships among ancient scripts.',
-  'research': 'My research spans computational linguistics, microbiome network modeling (with Prof. Forest Rohwer at SDSU), and enterprise LLM architectures.',
+  'research': 'My approved PhD topic is “Predictors of Behavioral Intention to Adopt Governed Generative AI in Regulated Financial Document Workflows: A Quantitative UTAUT Study.” My published work also includes machine learning research on ancient scripts.',
+  'phd': 'My approved PhD topic is “Predictors of Behavioral Intention to Adopt Governed Generative AI in Regulated Financial Document Workflows: A Quantitative UTAUT Study.”',
+  'speak': 'I speak about governed generative AI, agentic security, reliable production AI, and engineering for regulated environments. Recent appearances include API World and CISO New York.',
+  'invite': 'Use the Contact page for conference talks, panels, judging, session-chair roles, or research collaboration.',
   'music': 'I run v_naada — a music channel with Chinmayi. We explore classical and contemporary Indian music. Find us on YouTube and Instagram @v_naada.',
   'running': 'Completed 1 full marathon, 5+ half marathons. Currently training for NYC Marathon.',
   'rcb': 'Royal Challengers Bangalore. Always. We believe. Ee sala cup namde.',
   'travel': 'Dubai, Florida Keys, Amalfi Coast, Rome, Pisa, West Virginia, California. Skydived over the Keys. Zip-lined in Dubai. Always planning the next one.',
   'tech stack': 'JPMorgan: React/TypeScript, Java, AWS. Personal: Python, LLMs, RAG systems. This site: React 19 + Vite + Tailwind.',
   'contact': 'LinkedIn: linkedin.com/in/vyshak-bellur-40a072310 | GitHub: github.com/vyshakbellur',
-  'help': 'Try: who are you · publications · research · music · running · rcb · travel · tech stack · contact',
+  'help': 'Try: who are you · publications · research · PhD · speaking · invite · music · running · contact',
 };
 
 export const hobbiesInfo = {

@@ -4,10 +4,10 @@ import { consoleKnowledge } from '../data/content';
 type Message = { type: 'input' | 'output'; text: string };
 
 const SUGGESTIONS = [
-  'Tell me about your ML research',
-  'Ask about Metagenomics',
-  'What do you do at JPMC?',
-  'Tell me about your running',
+  'What does Vyshak speak about?',
+  'Tell me about the PhD research',
+  'Show me the publications',
+  'How can I invite Vyshak?',
 ];
 
 const WORKER_URL = 'https://chatbot-llm.vyshakathreya.workers.dev';
@@ -49,15 +49,19 @@ export default function Console() {
   const [thinking, setThinking] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const hasInteractedRef = useRef(false);
 
   /* Auto-scroll on new messages */
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (hasInteractedRef.current) {
+      bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
   }, [messages, thinking]);
 
   const handleSubmit = async (query?: string) => {
     const q = (query ?? input).trim();
     if (!q) return;
+    hasInteractedRef.current = true;
     setMessages(m => [...m, { type: 'input', text: q }]);
     setInput('');
 

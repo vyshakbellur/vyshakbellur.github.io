@@ -27,13 +27,12 @@ html, body, #root {
 
 /* ── Section entry animation ── */
 .section-enter {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  opacity: 1;
+  transform: none;
 }
 .section-enter.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 /* ── Respect reduced motion preference ── */

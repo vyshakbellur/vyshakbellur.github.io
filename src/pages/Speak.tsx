@@ -2,7 +2,7 @@ import { useState } from 'react';
 import apiWorldSpeakingUrl from '../assets/api-world-speaking.jpg';
 import cisoNewYorkPanelUrl from '../assets/ciso-new-york-panel.jpg';
 
-const BIO = `Applied AI researcher and Senior Software Engineer at JPMorgan Chase. Oxford-published conference speaker focused on trustworthy AI, agentic security, and production-scale systems.`;
+const BIO = `Applied AI researcher and Senior Software Engineer at JPMorgan Chase. Published by Oxford University Press. I speak about governed generative AI, agentic security, and reliable production systems.`;
 
 type Engagement = {
   title: string;
@@ -19,7 +19,7 @@ type Engagement = {
 
 /*
  * To add a new talk: just push an object here.
- * - status: 'featured' highlights the latest verified engagement
+ * - status: 'featured' highlights the most recent engagement
  * - status: 'upcoming' gets featured treatment, 'past' stacks below
  * - format: 'Talk' | 'Panel' | 'Workshop' — shown as a subtle label
  */
@@ -34,9 +34,9 @@ const ENGAGEMENTS: Engagement[] = [
     status: 'featured' as const,
     abstract: 'A practitioner panel on hidden risks from generative AI adoption, shadow AI, unmanaged integrations, and governance that keeps pace with a rapidly changing attack surface.',
     evidence: [
-      { label: 'Official agenda & panel listing', href: 'https://ciso-east.coriniumintelligence.com/agenda' },
-      { label: 'Official speaker profile', href: 'https://ciso-east.coriniumintelligence.com/speakers' },
-      { label: 'Organizer announcement', href: 'https://www.linkedin.com/posts/business-of-infosec_cisony-activity-7498379065633021952-BU7q' },
+      { label: 'Event agenda', href: 'https://ciso-east.coriniumintelligence.com/agenda' },
+      { label: 'Speaker list', href: 'https://ciso-east.coriniumintelligence.com/speakers' },
+      { label: 'Event announcement', href: 'https://www.linkedin.com/posts/business-of-infosec_cisony-activity-7498379065633021952-BU7q' },
     ],
   },
   {
@@ -141,7 +141,7 @@ export default function Speak() {
         </figure>
       </div>
 
-      {/* ── Latest verified engagement ── */}
+      {/* ── Recent event ── */}
       {featured.map((talk) => (
         <article
           key={talk.title}
@@ -151,7 +151,7 @@ export default function Speak() {
           <div className="relative">
             <div className="mb-5 flex flex-wrap items-center gap-3">
               <span className="rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-amber-200">
-                Latest verified engagement
+                Recent event
               </span>
               <span className="text-xs font-mono text-white/45">{talk.date}</span>
             </div>
@@ -286,7 +286,7 @@ export default function Speak() {
           href="/contact"
           className="text-sm text-white/40 hover:text-white/70 transition-colors"
         >
-          Invite to speak →
+          Invite me to speak, judge, or chair a session →
         </a>
       </div>
     </div>

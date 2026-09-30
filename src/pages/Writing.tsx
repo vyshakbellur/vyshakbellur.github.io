@@ -20,7 +20,7 @@ const PUBLICATIONS = [
   },
 ];
 
-const FEATURED_ANALYSIS = [
+const FEATURED_ARTICLES = [
   {
     title: 'Why Every Enterprise AI Agent Needs a Rollback Strategy',
     outlet: 'Towards AI',
@@ -112,15 +112,15 @@ export default function Writing() {
       {/* Header */}
       <div className="section-enter mb-12">
         <h1 className="text-4xl font-bold tracking-tight text-white/95 md:text-5xl mb-6">
-          Publications & Industry Analysis
+          Research & Writing
         </h1>
         <p className="text-lg md:text-xl text-white/60 font-light max-w-3xl leading-relaxed">
-          Peer-reviewed research and practitioner analysis on trustworthy AI, production-scale agentic systems, and machine learning applied across domains.
+          Peer-reviewed research, technical articles, and practical lessons from building AI and software systems in regulated environments.
         </p>
         <div className="mt-10 h-px w-full bg-white/10" />
       </div>
 
-      {/* Two-column: Published | Industry analysis */}
+      {/* Two-column: Research | Articles */}
       <div className="grid gap-8 lg:grid-cols-2 items-start">
 
         {/* ── LEFT: Published Literature ── */}
@@ -135,9 +135,9 @@ export default function Writing() {
                   href={p.href}
                   target="_blank"
                   rel="noreferrer"
-                  className={`group block ${isHero ? 'bg-white/[0.02] p-6 -mx-6 rounded-2xl border border-white/5 hover:bg-white/[0.05] hover:border-white/10 transition-all' : ''}`}
+                  className={`group block min-w-0 ${isHero ? 'rounded-2xl border border-white/5 bg-white/[0.02] p-5 transition-all hover:border-white/10 hover:bg-white/[0.05] sm:-mx-6 sm:p-6' : ''}`}
                 >
-                  <div className="flex items-center gap-3 mb-4">
+                  <div className="mb-4 flex flex-wrap items-center gap-2 sm:gap-3">
                     <span className={`text-[10px] font-bold tracking-[0.15em] uppercase px-2 py-0.5 rounded-sm ${isHero ? 'bg-amber-400 text-amber-950' : 'text-amber-400/80 border border-amber-400/20'}`}>
                       {p.publisher}
                     </span>
@@ -148,14 +148,14 @@ export default function Writing() {
                     )}
                     <span className="text-xs font-mono text-white/40">{p.year}</span>
                   </div>
-                  <h3 className={`${isHero ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'} font-bold leading-tight text-white/95 mb-3 group-hover:text-white transition-colors`}>
+                  <h3 className={`${isHero ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'} break-words font-bold leading-tight text-white/95 mb-3 group-hover:text-white transition-colors`}>
                     {p.title}
                   </h3>
                   {p.subtitle && (
                     <p className={`${isHero ? 'text-lg' : 'text-base'} text-white/60 font-light italic mb-5`}>{p.subtitle}</p>
                   )}
-                  <div className={`flex items-center justify-between border-t ${isHero ? 'border-white/10 pt-5 mt-3' : 'border-white/5 pt-4 mt-2'}`}>
-                    <span className="text-xs text-white/50 font-mono">
+                  <div className={`flex flex-col gap-2 border-t sm:flex-row sm:items-center sm:justify-between ${isHero ? 'border-white/10 pt-5 mt-3' : 'border-white/5 pt-4 mt-2'}`}>
+                    <span className="break-words text-xs text-white/50 font-mono">
                       {p.journal}{p.coAuthor ? ` · ${p.coAuthor}` : ''}
                     </span>
                     <span className="text-sm text-amber-400/0 group-hover:text-amber-400/90 transition-colors transform group-hover:translate-x-1">→</span>
@@ -166,10 +166,10 @@ export default function Writing() {
           </div>
         </div>
 
-        {/* ── RIGHT: Industry analysis + Medium feed ── */}
+        {/* ── RIGHT: Selected articles + Medium feed ── */}
         <div className="section-enter">
           <div className="flex items-center justify-between mb-4">
-            <div className="text-[10px] font-semibold tracking-[0.2em] text-white/40 uppercase">Industry Analysis</div>
+            <div className="text-[10px] font-semibold tracking-[0.2em] text-white/40 uppercase">Selected technical articles</div>
             <a
               href={`https://medium.com/@${MEDIUM_USERNAME}`}
               target="_blank"
@@ -181,7 +181,7 @@ export default function Writing() {
           </div>
 
           <div className="space-y-3 mb-9">
-            {FEATURED_ANALYSIS.map((article) => (
+            {FEATURED_ARTICLES.map((article) => (
               <a key={article.href} href={article.href} target="_blank" rel="noreferrer" className="group block rounded-xl border border-white/5 bg-white/[0.02] p-4 hover:border-white/10 hover:bg-white/[0.045] transition-all">
                 <div className="mb-2 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-amber-300/70">
                   <span>{article.outlet}</span>

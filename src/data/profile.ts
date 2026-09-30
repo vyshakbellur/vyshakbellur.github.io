@@ -1,7 +1,7 @@
 export const profile = {
     name: "Vyshak Bellur",
     fullName: "Vyshak Athreya Bellur Keshavamurthy",
-    tagline: "Cross-domain ML Researcher • Musician • Runner • Adrenaline Junkie",
+    tagline: "Applied AI Researcher • Senior Software Engineer • Conference Speaker",
     location: "NYC / New Jersey",
     links: {
       github: "https://github.com/vyshakbellur",
@@ -12,13 +12,12 @@ export const profile = {
       resume: "/Vyshak_Bellur_Resume.pdf",
     },
     about: [
-      "I build reliable, scalable products end-to-end: crisp frontends, solid APIs, and cloud-native delivery.",
-      "I’m especially interested in LLM systems, RAG, and enterprise architectures that make AI useful and safe in real organizations.",
+      "I build reliable software and AI systems for regulated, high-accountability environments.",
+      "My research examines the adoption of governed generative AI in financial document workflows.",
     ],
     highlights: [
-      { k: "Focus", v: "Full-stack + GenAI" },
-      { k: "Stack", v: "React • TS • Java • AWS • Python" },
-      { k: "Now", v: "Portfolio refresh + publishing" },
+      { k: "Focus", v: "Governed GenAI" },
+      { k: "Research", v: "UTAUT • AI adoption" },
+      { k: "Speaking", v: "AI governance • Agentic security" },
     ],
   };
-  

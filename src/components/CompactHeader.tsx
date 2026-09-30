@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { nav } from '../data/nav';
-import { profile } from '../data/profile';
 
 /* Per-page accent colours — complement each page's content palette */
 const PAGE_ACCENT: Record<string, string> = {
@@ -26,19 +25,19 @@ export default function CompactHeader() {
       <header
         className="flex flex-shrink-0 z-50 items-center relative"
         style={{
-          height: 76,  /* Matched precisely to the Home Piano header height */
+          height: 72,
           background: 'rgba(10,15,26,0.97)',
           backdropFilter: 'blur(10px)',
           borderBottom: `1px solid ${ac}22`,
           boxShadow: `0 1px 0 ${ac}10, 0 4px 24px rgba(0,0,0,0.8), 0 1px 6px ${ac}08`,
-          padding: '0 32px',
+          padding: '0 clamp(20px, 4vw, 40px)',
           gap: 0,
         }}
       >
         {/* ── Name / home link ── */}
         <Link
           to="/"
-          style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', gap: 2, marginRight: 'auto' }}
+          style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', gap: 2, marginRight: 'auto', flexShrink: 0, whiteSpace: 'nowrap' }}
           onClick={() => setMenuOpen(false)}
         >
           <span className="text-[18px] md:text-[24px]" style={{
@@ -60,7 +59,7 @@ export default function CompactHeader() {
 
         {/* ── Mobile Hamburger Toggle ── */}
         <button
-          className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 z-50 focus:outline-none"
+          className="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 z-50 focus:outline-none"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           <div className={`w-6 h-[2px] bg-white transition-all ${menuOpen ? 'rotate-45 translate-y-[8px]' : ''}`} />
@@ -69,10 +68,10 @@ export default function CompactHeader() {
         </button>
 
         {/* ── Separator (Desktop) ── */}
-        <div className="hidden md:block" style={{ width: 1, height: 36, background: `${ac}18`, marginRight: 24 }} />
+        <div className="hidden lg:block" style={{ width: 1, height: 36, background: `${ac}18`, marginRight: 24 }} />
 
         {/* ── Nav links (Desktop) ── */}
-        <nav className="hidden md:flex items-center gap-2">
+        <nav className="hidden lg:flex items-center gap-2">
           {nav.map(item => (
             <NavLink
               key={item.href}
@@ -98,27 +97,12 @@ export default function CompactHeader() {
             </NavLink>
           ))}
           
-          <div className="w-px h-6 bg-white/10 mx-2" />
-          
-          <a
-            href={profile.links.resume}
-            target="_blank"
-            rel="noreferrer"
-            className="px-4 py-1.5 rounded text-[11px] font-black font-mono tracking-widest uppercase transition-all duration-200 hover:scale-105"
-            style={{ 
-              color: '#0a0f1a',
-              background: ac,
-              boxShadow: `0 0 12px ${ac}50`
-            }}
-          >
-            Resume
-          </a>
         </nav>
       </header>
 
       {/* ── Mobile Dropdown Menu ── */}
       {menuOpen && (
-        <div className="md:hidden absolute top-[76px] left-0 right-0 bg-[#050300]/95 backdrop-blur-xl border-b border-white/10 z-40 shadow-2xl flex flex-col">
+        <div className="lg:hidden absolute top-[72px] left-0 right-0 bg-[#050912]/98 backdrop-blur-xl border-b border-white/10 z-40 shadow-2xl flex flex-col">
           {nav.map(item => (
             <NavLink
               key={item.href}

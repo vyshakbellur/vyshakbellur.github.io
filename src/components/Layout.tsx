@@ -3,159 +3,72 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { profile } from '../data/profile';
 import CompactHeader from './CompactHeader';
 import Console from './Console';
-
-import airJordansUrl from '../assets/air_jordans.png';
-import runningMedalsUrl from '../assets/running_medals.png';
-import rcbLogoUrl from '../assets/rcb_logo.png';
 import auroraUrl from '../assets/aurora_mountain.png';
 
 export default function Layout() {
-  const location = useLocation();
-  const isHome = location.pathname === '/';
+  const { pathname } = useLocation();
+  const isHome = pathname === '/';
   const [chatOpen, setChatOpen] = useState(false);
 
   return (
-    <div className="h-screen overflow-hidden flex flex-col text-slate-100 bg-[#0a0f1a]">
-      
-      {/* ── Global Aurora backdrop ── */}
+    <div className="min-h-screen bg-[#0a0f1a] text-slate-100">
       <div className="fixed inset-0 z-0 pointer-events-none bg-[#010610]">
-        <img 
-          src={auroraUrl} 
-          alt="Aurora Background" 
-          className="w-full h-full object-cover opacity-[0.25]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#010610] via-transparent to-[#010610]/80 pointer-events-none" />
+        <img src={auroraUrl} alt="" className="h-full w-full object-cover opacity-[0.22]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#010610] via-[#010610]/35 to-[#010610]/90" />
       </div>
 
-      {/* ── Universally Sleek Header ── */}
-      <div className="flex-shrink-0 z-50">
-         <CompactHeader />
-      </div>
-
-      <main className="flex-1 overflow-y-auto relative z-10 min-h-0 no-scrollbar">
-        <Outlet />
-      </main>
-
-      {/* ── Floating Chatbot FAB — only on non-home pages ── */}
-      {!isHome && (
-        <>
-          {/* Floating panel */}
-          {chatOpen && (
-            <div className="fixed bottom-[130px] right-6 z-[60] w-[400px] max-w-[calc(100vw-2rem)] animate-in fade-in slide-in-from-bottom-4">
-              <div className="relative rounded-xl shadow-2xl shadow-black/60 border border-white/10 overflow-hidden bg-slate-950">
-                {/* Close button */}
-                <button
-                  onClick={() => setChatOpen(false)}
-                  className="absolute top-2 right-2 z-10 w-6 h-6 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white/50 hover:text-white transition-colors text-xs"
-                  aria-label="Close chat"
-                >
-                  ✕
-                </button>
-                <Console />
-              </div>
-            </div>
-          )}
-
-          {/* FAB button */}
-          <button
-            onClick={() => setChatOpen(prev => !prev)}
-            className={`fixed bottom-[130px] right-6 z-[55] w-12 h-12 rounded-full flex items-center justify-center shadow-lg shadow-black/50 transition-all duration-300 ${
-              chatOpen
-                ? 'opacity-0 pointer-events-none scale-75'
-                : 'opacity-100 scale-100 hover:scale-110 bg-gradient-to-br from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500'
-            }`}
-            aria-label="Open chat"
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            </svg>
-          </button>
-        </>
-      )}
-
-      {/* ── FOOTER ── */}
-      <footer className="flex-shrink-0 z-50 relative overflow-hidden group border-t-0" style={{ height: 110, background: 'linear-gradient(to top, rgba(10,15,26,0.95), rgba(10,15,26,0.6))' }}>
-        {/* Left Side: Air Jordans */}
-        <img 
-          src={airJordansUrl} 
-          alt="Air Jordans Kicks" 
-          className="absolute -bottom-16 -left-12 w-56 object-contain mix-blend-screen opacity-20 group-hover:opacity-40 group-hover:-translate-y-2 group-hover:scale-105 transition-all duration-700 z-0"
-          style={{ WebkitMaskImage: 'radial-gradient(circle at 40% 60%, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 60%)' }}
-        />
-
-        {/* Left Side: Running Medals */}
-        <img 
-          src={runningMedalsUrl} 
-          alt="Marathon Medals" 
-          className="absolute -bottom-[50px] left-[180px] w-[380px] object-contain mix-blend-screen opacity-15 group-hover:opacity-30 transition-all duration-700 pointer-events-none scale-125 z-0"
-          style={{ WebkitMaskImage: 'radial-gradient(circle at 50% 50%, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 65%)' }}
-        />
-
-        <div className="h-full mx-auto max-w-[1400px] flex items-center justify-between px-6 pl-40 gap-6 relative z-10">
-          <div className="flex-1 flex items-center">
-            <span className="text-[10px] font-black tracking-[0.4em] uppercase text-white/40 shrink-0 hidden md:block">
-              © {new Date().getFullYear()} VABK
-            </span>
-          </div>
-
-          <div className="flex items-center gap-10 shrink-0">
-            {/* Logos */}
-            <div className="flex items-center gap-6">
-              <div className="flex items-center opacity-50 hover:opacity-100 transition-opacity cursor-default animate-pulse" style={{ animationDuration: '3s' }}>
-                <svg width="28" height="28" viewBox="0 0 26 26" className="drop-shadow-[0_0_8px_rgba(204,0,0,0.8)]">
-                  <rect width="26" height="26" rx="4" fill="#CC0000" />
-                  <text x="13" y="18" textAnchor="middle" fontSize="9" fontWeight="900" fontFamily="Georgia,serif" fill="white">SDSU</text>
-                </svg>
-              </div>
-              <div className="w-px h-6 bg-white/10" />
-              <div className="flex items-center opacity-50 hover:opacity-100 transition-opacity cursor-default hover:animate-ping" style={{ animationDuration: '2s' }}>
-                <img 
-                  src={rcbLogoUrl} 
-                  alt="RCB Lion Crest" 
-                  className="w-[34px] h-[34px] mix-blend-screen drop-shadow-[0_0_12px_rgba(251,191,36,0.9)]"
-                />
-              </div>
-              <div className="w-px h-6 bg-white/10" />
-              <div className="flex items-center opacity-50 hover:opacity-100 transition-opacity cursor-default animate-pulse" style={{ animationDuration: '4s', animationDelay: '1s' }}>
-                <svg width="28" height="28" viewBox="0 0 26 26" className="drop-shadow-[0_0_8px_rgba(0,48,135,0.8)]">
-                  <rect width="26" height="26" rx="4" fill="#003087" />
-                  <text x="13" y="11" textAnchor="middle" fontSize="5.5" fontWeight="900" fontFamily="Georgia,serif" fill="#FFD700">UNIV OF</text>
-                  <text x="13" y="20" textAnchor="middle" fontSize="5" fontWeight="900" fontFamily="Georgia,serif" fill="white">CUMB.</text>
-                </svg>
-              </div>
-            </div>
-
-            <div className="w-px h-8 bg-white/10 hidden md:block" />
-
-            {/* Core Contact icons */}
-            <div className="flex items-center gap-7">
-              <a title="GitHub" href={profile.links.github} target="_blank" rel="noreferrer" className="text-white/55 hover:text-cyan-400 transition-all hover:scale-125 duration-200 drop-shadow-[0_0_8px_currentColor]">
-                <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-                  <path d="M9 18c-4.51 2-5-2-7-2" />
-                </svg>
-              </a>
-              <a title="LinkedIn" href={profile.links.linkedin} target="_blank" rel="noreferrer" className="text-white/55 hover:text-blue-500 transition-all hover:scale-125 duration-200 drop-shadow-[0_0_8px_currentColor]">
-                <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                  <rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" />
-                </svg>
-              </a>
-              <a title="Medium" href={profile.links.medium} target="_blank" rel="noreferrer" className="text-white/55 hover:text-white transition-all hover:scale-125 duration-200 drop-shadow-[0_0_8px_currentColor]">
-                <svg width="23" height="23" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
-                </svg>
-              </a>
-              <a title="Google Scholar" href={profile.links.scholar} target="_blank" rel="noreferrer" className="text-white/55 hover:text-amber-400 transition-all hover:scale-125 duration-200 drop-shadow-[0_0_8px_currentColor]">
-                <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                  <path d="M6 12v5c0 2 2.5 3 6 3s6-1 6-3v-5" />
-                </svg>
-              </a>
-            </div>
-          </div>
+      <div className="relative z-10 flex min-h-screen flex-col">
+        <div className="sticky top-0 z-50 flex-shrink-0">
+          <CompactHeader />
         </div>
-      </footer>
+
+        <main className="relative flex-1">
+          <Outlet />
+        </main>
+
+        {!isHome && (
+          <>
+            {chatOpen && (
+              <div className="fixed bottom-20 right-4 z-[60] hidden w-[400px] max-w-[calc(100vw-2rem)] sm:block">
+                <div className="relative overflow-hidden rounded-xl border border-white/10 bg-slate-950 shadow-2xl shadow-black/60">
+                  <button
+                    onClick={() => setChatOpen(false)}
+                    className="absolute right-2 top-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-xs text-white/60 transition-colors hover:bg-white/20 hover:text-white"
+                    aria-label="Close chat"
+                  >
+                    ✕
+                  </button>
+                  <Console />
+                </div>
+              </div>
+            )}
+
+            <button
+              onClick={() => setChatOpen((open) => !open)}
+              className={`fixed bottom-5 right-4 z-[55] hidden h-11 w-11 items-center justify-center rounded-full bg-amber-400 text-slate-950 shadow-lg shadow-black/40 transition-all hover:bg-amber-300 sm:flex ${
+                chatOpen ? 'pointer-events-none scale-75 opacity-0' : 'scale-100 opacity-100'
+              }`}
+              aria-label="Ask about Vyshak's work"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+            </button>
+          </>
+        )}
+
+        <footer className="border-t border-white/8 bg-[#050912]/90">
+          <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-5 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
+            <span>© {new Date().getFullYear()} Vyshak Bellur</span>
+            <div className="flex flex-wrap items-center gap-5">
+              <a href={profile.links.linkedin} target="_blank" rel="noreferrer" className="transition-colors hover:text-white">LinkedIn</a>
+              <a href={profile.links.scholar} target="_blank" rel="noreferrer" className="transition-colors hover:text-white">Google Scholar</a>
+              <a href={profile.links.github} target="_blank" rel="noreferrer" className="transition-colors hover:text-white">GitHub</a>
+              <a href={profile.links.resume} target="_blank" rel="noreferrer" className="transition-colors hover:text-white">Resume</a>
+            </div>
+          </div>
+        </footer>
+      </div>
     </div>
   );
 }

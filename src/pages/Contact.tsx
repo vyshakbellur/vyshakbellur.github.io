@@ -28,10 +28,10 @@ export default function Contact() {
     <div ref={sectionRef} className="mx-auto max-w-6xl px-5 py-10">
       <div className="section-enter mb-12">
         <h1 className="text-4xl font-bold tracking-tight text-white/95 md:text-5xl mb-6 leading-tight">
-          Let's build something<br />extraordinary.
+          Bring a practical AI voice<br />to your program.
         </h1>
         <p className="mt-3 max-w-2xl text-lg md:text-xl text-white/60 font-light leading-relaxed mb-6">
-          I am currently accepting invitations for keynote speaking, hackathon judging, and panel discussions. I am also open to targeted research collaborations and mentorship opportunities.
+          Invite me for a conference talk, panel, technical judging, or session-chair role. I also welcome focused research collaborations on governed generative AI and reliable systems.
         </p>
 
         {/* Quick Links */}
@@ -75,7 +75,7 @@ export default function Contact() {
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
                 className="w-full rounded-lg border border-white/14 bg-white/[0.07] px-3 py-2.5 text-sm text-white/90 outline-none focus:border-amber-400/40 transition-colors placeholder:text-white/30"
-                placeholder="Speaking invitation, Collaboration, etc."
+                placeholder="Speaking, judging, session chair, or collaboration"
               />
             </div>
             <div>
@@ -105,11 +105,11 @@ export default function Contact() {
             <div className="text-[10px] font-semibold tracking-widest uppercase text-white/50 mb-4">Engagement Types</div>
             <div className="space-y-3">
               {[
-                { label: 'Technical Speaking', desc: 'Keynotes, conference talks, and tech sessions on trustworthy AI, enterprise ML, and agentic security.' },
-                { label: 'Panel Discussions', desc: 'Moderating or participating in panels on AI governance, cross-domain research, and engineering leadership.' },
-                { label: 'Hackathon Judging', desc: 'Evaluating projects across ML, software engineering, and product innovation tracks.' },
-                { label: 'ML Mentorship', desc: 'Guiding early-career engineers and graduate researchers on production ML and system design.' },
-                { label: 'Research Collaboration', desc: 'Joint research in metagenomics, computational linguistics, or self-healing systems.' },
+                { label: 'Conference Speaking', desc: 'Practical sessions on governed generative AI, agentic security, and production reliability.' },
+                { label: 'Panel Participation', desc: 'Evidence-based discussion on AI governance, adoption, engineering risk, and regulated workflows.' },
+                { label: 'Judging', desc: 'Evaluating technical work across AI, software engineering, responsible innovation, and product execution.' },
+                { label: 'Session Chair', desc: 'Keeping technical sessions focused, on time, and useful to both speakers and attendees.' },
+                { label: 'Research Collaboration', desc: 'Quantitative and applied research on governed AI adoption and dependable enterprise systems.' },
               ].map(t => (
                 <div key={t.label} className="flex items-start gap-3">
                   <span className="mt-1 w-1.5 h-1.5 rounded-full bg-amber-400/80 shrink-0" />
@@ -122,7 +122,7 @@ export default function Contact() {
             </div>
             <div className="mt-4 pt-3 border-t border-white/8">
               <p className="text-xs text-white/70 leading-[1.7]">
-                View the <a href="/speak" className="text-yellow-400 hover:text-yellow-300 transition-colors">Speaking & Leadership page</a> for full topic list and press kit.
+                View the <a href="/speak" className="text-yellow-400 hover:text-yellow-300 transition-colors">Speaking page</a> for recent events, topics, and source links.
               </p>
             </div>
           </div>
