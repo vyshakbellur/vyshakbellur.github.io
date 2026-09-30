@@ -141,11 +141,6 @@ export default function Writing() {
                     <span className={`text-[10px] font-bold tracking-[0.15em] uppercase px-2 py-0.5 rounded-sm ${isHero ? 'bg-amber-400 text-amber-950' : 'text-amber-400/80 border border-amber-400/20'}`}>
                       {p.publisher}
                     </span>
-                    {isHero && (
-                      <span className="text-[10px] font-bold tracking-[0.1em] text-emerald-400/90 uppercase border border-emerald-400/20 px-2 py-0.5 rounded-sm">
-                        Peer-Reviewed
-                      </span>
-                    )}
                     <span className="text-xs font-mono text-white/40">{p.year}</span>
                   </div>
                   <h3 className={`${isHero ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'} break-words font-bold leading-tight text-white/95 mb-3 group-hover:text-white transition-colors`}>

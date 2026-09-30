@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import Console from '../components/Console';
 import { profile } from '../data/profile';
-import speakerHeadshotUrl from '../assets/Vyshak_speaker.jpeg';
+import speakerHeadshotUrl from '../assets/ciso-new-york-portrait.jpg';
 
 export default function Home() {
   return (
@@ -20,7 +20,7 @@ export default function Home() {
             <img 
               src={speakerHeadshotUrl} 
               alt="Vyshak Bellur" 
-              className="mb-7 h-24 w-24 rounded-2xl border border-white/10 object-cover shadow-2xl sm:h-28 sm:w-28"
+              className="mb-7 h-24 w-24 rounded-2xl border border-white/10 object-cover object-[center_24%] shadow-2xl sm:h-28 sm:w-28"
             />
             
             <h1 className="mb-5 text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl">
