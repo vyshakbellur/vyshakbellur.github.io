@@ -36,11 +36,11 @@ export default function Home() {
             </p>
 
             {/* Evidence micro-bar */}
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[11px] font-semibold tracking-widest uppercase text-white/40 mb-8">
-              {['JPMorgan Chase', 'Oxford University Press', 'CISO New York panelist'].map((p, i) => (
+            <div className="mb-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-white/45">
+              {['Oxford University Press', 'CISO New York', 'Globee Awards judge'].map((p, i) => (
                 <span key={p} className="flex items-center gap-2">
                   {i > 0 && <span className="text-white/10">·</span>}
-                  <span className="hover:text-white/80 transition-colors cursor-default">{p}</span>
+                  <span className="cursor-default transition-colors hover:text-white/80">{p}</span>
                 </span>
               ))}
             </div>
@@ -51,7 +51,7 @@ export default function Home() {
                 to="/speak"
                 className="inline-flex items-center gap-2 rounded-lg bg-amber-400 px-4 py-2 text-xs font-semibold text-slate-950 hover:bg-amber-300 transition-all"
               >
-                Speaking & topics
+                Speaking
               </Link>
               <Link
                 to="/contact"

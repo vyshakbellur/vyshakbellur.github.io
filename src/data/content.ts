@@ -3,7 +3,7 @@ export const consoleKnowledge: Record<string, string> = {
   'publications': 'Published in Oxford University Press (Digital Scholarship in the Humanities, 2026). Co-authored research applying machine learning and deep learning to structural relationships among ancient scripts.',
   'research': 'My approved PhD topic is “Predictors of Behavioral Intention to Adopt Governed Generative AI in Regulated Financial Document Workflows: A Quantitative UTAUT Study.” My published work also includes machine learning research on ancient scripts.',
   'phd': 'My approved PhD topic is “Predictors of Behavioral Intention to Adopt Governed Generative AI in Regulated Financial Document Workflows: A Quantitative UTAUT Study.”',
-  'speak': 'I speak about governed generative AI, agentic security, reliable production AI, and engineering for regulated environments. Recent appearances include API World and CISO New York.',
+  'speak': 'I speak about governed generative AI, agentic security, reliable production AI, and engineering for regulated environments. Recent appearances include API World and CISO New York. Judging work includes the 2026 Globee Awards for Business, with an appointment to NASA Space Apps Yonkers.',
   'invite': 'Use the Contact page for conference talks, panels, judging, session-chair roles, or research collaboration.',
   'music': 'I run v_naada — a music channel with Chinmayi. We explore classical and contemporary Indian music. Find us on YouTube and Instagram @v_naada.',
   'running': 'Completed 1 full marathon, 5+ half marathons. Currently training for NYC Marathon.',

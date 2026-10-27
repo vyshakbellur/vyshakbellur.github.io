@@ -2,7 +2,7 @@ import { useState } from 'react';
 import apiWorldSpeakingUrl from '../assets/api-world-speaking.jpg';
 import cisoNewYorkPanelUrl from '../assets/ciso-new-york-panel.jpg';
 
-const BIO = `Applied AI researcher and Senior Software Engineer at JPMorgan Chase. Published by Oxford University Press. I speak about governed generative AI, agentic security, and reliable production systems.`;
+const BIO = `Applied AI researcher and Senior Software Engineer at JPMorgan Chase. Published by Oxford University Press. I speak and judge work across governed generative AI, agentic security, and reliable production systems.`;
 
 type Engagement = {
   title: string;
@@ -15,6 +15,14 @@ type Engagement = {
   status: 'featured' | 'upcoming' | 'past';
   abstract: string;
   evidence: Array<{ label: string; href: string }>;
+};
+
+type JudgingEngagement = {
+  organization: string;
+  role: string;
+  date: string;
+  description: string;
+  links: Array<{ label: string; href: string }>;
 };
 
 /*
@@ -54,28 +62,6 @@ const ENGAGEMENTS: Engagement[] = [
       { label: 'Speaker roster', href: 'https://cloudxconf.com/speakers/' },
     ],
   },
-  /*
-  {
-    title: 'AI Camp Technical Session',
-    subtitle: 'Applied Machine Learning and Agentic Systems',
-    venue: 'AI Camp',
-    location: 'Santa Clara, CA',
-    date: 'September 2026 (TBC)',
-    format: 'Talk' as const,
-    status: 'upcoming' as const,
-    abstract: 'Upcoming technical talk focusing on the engineering challenges of deploying agentic systems in production.',
-  },
-  {
-    title: 'Expert Panel on Trustworthy AI',
-    subtitle: 'Navigating the Security-Latency Tradeoff',
-    venue: 'Industry Panel',
-    location: 'Santa Clara, CA',
-    date: 'September 2026 (TBC)',
-    format: 'Panel' as const,
-    status: 'upcoming' as const,
-    abstract: 'A deep-dive discussion with industry experts on implementing secure LLM architectures in enterprise environments.',
-  },
-  */
   {
     title: 'Financial Guardrail Agent',
     subtitle: 'A Security-First Approach to Agentic AI',
@@ -89,14 +75,34 @@ const ENGAGEMENTS: Engagement[] = [
   },
 ];
 
+const JUDGING: JudgingEngagement[] = [
+  {
+    organization: 'Globee Awards for Business',
+    role: 'Judge',
+    date: '2026 · Completed',
+    description: 'Reviewed and scored 50 award submissions. Globee issued a verified judge credential and includes my name and company on its official 2026 judges roster.',
+    links: [
+      { label: 'Official judges roster', href: 'https://globeeawards.com/2026-judges-business-awards/' },
+    ],
+  },
+  {
+    organization: 'NASA Space Apps Yonkers',
+    role: 'Judge',
+    date: 'November 14–15, 2026',
+    description: 'Appointed to evaluate projects at the Yonkers local event for the 2026 NASA International Space Apps Challenge.',
+    links: [
+      { label: 'Appointment announcement', href: 'https://spaceappsyonkers.org/about/press-release/nasa-space-apps-yonkers-appoints-vyshak-athreya-bellur-keshavamurthy-as-judge-in-2026' },
+      { label: 'Event page', href: 'https://www.spaceappschallenge.org/2026/local-events/yonkers/' },
+    ],
+  },
+];
+
 const TOPICS = [
-  'Building Self-Healing APIs with AI',
-  'The Guardian Paradigm: Secure Agentic AI for Regulated Enterprises',
-  'Designing AI Systems for Production, Not Prototypes',
-  'Beyond Chatbots: Enterprise Applications of Large Language Models',
-  'From Observability to Autonomous Operations',
-  'Machine Learning Beyond Language: Scripts, Genomes, and Software Systems',
-  'Responsible AI in Enterprise Engineering',
+  'Governed generative AI in regulated environments',
+  'Secure and reliable agentic systems',
+  'Designing production AI beyond prototypes',
+  'AI adoption, trust, and human behavior',
+  'Engineering controls for enterprise AI',
 ];
 
 export default function Speak() {
@@ -112,7 +118,7 @@ export default function Speak() {
       {/* ── Hero: positioning + verifiable conference image ── */}
       <div className="grid gap-6 mt-6 mb-12 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.5fr)] md:items-center">
         <div className="flex flex-col justify-center py-2">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">Speaking</h1>
+          <h1 className="mb-4 text-4xl font-semibold tracking-[-0.035em] text-white md:text-5xl">Speaking &amp; Judging</h1>
           <p className="text-sm text-white/50 leading-relaxed max-w-md mb-2">{BIO}</p>
           <button
             onClick={() => {
@@ -141,24 +147,22 @@ export default function Speak() {
         </figure>
       </div>
 
-      {/* ── Recent event ── */}
+      {/* ── Selected speaking ── */}
       {featured.map((talk) => (
         <article
           key={talk.title}
-          className="relative mb-16 overflow-hidden rounded-2xl border border-amber-300/20 bg-gradient-to-br from-amber-300/[0.09] via-white/[0.035] to-transparent p-6 shadow-2xl shadow-black/20 md:p-8"
+          className="mb-16 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.035] p-6 shadow-2xl shadow-black/20 md:p-8"
         >
-          <div className="absolute right-0 top-0 h-48 w-48 rounded-full bg-amber-300/[0.07] blur-3xl" aria-hidden="true" />
-          <div className="relative">
+          <div>
             <div className="mb-5 flex flex-wrap items-center gap-3">
-              <span className="rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-amber-200">
-                Recent event
-              </span>
-              <span className="text-xs font-mono text-white/45">{talk.date}</span>
+              <span className="text-xs text-white/45">{talk.venue}</span>
+              <span className="text-white/15">·</span>
+              <span className="text-xs text-white/45">{talk.date}</span>
             </div>
             <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-start">
               <div>
                 <div className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-amber-300/75">
-                  {talk.format} · {talk.venue}
+                  {talk.format}
                 </div>
                 <h2 className="max-w-3xl text-2xl font-bold leading-tight tracking-tight text-white md:text-4xl">
                   {talk.title}
@@ -241,6 +245,35 @@ export default function Speak() {
         </div>
       )}
 
+      {/* ── Judging ── */}
+      <section className="mb-16 border-t border-white/10 pt-10" aria-labelledby="judging-heading">
+        <div className="mb-8 max-w-2xl">
+          <h2 id="judging-heading" className="text-2xl font-semibold tracking-[-0.025em] text-white/95 md:text-3xl">Judging</h2>
+          <p className="mt-3 text-sm leading-relaxed text-white/45">
+            Selected technical and innovation programs where I evaluate the work of others.
+          </p>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          {JUDGING.map((item) => (
+            <article key={item.organization} className="rounded-2xl border border-white/10 bg-white/[0.025] p-5 md:p-6">
+              <div className="mb-5 flex items-center justify-between gap-4 text-xs text-white/35">
+                <span>{item.role}</span>
+                <span>{item.date}</span>
+              </div>
+              <h3 className="text-lg font-semibold tracking-tight text-white/90">{item.organization}</h3>
+              <p className="mt-3 text-sm leading-[1.7] text-white/50">{item.description}</p>
+              <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 border-t border-white/8 pt-4">
+                {item.links.map((link) => (
+                  <a key={link.href} href={link.href} target="_blank" rel="noreferrer" className="text-xs text-white/45 transition-colors hover:text-white/80">
+                    {link.label} ↗
+                  </a>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       {/* ── Past ── */}
       {past.length > 0 && (
         <div className="mb-12">
@@ -270,7 +303,7 @@ export default function Speak() {
 
       {/* ── Topics ── */}
       <div className="mb-12">
-        <div className="text-[10px] font-semibold tracking-[0.2em] uppercase text-white/25 mb-4">Also speaks on</div>
+        <div className="mb-4 text-xs font-medium text-white/35">Selected topics</div>
         <div className="space-y-2">
           {TOPICS.map((topic) => (
             <div key={topic} className="text-sm text-white/45 hover:text-white/70 transition-colors">
@@ -286,7 +319,7 @@ export default function Speak() {
           href="/contact"
           className="text-sm text-white/40 hover:text-white/70 transition-colors"
         >
-          Invite me to speak, judge, or chair a session →
+          Discuss a talk, panel, judging role, or collaboration →
         </a>
       </div>
     </div>

@@ -122,7 +122,7 @@ export default function Contact() {
             </div>
             <div className="mt-4 pt-3 border-t border-white/8">
               <p className="text-xs text-white/70 leading-[1.7]">
-                View the <a href="/speak" className="text-yellow-400 hover:text-yellow-300 transition-colors">Speaking page</a> for recent events, topics, and source links.
+                View the <a href="/speak" className="text-yellow-400 hover:text-yellow-300 transition-colors">Speaking page</a> for recent engagements, topics, and source links.
               </p>
             </div>
           </div>
