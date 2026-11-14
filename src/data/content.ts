@@ -6,7 +6,7 @@ export const consoleKnowledge: Record<string, string> = {
   'speak': 'I speak about governed generative AI, agentic security, reliable production AI, and engineering for regulated environments. Recent appearances include API World and CISO New York. Judging work includes the 2026 Globee Awards for Business, with an appointment to NASA Space Apps Yonkers.',
   'invite': 'Use the Contact page for conference talks, panels, judging, session-chair roles, or research collaboration.',
   'music': 'I run v_naada — a music channel with Chinmayi. We explore classical and contemporary Indian music. Find us on YouTube and Instagram @v_naada.',
-  'running': 'Completed 1 full marathon, 5+ half marathons. Currently training for NYC Marathon.',
+  'running': 'NYC Marathon runner and NYRR member. I share race experiences, training, and the everyday motivation to keep running.',
   'rcb': 'Royal Challengers Bangalore. Always. We believe. Ee sala cup namde.',
   'travel': 'Dubai, Florida Keys, Amalfi Coast, Rome, Pisa, West Virginia, California. Skydived over the Keys. Zip-lined in Dubai. Always planning the next one.',
   'tech stack': 'JPMorgan: React/TypeScript, Java, AWS. Personal: Python, LLMs, RAG systems. This site: React 19 + Vite + Tailwind.',
@@ -23,11 +23,11 @@ export const hobbiesInfo = {
   },
   running: {
     stats: [
-      { label: 'Full Marathon', value: '26.2', unit: 'mi' },
-      { label: 'Half Marathons', value: '5+', unit: 'races' },
-      { label: 'Next Goal', value: 'NYC', unit: 'Marathon' },
+      { label: 'Race Experience', value: 'NYC', unit: 'Marathon' },
+      { label: 'Community', value: 'NYRR', unit: 'member' },
+      { label: 'Focus', value: 'Long-distance', unit: 'running' },
     ],
-    description: 'Half marathons, one full marathon, training for NYC Marathon. NYRR member — race results and training log below.',
+    description: 'NYC Marathon runner and NYRR member. Race experiences, training, and the motivation to keep running — race results below.',
     nyrrHref: 'https://results.nyrr.org/runner/50011145/races',
   },
   travel: {

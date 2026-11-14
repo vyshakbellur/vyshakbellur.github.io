@@ -390,7 +390,7 @@ function RunningTab() {
         <div className="rounded-xl overflow-hidden border border-white/10 shadow-lg shadow-black/30">
           <img
             src="/adventure/marathon_bib.jpg"
-            alt="Vyshak Bellur — TCS NYC Marathon 2025"
+            alt="Vyshak Bellur — TCS NYC Marathon"
             className="w-full h-[260px] object-cover object-top opacity-85 hover:opacity-100 transition-opacity"
           />
         </div>
@@ -405,10 +405,10 @@ function RunningTab() {
 
       <div className="grid gap-5 md:grid-cols-2">
         <div className="rounded-xl border border-white/14 bg-white/[0.06] p-5">
-          <div className="text-xs font-semibold tracking-widest uppercase text-pink-400/70 mb-3">Race Stats</div>
+          <div className="text-xs font-semibold tracking-widest uppercase text-pink-400/70 mb-3">Running</div>
           <ul className="text-sm space-y-3 text-white/70 font-mono">
-            <li className="flex justify-between border-b border-white/5 pb-2"><span>Full Marathons</span><span className="text-white font-bold">1</span></li>
-            <li className="flex justify-between border-b border-white/5 pb-2"><span>Half Marathons</span><span className="text-white font-bold">5</span></li>
+            <li className="flex justify-between border-b border-white/5 pb-2"><span>Race experience</span><span className="text-white font-bold">NYC Marathon</span></li>
+            <li className="flex justify-between border-b border-white/5 pb-2"><span>Community</span><span className="text-white font-bold">NYRR member</span></li>
             <li className="text-xs text-white/55 italic pt-1">Racing the streets of NYC.</li>
           </ul>
           <a href={hobbiesInfo.running.nyrrHref} target="_blank" rel="noreferrer" className="mt-4 inline-block text-[10px] font-bold tracking-widest uppercase text-pink-400/80 hover:text-pink-400 transition-colors">NYRR Results ↗</a>
